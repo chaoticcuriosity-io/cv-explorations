@@ -28,6 +28,7 @@ The same code is validated on both x86 and ARM64 — see
 | 07 | [Embeddings / retrieval](modules/07-retrieval/report.qmd) | *How similar are two images?* | DINOv2 · SigLIP 2 | ✅ done |
 | 08 | [Vision-language models](modules/08-vlm/report.qmd) | *Describe / answer / ground* | Qwen2.5-VL 3B | ✅ done |
 | 09 | [Classical CV](modules/09-classical/report.qmd) | *(pre-deep-learning)* | OpenCV: edges, flow, ORB | ✅ done |
+| 10 | [**Fine-tuning** (on the Spark)](modules/10-finetuning/report.qmd) | *Teach a model a new class* | YOLO11 · auto-labeled via CLIP + Grounding DINO | ✅ done |
 
 ## A useful mental model
 

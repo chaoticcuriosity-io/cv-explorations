@@ -49,6 +49,8 @@ def save_image_grid(
     import matplotlib.pyplot as plt
 
     n = len(images)
+    if n == 0:
+        raise ValueError("save_image_grid: no images to plot")
     cols = max(1, min(cols, n))
     rows = (n + cols - 1) // cols
     fig, axes = plt.subplots(
