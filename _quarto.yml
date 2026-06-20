@@ -30,6 +30,8 @@ website:
             text: "07 · Embeddings & retrieval"
           - href: modules/08-vlm/report.qmd
             text: "08 · Vision-language models"
+          - href: modules/09-classical/report.qmd
+            text: "09 · Classical CV"
     right:
       - icon: github
         href: https://github.com/chaoticcuriosity-io/cv-explorations
