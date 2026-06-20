@@ -476,11 +476,39 @@
     "text": "Next\nRun the full benchmark with uv run python run.py from this folder, or read the report for the rigorous numbers."
   },
   {
+    "objectID": "cross-platform.html",
+    "href": "cross-platform.html",
+    "title": "Cross-platform validation (DGX Spark)",
+    "section": "",
+    "text": "A goal of this repo is that the code is portable, not tied to one machine. The modules are developed on an x86-64 workstation with an RTX 3090 Ti (Ampere, CUDA 12.8). To prove they aren’t accidentally x86-only, the same code was validated on a very different machine — an NVIDIA DGX Spark: ARM64 (aarch64), GB10 Grace-Blackwell GPU, sm_121, CUDA 13, unified memory. (The Spark also does robotics duty, which is why depth / pose / tracking / segmentation matter here — they’re robot-perception primitives.)"
+  },
+  {
+    "objectID": "cross-platform.html#the-one-thing-that-changes-the-pytorch-build",
+    "href": "cross-platform.html#the-one-thing-that-changes-the-pytorch-build",
+    "title": "Cross-platform validation (DGX Spark)",
+    "section": "The one thing that changes: the PyTorch build",
+    "text": "The one thing that changes: the PyTorch build\nEverything in this repo is pure-Python or ships ARM64 wheels (ultralytics, supervision, transformers, timm, opencv…). The single platform-specific dependency is PyTorch + CUDA:\n\nOn the x86 workstation, pyproject.toml pins the CUDA 12.8 wheels (Ampere-friendly).\nOn the ARM64 Spark, that pin is wrong — sm_121 needs CUDA 13. The clean fix is to run inside NVIDIA’s NGC PyTorch container (nvcr.io/nvidia/pytorch), which ships a Blackwell-ready torch for aarch64, and create a venv with --system-site-packages so the repo’s extra deps install on top of that torch rather than dragging in an incompatible build.\n\nThat’s the whole portability story: swap the torch build, keep the code."
+  },
+  {
+    "objectID": "cross-platform.html#what-was-validated-on-the-gb10",
+    "href": "cross-platform.html#what-was-validated-on-the-gb10",
+    "title": "Cross-platform validation (DGX Spark)",
+    "section": "What was validated on the GB10",
+    "text": "What was validated on the GB10\nCloning this public repo into the NGC container and running it produced:\ndevice: NVIDIA GB10 | 121.7 GB | sm_121 | torch 2.11.0a0 (nv) / CUDA 13.2\n\ncvkit unit tests ......... 6 passed\nyolo26n via modules/01 detect.py:\n  detections: 5  -&gt;  ['bus', 'person', 'person', 'person', 'person']\n\ncvkit is platform-agnostic — its device/IO/timing/metrics helpers pass unchanged on ARM64, and describe_device correctly reports the GB10 at sm_121 / CUDA 13.2.\nThe module adapters run as-is — the exact detect.py used on the 3090 Ti loads YOLO26 and produces correct detections on Blackwell, no code edits."
+  },
+  {
+    "objectID": "cross-platform.html#takeaways",
+    "href": "cross-platform.html#takeaways",
+    "title": "Cross-platform validation (DGX Spark)",
+    "section": "Takeaways",
+    "text": "Takeaways\n\nA repo like this is portable if you isolate the torch build and keep everything else pure Python / wheel-installable. The cvkit abstraction (one device/dtype path, no hard-coded CUDA assumptions) is what makes that cheap.\nThe NGC container is the path of least resistance on bleeding-edge hardware (new sm_, new CUDA), versus assembling pip wheels by hand.\nHeavier or Linux-only tooling (mmdet/detectron2/flash-attention) would also live on the Spark rather than the Windows workstation — the natural division of labour for this project."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "CV Explorations",
     "section": "",
-    "text": "This is a repo-as-curriculum: each major computer-vision capability is a self-contained module that is both runnable and explained. Every module ships a reusable CLI/engine, an interactive notebook, and a rigorous benchmark report — multiple models per task, real metrics, latency measured on the local GPU, and honest failure cases.\nThe reports you’re reading were rendered from results computed locally on an NVIDIA RTX 3090 Ti (24 GB); heavier or Linux-only work runs on an NVIDIA DGX Spark over Tailscale. Site rendering itself needs no GPU."
+    "text": "This is a repo-as-curriculum: each major computer-vision capability is a self-contained module that is both runnable and explained. Every module ships a reusable CLI/engine, an interactive notebook, and a rigorous benchmark report — multiple models per task, real metrics, latency measured on the local GPU, and honest failure cases.\nThe reports you’re reading were rendered from results computed locally on an NVIDIA RTX 3090 Ti (24 GB); heavier or Linux-only work runs on an NVIDIA DGX Spark (ARM64 / GB10 Grace-Blackwell). Site rendering itself needs no GPU. The same code is validated on both x86 and ARM64 — see Cross-platform validation."
   },
   {
     "objectID": "index.html#the-curriculum",
