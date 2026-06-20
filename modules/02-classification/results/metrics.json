@@ -1,0 +1,29 @@
+[
+  {
+    "key": "convnext-tiny",
+    "display": "ConvNeXt-Tiny",
+    "paradigm": "Supervised",
+    "license": "Apache-2.0",
+    "top1": 99.9,
+    "latency_ms": 12.31,
+    "fps": 81.2
+  },
+  {
+    "key": "siglip2-base",
+    "display": "SigLIP 2 Base",
+    "paradigm": "Zero-shot",
+    "license": "Apache-2.0",
+    "top1": 99.4,
+    "latency_ms": 23.4,
+    "fps": 42.7
+  },
+  {
+    "key": "openclip-vitb32",
+    "display": "OpenCLIP ViT-B/32",
+    "paradigm": "Zero-shot",
+    "license": "MIT",
+    "top1": 99.0,
+    "latency_ms": 10.09,
+    "fps": 99.1
+  }
+]
