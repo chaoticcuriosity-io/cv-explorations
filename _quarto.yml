@@ -26,6 +26,8 @@ website:
             text: "05 · Human pose"
           - href: modules/06-tracking/report.qmd
             text: "06 · Tracking"
+          - href: modules/07-retrieval/report.qmd
+            text: "07 · Embeddings & retrieval"
     right:
       - icon: github
         href: https://github.com/chaoticcuriosity-io/cv-explorations

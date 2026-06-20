@@ -1,0 +1,20 @@
+[
+  {
+    "display": "DINOv2 Base",
+    "kind": "self-supervised",
+    "license": "Apache-2.0",
+    "recall1": 99.3,
+    "p5": 98.8,
+    "latency_ms": 19.45,
+    "fps": 51.4
+  },
+  {
+    "display": "SigLIP 2 Base",
+    "kind": "image-text",
+    "license": "Apache-2.0",
+    "recall1": 99.8,
+    "p5": 99.2,
+    "latency_ms": 20.51,
+    "fps": 48.8
+  }
+]
