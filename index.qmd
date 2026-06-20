@@ -22,7 +22,7 @@ DGX Spark** over Tailscale. Site rendering itself needs no GPU.
 | 03 | [Segmentation](modules/03-segmentation/report.qmd) | *Which pixels (masks)?* | YOLO-seg · SAM 2.1 | ✅ done |
 | 04 | [Monocular depth](modules/04-depth/report.qmd) | *How far is each pixel?* | Depth Anything V2 (S/B) | ✅ done |
 | 05 | [Pose / keypoints](modules/05-pose/report.qmd) | *Where are the joints?* | YOLO26-pose · YOLO11-pose | ✅ done |
-| 06 | Tracking | *Same object across frames?* | ByteTrack · BoT-SORT | ⏳ planned |
+| 06 | [Tracking](modules/06-tracking/report.qmd) | *Same object across frames?* | YOLO26 + ByteTrack | ✅ done |
 | 07 | Embeddings / retrieval | *How similar are two images?* | DINOv2 · SigLIP 2 | ⏳ planned |
 | 08 | Vision-language models | *Describe / answer / ground* | Florence-2 · Qwen3-VL · Moondream 3 | ⏳ planned |
 | 09 | Classical CV | *(pre-deep-learning)* | OpenCV: edges, flow, ORB/SIFT | ⏳ planned |
