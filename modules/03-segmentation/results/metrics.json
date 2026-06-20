@@ -1,0 +1,26 @@
+[
+  {
+    "display": "YOLO26-n-seg",
+    "family": "instance (YOLO)",
+    "license": "AGPL-3.0",
+    "latency_ms": 23.79,
+    "fps": 42.0,
+    "avg_masks": 7.0
+  },
+  {
+    "display": "YOLO11-n-seg",
+    "family": "instance (YOLO)",
+    "license": "AGPL-3.0",
+    "latency_ms": 22.9,
+    "fps": 43.7,
+    "avg_masks": 6.5
+  },
+  {
+    "display": "SAM 2.1 (base)",
+    "family": "promptable",
+    "license": "Apache-2.0",
+    "latency_ms": 93.39,
+    "fps": 10.7,
+    "avg_masks": "n/a"
+  }
+]
