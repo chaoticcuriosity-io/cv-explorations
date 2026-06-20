@@ -131,6 +131,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-start-here" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Start here</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-start-here">    
+        <li>
+    <a class="dropdown-item" href="../../foundations.html">
+ <span class="dropdown-text">Foundations (read first)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../models.html">
+ <span class="dropdown-text">Model families</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
@@ -236,18 +255,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled" title="New here? Read this first">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>New here? Read this first
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No prior knowledge needed — but this report is easier if you’ve skimmed <strong><a href="../../foundations.html">Foundations</a></strong> (how a computer sees an image, what a model is, how we measure success). Stuck on a word? See the <strong><a href="../../glossary.html">Glossary</a></strong>. Stuck on a model name? See <strong><a href="../../models.html">Model families</a></strong>. Key terms are explained inline the first time they appear.</p>
+</div>
+</div>
+</div>
 <section id="the-task" class="level2">
 <h2 class="anchored" data-anchor-id="the-task">The task</h2>
-<p>Most of this curriculum predicts <em>labels</em>. This module predicts a <strong>vector</strong>: an embedding that places similar images near each other in a high-dimensional space. That single idea underpins <strong>reverse image search, deduplication, clustering, recommendation, anomaly detection, and few-shot recognition</strong> — none of which need a classifier head. To “classify” you just look at your neighbours.</p>
-<p>The workflow:</p>
+<p>Most of this curriculum predicts <em>labels</em>. This module predicts a <strong>vector</strong>: an embedding that places similar images near each other in a high-dimensional space. (An <em>embedding</em> or <em>vector</em> is just a list of numbers summarising an image so that similar images get similar lists — and <em>retrieval</em> means finding the most similar images to a query by comparing those embeddings.) That single idea underpins <strong>reverse image search, deduplication, clustering, recommendation, anomaly detection, and few-shot recognition</strong> — none of which need a classifier head. To “classify” you just look at your neighbours.</p>
+<p>The workflow (the <strong>gallery</strong> is the searchable set of images; a <strong>query</strong> is the image you search with):</p>
 <ol type="1">
-<li>Embed every gallery image to an L2-normalised vector.</li>
+<li>Embed every gallery image to an L2-normalised vector (<em>L2-normalised</em> = scaled so each vector has length 1, which makes the similarity comparison clean).</li>
 <li>Embed a query the same way.</li>
-<li>Rank gallery vectors by cosine similarity (a dot product) and return the nearest.</li>
+<li>Rank gallery vectors by cosine similarity (a dot product — both are simple ways to measure how alike two vectors/embeddings are) and return the nearest.</li>
 </ol>
 </section>
 <section id="two-kinds-of-embedding" class="level2">
 <h2 class="anchored" data-anchor-id="two-kinds-of-embedding">Two kinds of embedding</h2>
+<p>We compare two <strong>backbones</strong> — the network body that turns an image into its embedding. <strong>DINOv2</strong> (built on the earlier <strong>DINO</strong>) is <em>self-supervised</em>: trained without any human labels, e.g.&nbsp;by making different views of the same image agree. <strong>SigLIP 2</strong> is <em>image-text</em> (<em>contrastive</em>): trained on image–caption pairs so an image’s vector lands near its caption’s. For more on where these models come from, see <a href="../../models.html">Model families</a>.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -346,7 +382,7 @@ Figure&nbsp;1: Each row: a query (black border) and its 5 nearest neighbours. Gr
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><strong>Search beats training, for free.</strong> Both embedders retrieve the correct class <strong>&gt;99%</strong> of the time (Recall@1) with <em>no</em> classifier and <em>no</em> labels at query time — add a new class by just dropping its images into the gallery.</li>
+<li><strong>Search beats training, for free.</strong> Both embedders retrieve the correct class <strong>&gt;99%</strong> of the time (Recall@1 — did the single nearest image share the query’s class; a related measure, Precision@5, asks what fraction of the 5 nearest do) with <em>no</em> classifier and <em>no</em> labels at query time — add a new class by just dropping its images into the gallery.</li>
 <li><strong>Self-supervised is competitive with image-text.</strong> DINOv2 (never saw a single label or caption) trails SigLIP 2 by only a few tenths of a point here — a striking result for a model trained purely on images.</li>
 <li><strong>This is how you’d handle an open, growing catalogue</strong> — products, faces, defects — where retraining a classifier per new item is impractical.</li>
 </ul>
@@ -357,7 +393,7 @@ Figure&nbsp;1: Each row: a query (black border) and its 5 nearest neighbours. Gr
 <h2 class="anchored" data-anchor-id="where-retrieval-fails">Where retrieval fails</h2>
 <ul>
 <li><strong>Fine-grained distinctions</strong> — near-duplicate categories (specific dog breeds, product variants) can blur in a general embedding; specialised/fine-tuned embeddings help.</li>
-<li><strong>Gallery quality &amp; scale</strong> — retrieval is only as good as what’s indexed; at millions of items you need an ANN index (FAISS) and recall/speed trade-offs appear.</li>
+<li><strong>Gallery quality &amp; scale</strong> — retrieval is only as good as what’s indexed; at millions of items you need an ANN index (FAISS) — fast <em>approximate nearest-neighbour</em> search for large galleries — and recall/speed trade-offs appear.</li>
 <li><strong>Domain gap</strong> — embeddings trained on web images underperform on medical, satellite, or industrial imagery without adaptation.</li>
 </ul>
 </section>

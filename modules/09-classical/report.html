@@ -131,6 +131,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-start-here" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Start here</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-start-here">    
+        <li>
+    <a class="dropdown-item" href="../../foundations.html">
+ <span class="dropdown-text">Foundations (read first)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../models.html">
+ <span class="dropdown-text">Model families</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
@@ -241,15 +260,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled" title="New here? Read this first">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>New here? Read this first
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No prior knowledge needed — but this report is easier if you’ve skimmed <strong><a href="../../foundations.html">Foundations</a></strong> (how a computer sees an image, what a model is, how we measure success). Stuck on a word? See the <strong><a href="../../glossary.html">Glossary</a></strong>. Stuck on a model name? See <strong><a href="../../models.html">Model families</a></strong>. Key terms are explained inline the first time they appear.</p>
+</div>
+</div>
+</div>
 <section id="why-this-module-exists" class="level2">
 <h2 class="anchored" data-anchor-id="why-this-module-exists">Why this module exists</h2>
-<p>Modules 01–08 are all neural networks. This one deliberately goes back to the <strong>pre-deep-learning</strong> toolkit: hand-designed algorithms from OpenCV that are <strong>fast, transparent, deterministic, and need no training data or GPU</strong>. They aren’t a historical curiosity — they still run inside camera calibration, visual SLAM front-ends, image stabilisation, panorama stitching, and as cheap preprocessing for the deep models. Seeing them makes the rest of the curriculum legible: you can <em>read every line</em> of what these do, which is rarely true of a learned model.</p>
+<p>Modules 01–08 are all neural networks. This one deliberately goes back to the <strong>pre-deep-learning</strong> toolkit — <em>classical CV</em>, meaning hand-designed algorithms (explicit math), with no training and no neural networks. These come from OpenCV (a free, widely used library of ready-made image-processing functions; see <a href="../../models.html">Model families</a>) and are <strong>fast, transparent, deterministic, and need no training data or GPU</strong>. <em>Deterministic</em> means the same input always gives the same output — no randomness, no learned weights. They aren’t a historical curiosity — they still run inside camera calibration, visual SLAM front-ends (SLAM = building a map and tracking a camera’s position as it moves, using these classical features), image stabilisation, panorama stitching, and as cheap preprocessing for the deep models. Seeing them makes the rest of the curriculum legible: you can <em>read every line</em> of what these do, which is rarely true of a learned model.</p>
 </section>
 <section id="four-classics" class="level2">
 <h2 class="anchored" data-anchor-id="four-classics">Four classics</h2>
 <section id="edge-detection-contours" class="level3">
 <h3 class="anchored" data-anchor-id="edge-detection-contours">Edge detection &amp; contours</h3>
-<p>The <strong>Canny</strong> edge detector finds intensity discontinuities (gradients), then thins and links them into clean edges. <strong>Contours</strong> chain those edges into closed boundaries you can measure (area, perimeter, shape). For decades this <em>was</em> “object detection”.</p>
+<p><em>Edge detection</em> means finding the outlines where image brightness changes sharply. The <strong>Canny</strong> edge detector (a classic edge-finding recipe; see <a href="../../models.html">Model families</a>) finds intensity discontinuities (gradients), then thins and links them into clean edges. A <em>gradient</em> is just how fast brightness changes from pixel to pixel — that change is what an edge detector looks for. <strong>Contours</strong> chain those edges into closed boundaries you can measure (area, perimeter, shape); a <em>contour</em> is a connected boundary line traced around a shape. For decades this <em>was</em> “object detection”.</p>
 <div id="fig-edges" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-edges-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -263,7 +298,7 @@ Figure&nbsp;1: Canny edges and extracted contours — pure gradient math, no lea
 </section>
 <section id="feature-detection-matching-orb" class="level3">
 <h3 class="anchored" data-anchor-id="feature-detection-matching-orb">Feature detection &amp; matching (ORB)</h3>
-<p><strong>ORB</strong> finds repeatable keypoints (corners) and encodes each as a binary descriptor, so the <em>same</em> physical point can be matched across two images. Matching keypoints between views is the engine behind panorama stitching, structure-from-motion, and the front-end of visual SLAM — the hand-built ancestor of the learned embeddings in <a href="../../modules/07-retrieval/report.html">module 07</a>.</p>
+<p><strong>ORB</strong> (a fast classical keypoint finder; see <a href="../../models.html">Model families</a>) finds repeatable keypoints (corners) and encodes each as a binary descriptor, so the <em>same</em> physical point can be matched across two images. Here a <em>feature</em> or <em>keypoint</em> is a distinctive point — like a corner — that can be re-found in another image; a <em>descriptor</em> is the short numeric fingerprint of that keypoint used to match it across images; and <em>feature matching</em> is pairing the same physical point between two images. Matching keypoints between views is the engine behind panorama stitching, structure-from-motion, and the front-end of visual SLAM — the hand-built ancestor of the learned embeddings in <a href="../../modules/07-retrieval/report.html">module 07</a>. (A related classical detector you may see named is SIFT, an older scale-invariant keypoint finder that ORB was designed to replace more cheaply.)</p>
 <div id="fig-orb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-orb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -277,7 +312,7 @@ Figure&nbsp;2: ORB keypoints matched between two video frames.
 </section>
 <section id="optical-flow" class="level3">
 <h3 class="anchored" data-anchor-id="optical-flow">Optical flow</h3>
-<p><strong>Farneback</strong> dense optical flow estimates a motion vector for <em>every</em> pixel between two frames — direction as hue, speed as brightness. It’s geometry, not recognition: no idea <em>what</em> is moving, only <em>how</em>. Flow feeds stabilisation, motion segmentation, and action recognition.</p>
+<p><em>Optical flow</em> is the per-pixel motion between two video frames — its direction and speed. <strong>Farneback</strong> dense optical flow (a classical algorithm that computes this flow for every pixel; see <a href="../../models.html">Model families</a>) estimates a motion vector for <em>every</em> pixel between two frames — direction as hue, speed as brightness. It’s geometry, not recognition: no idea <em>what</em> is moving, only <em>how</em>. Flow feeds stabilisation, motion segmentation, and action recognition.</p>
 <div id="fig-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

@@ -131,6 +131,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-start-here" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Start here</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-start-here">    
+        <li>
+    <a class="dropdown-item" href="../../foundations.html">
+ <span class="dropdown-text">Foundations (read first)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../models.html">
+ <span class="dropdown-text">Model families</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
@@ -237,12 +256,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled" title="New here? Read this first">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>New here? Read this first
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No prior knowledge needed — but this report is easier if you’ve skimmed <strong><a href="../../foundations.html">Foundations</a></strong> (how a computer sees an image, what a model is, how we measure success). Stuck on a word? See the <strong><a href="../../glossary.html">Glossary</a></strong>. Stuck on a model name? See <strong><a href="../../models.html">Model families</a></strong>. Key terms are explained inline the first time they appear.</p>
+</div>
+</div>
+</div>
 <section id="the-task" class="level2">
 <h2 class="anchored" data-anchor-id="the-task">The task</h2>
-<p><strong>Pose estimation</strong> locates a set of body keypoints per person — for the COCO format, 17 of them (eyes, ears, shoulders, elbows, wrists, hips, knees, ankles) — and connects them into a skeleton. It powers motion capture, sports analytics, gesture interfaces, and <strong>human-aware robotics</strong> (a robot that must not bump the person reaching past it).</p>
+<p><strong>Pose estimation</strong> — locating a person’s body joints and connecting them into a skeleton — locates a set of body keypoints per person. A <strong>keypoint</strong> is a single labelled point such as “left elbow.” For the COCO format, there are 17 of them (eyes, ears, shoulders, elbows, wrists, hips, knees, ankles), connected into a skeleton. It powers motion capture, sports analytics, gesture interfaces, and <strong>human-aware robotics</strong> (a robot that must not bump the person reaching past it).</p>
 </section>
 <section id="two-paradigms" class="level2">
 <h2 class="anchored" data-anchor-id="two-paradigms">Two paradigms</h2>
+<p>There are two broad strategies. In <strong>bottom-up</strong> estimation, one network finds all the people and all their joints in a single pass; <strong>top-down</strong> instead first detects each person, then runs a separate pose network on each one. A <strong>single-stage</strong> model does the whole job in one network pass. The models named below — <strong>YOLO-pose</strong> (a fast, single-stage pose model from the YOLO family of real-time detectors), plus the top-down <strong>ViTPose</strong> and <strong>RTMPose</strong> — are described in more detail under <a href="../../models.html">Model families</a>.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -269,14 +305,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>This module benchmarks two YOLO-pose generations (single-stage). The top-down family is the accuracy-first alternative when you have few people and need precise joints.</p>
+<p>This module benchmarks two YOLO-pose generations (single-stage): <strong>YOLO11-pose</strong> (the prior generation) and <strong>YOLO26-pose</strong> (the newer one). The top-down family is the accuracy-first alternative when you have few people and need precise joints.</p>
 </section>
 <section id="how-it-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
-<p>YOLO-pose extends the detector: alongside each person box it regresses the 17 keypoint coordinates (and a per-keypoint visibility). Because keypoints are predicted jointly with detection in one forward pass, throughput stays high even in crowds — you can see this in the figures, where several skeletons are recovered at once.</p>
+<p>YOLO-pose extends the detector: alongside each person box it regresses the 17 keypoint coordinates (and a per-keypoint <strong>visibility</strong> — a confidence that the joint is actually visible rather than hidden). Because keypoints are predicted jointly with detection in one forward pass, throughput stays high even in crowds — you can see this in the figures, where several skeletons are recovered at once.</p>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The table below reports speed two ways: <strong>latency</strong>, the time to process one image in milliseconds, and <strong>FPS</strong> (frames per second), how many images per second the model handles — around 30 FPS or higher counts as real-time. The footnote mentions <strong>OKS-AP</strong>: OKS (object keypoint similarity) is the pose world’s answer to IoU — a score for how closely predicted joints match the true ones — and is used to compute pose accuracy (AP).</p>
 </section>
 <section id="pose-estimation-speed" class="level2">
 <h2 class="anchored" data-anchor-id="pose-estimation-speed">Pose estimation: speed</h2>
@@ -340,7 +377,7 @@ Figure&nbsp;2: YOLO11-n-pose — same images, prior generation.
 <div class="callout-body-container callout-body">
 <ul>
 <li><strong>Crowd-constant speed.</strong> Both models stay at ~50 fps whether the image has one person or several — the single-stage win. A top-down model would slow down as people are added.</li>
-<li><strong>A newer generation recovers more people.</strong> YOLO26-pose found more people per image than YOLO11-pose here (better recall on partially-occluded figures), at a slightly lower frame-rate.</li>
+<li><strong>A newer generation recovers more people.</strong> YOLO26-pose found more people per image than YOLO11-pose here (better recall on partially-occluded figures — i.e.&nbsp;people partly hidden behind something), at a slightly lower frame-rate.</li>
 <li><strong>Keypoints carry visibility.</strong> Occluded joints are predicted with low confidence; downstream code should use that, not assume every joint is reliable.</li>
 </ul>
 </div>

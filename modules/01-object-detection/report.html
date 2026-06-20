@@ -131,6 +131,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-start-here" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Start here</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-start-here">    
+        <li>
+    <a class="dropdown-item" href="../../foundations.html">
+ <span class="dropdown-text">Foundations (read first)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../models.html">
+ <span class="dropdown-text">Model families</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
@@ -240,22 +259,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled" title="New here? Read this first">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>New here? Read this first
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No prior knowledge needed — but this report is easier if you’ve skimmed <strong><a href="../../foundations.html">Foundations</a></strong> (how a computer sees an image, what a model is, how we measure success). Stuck on a word? See the <strong><a href="../../glossary.html">Glossary</a></strong>. Stuck on a model name? See <strong><a href="../../models.html">Model families</a></strong>. Key terms are explained inline the first time they appear.</p>
+</div>
+</div>
+</div>
 <section id="the-task" class="level2">
 <h2 class="anchored" data-anchor-id="the-task">The task</h2>
-<p><strong>Object detection</strong> answers two questions at once: <em>what</em> objects are present and <em>where</em> they are, as axis-aligned bounding boxes with class labels and confidence scores. It sits between <strong>classification</strong> (one label for the whole image) and <strong>segmentation</strong> (a label for every pixel), and it underpins most real-world perception — including the robotics work this repo’s hardware also serves.</p>
-<p>The headline metric is <strong>mean Average Precision (mAP)</strong>: for each class you sweep a confidence threshold to trace a precision–recall curve, take the area under it (Average Precision), and average across classes. COCO reports mAP averaged over ten IoU thresholds from 0.50 to 0.95 (written <code>mAP@[.50:.95]</code>), which rewards <em>tight</em> boxes, not just roughly-right ones.</p>
+<p><strong>Object detection</strong> answers two questions at once: <em>what</em> objects are present and <em>where</em> they are, as axis-aligned bounding boxes (a <em>bounding box</em> is just a rectangle drawn around an object — four numbers: left, top, right, bottom) with class labels and confidence scores (the model’s own 0–1 certainty in each prediction). It sits between <strong>classification</strong> (one label for the whole image) and <strong>segmentation</strong> (a label for every pixel), and it underpins most real-world perception — including the robotics work this repo’s hardware also serves.</p>
+<p>The headline metric is <strong>mean Average Precision (mAP)</strong> — the standard detection score from 0 to 1, where higher is better: for each class you sweep a confidence threshold to trace a precision–recall curve (<em>precision</em> = of the model’s predictions, the fraction that were correct; <em>recall</em> = of the real objects, the fraction the model found), take the area under it (Average Precision), and average across classes. COCO (a standard 80-class dataset of everyday photos used to train and compare detectors) reports mAP averaged over ten IoU thresholds from 0.50 to 0.95 (written <code>mAP@[.50:.95]</code>) — <em>IoU</em>, or Intersection over Union, measures how much a predicted box overlaps the true box (shared area ÷ combined area, so 1.0 is a perfect match), which rewards <em>tight</em> boxes, not just roughly-right ones.</p>
 </section>
 <section id="two-paradigms" class="level2">
 <h2 class="anchored" data-anchor-id="two-paradigms">Two paradigms</h2>
 <p>The most important idea to carry across this whole curriculum is the split between <strong>closed-set</strong> and <strong>open-vocabulary</strong> detection:</p>
 <ul>
 <li><strong>Closed-set</strong> models (YOLO, RF-DETR here) predict from a <em>fixed</em> label set — the 80 COCO classes. Fast, accurate, benchmarkable, but blind to anything off-list.</li>
-<li><strong>Open-vocabulary</strong> models (Grounding DINO, YOLO-World) take <em>text</em> at inference time and detect whatever you name — “a forklift”, “a person wearing hi-vis” — with no retraining. More flexible, generally slower and lower-AP on the fixed COCO set.</li>
+<li><strong>Open-vocabulary</strong> models (Grounding DINO, YOLO-World) take <em>text</em> at inference time and detect whatever you name — “a forklift”, “a person wearing hi-vis” — with no retraining. More flexible, generally slower and lower-AP on the fixed COCO set. (<em>Open-vocabulary</em> means detecting by free-text prompt instead of from a fixed class list.)</li>
 </ul>
+<p>For background on each model named here, see <a href="../../models.html">Model families</a>.</p>
 <p>This report benchmarks the closed-set models head-to-head (they share the COCO label space, so mAP is a fair comparison), then demonstrates the open-vocabulary alternative qualitatively below — it isn’t restricted to the 80 COCO names, so a like-for-like mAP wouldn’t be meaningful.</p>
 </section>
 <section id="the-architectures-benchmarked" class="level2">
 <h2 class="anchored" data-anchor-id="the-architectures-benchmarked">The architectures benchmarked</h2>
+<p>The two families below take different routes to the same goal. <strong>YOLO26</strong> is the newest of the fast, real-time YOLO detectors; <strong>RF-DETR</strong> is a transformer-based detector that trades a little speed for accuracy. Two architecture words recur: a <em>CNN</em> slides small pattern-matching filters across the image (the classic image architecture), while a <em>transformer</em> instead relates every part of the image to every other part (an idea called “attention”).</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -276,13 +313,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><strong>YOLO</strong></td>
 <td>YOLO26-n, YOLO11-n</td>
 <td>Dense grid of predictions over a CNN/feature pyramid</td>
-<td>YOLO26 is <strong>NMS-free</strong> — it learns to emit one box per object, removing the non-maximum-suppression post-step that older YOLOs need</td>
+<td>YOLO26 is <strong>NMS-free</strong> — it learns to emit one box per object, removing the non-maximum-suppression (NMS, a clean-up step that deletes duplicate overlapping boxes for the same object and keeps the most confident) post-step that older YOLOs need</td>
 </tr>
 <tr class="even">
 <td><strong>RF-DETR</strong></td>
 <td>Nano, Medium</td>
-<td>A transformer <strong>decoder</strong> with a fixed set of learned “object queries”, each attending to the image</td>
-<td>DETR-style; no anchors, no NMS by design; built on a DINOv2 backbone</td>
+<td>A transformer <strong>decoder</strong> with a fixed set of learned “object queries” (each query is one “slot” the model uses to find one object), each attending to the image</td>
+<td>DETR-style; no anchors (older detectors nudge pre-set template boxes called <em>anchors</em>; anchor-free models predict boxes directly), no NMS by design; built on a DINOv2 backbone (the <em>backbone</em> is the main body of the network that turns an image into features)</td>
 </tr>
 </tbody>
 </table>
@@ -456,7 +493,7 @@ Figure&nbsp;4: RF-DETR Medium
 </section>
 <section id="open-vocabulary-in-action" class="level2">
 <h2 class="anchored" data-anchor-id="open-vocabulary-in-action">Open-vocabulary in action</h2>
-<p>The four models above can <em>only ever</em> emit one of the 80 COCO names. <strong>Grounding DINO</strong> removes that ceiling: you hand it a sentence of phrases at inference time and it localises whatever it can find — no retraining, no fixed label set.</p>
+<p>The four models above can <em>only ever</em> emit one of the 80 COCO names. <strong>Grounding DINO</strong> (an open-vocabulary detector that matches free-text phrases to regions of the image) removes that ceiling: you hand it a sentence of phrases at inference time and it localises whatever it can find — no retraining, no fixed label set.</p>
 <p>Run on the same kind of images with the prompt <code>person. bottle. cup. plate. napkin. logo. shoe. hand.</code>, it returns not just the COCO classes but <strong><code>plate</code>, <code>napkin</code>, <code>logo</code>, <code>shoe</code>, <code>hand</code></strong> — concepts that don’t exist in COCO’s vocabulary at all:</p>
 <div id="fig-openvocab" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">

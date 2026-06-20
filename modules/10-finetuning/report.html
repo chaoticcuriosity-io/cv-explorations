@@ -131,6 +131,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-start-here" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Start here</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-start-here">    
+        <li>
+    <a class="dropdown-item" href="../../foundations.html">
+ <span class="dropdown-text">Foundations (read first)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../models.html">
+ <span class="dropdown-text">Model families</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
@@ -237,17 +256,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled" title="New here? Read this first">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>New here? Read this first
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No prior knowledge needed — but this report is easier if you’ve skimmed <strong><a href="../../foundations.html">Foundations</a></strong> (how a computer sees an image, what a model is, how we measure success). Stuck on a word? See the <strong><a href="../../glossary.html">Glossary</a></strong>. Stuck on a model name? See <strong><a href="../../models.html">Model families</a></strong>. Key terms are explained inline the first time they appear.</p>
+</div>
+</div>
+</div>
 <section id="the-task" class="level2">
 <h2 class="anchored" data-anchor-id="the-task">The task</h2>
-<p>Every module so far <em>ran</em> a pretrained model. This one <strong>trains</strong> one — the capstone skill, because real projects almost always need a class the off-the-shelf models don’t have. Here that class is <strong>air vents</strong>: not in COCO, so <a href="../../modules/01-object-detection/report.html">module 01’s</a> detectors are blind to it. We fine-tune a YOLO detector to find vents, and — the interesting part — we do it <strong>without hand-labelling a single image</strong>, then train <strong>on the DGX Spark</strong>.</p>
+<p>Every module so far <em>ran</em> a <strong>pretrained</strong> model (one whose internal numbers — its <em>weights</em> — were already learned and saved in a file you load). This one <strong>trains</strong> one — the capstone skill, because real projects almost always need a class the off-the-shelf models don’t have. (Two words worth pinning down: <em>training</em> adjusts a model’s internal numbers from labelled examples, while <em>inference</em> just runs the finished model. Every earlier module did inference; this one does training.) Here that class is <strong>air vents</strong>: not in COCO, so <a href="../../modules/01-object-detection/report.html">module 01’s</a> detectors are blind to it. We <strong>fine-tune</strong> a YOLO detector to find vents — fine-tuning means continuing to train an already-pretrained model on your own smaller dataset to specialise it, which is far cheaper than training from scratch. <strong>YOLO</strong> (here YOLO11, a small, fast object detector that draws boxes around things; see <a href="../../models.html">Model families</a>) is what we specialise. And — the interesting part — we do it <strong>without hand-labelling a single image</strong>, then train <strong>on the DGX Spark</strong>.</p>
 </section>
 <section id="the-data-engine-this-repo-labelling-itself" class="level2">
 <h2 class="anchored" data-anchor-id="the-data-engine-this-repo-labelling-itself">The data engine: this repo, labelling itself</h2>
-<p>Fine-tuning needs labelled data, and labelling is the expensive, boring bottleneck of applied CV. So we manufacture the dataset from capabilities built earlier in this very curriculum — the “distill an open-vocabulary model into a specialist” workflow that <a href="../../modules/01-object-detection/report.html">module 01</a> promised:</p>
+<p>Fine-tuning needs labelled data — and a <em>label</em> (or <em>annotation</em>) is just the correct answer attached to a training image; here, a box drawn around a vent. Labelling is the expensive, boring bottleneck of applied CV. So we manufacture the dataset from capabilities built earlier in this very curriculum — the “<strong>distill</strong> an open-vocabulary model into a specialist” workflow that <a href="../../modules/01-object-detection/report.html">module 01</a> promised. (<em>Distillation</em> means training a small, fast model to copy a big, slow one’s outputs. <em>Open-vocabulary</em> — or <em>zero-shot</em> — means a model that detects or classifies things from a text <em>description</em> rather than from a fixed list it was trained on, which is exactly how CLIP and Grounding DINO are used below to build the data.) The recipe:</p>
 <ol type="1">
 <li><strong>Source</strong> — pull Creative-Commons vent images from Wikimedia Commons (no API key).</li>
-<li><strong>Filter (zero-shot)</strong> — score each image with <strong>CLIP</strong> (<a href="../../modules/02-classification/report.html">module 02</a>) against vent prompts vs distractor prompts (smokestacks, landscapes, documents, <strong>cars</strong>, people…) and keep only the vent-like ones. This gate is essential — a raw “air vent” web search is mostly <em>not</em> air vents.</li>
-<li><strong>Auto-label</strong> — run <strong>Grounding DINO</strong> (<a href="../../modules/01-object-detection/report.html">module 01</a>) with vent text prompts; its boxes (after a size-sanity filter) become YOLO labels.</li>
+<li><strong>Filter (zero-shot)</strong> — score each image with <strong>CLIP</strong> (a model that scores how well an image matches a text description; <a href="../../modules/02-classification/report.html">module 02</a>, and <a href="../../models.html">Model families</a>) against vent prompts vs distractor prompts (smokestacks, landscapes, documents, <strong>cars</strong>, people…) and keep only the vent-like ones. This gate is essential — a raw “air vent” web search is mostly <em>not</em> air vents.</li>
+<li><strong>Auto-label</strong> — run <strong>Grounding DINO</strong> (an open-vocabulary detector that draws boxes from a text prompt; <a href="../../modules/01-object-detection/report.html">module 01</a>) with vent text prompts; its boxes (after a size-sanity filter) become YOLO labels. Because <em>another</em> model produces them rather than a human, these are <strong>pseudo-labels</strong> — cheap to generate, but noisier than human annotations.</li>
 <li><strong>Fine-tune</strong> — train YOLO on the result, on the Spark.</li>
 </ol>
 <p>So three earlier modules become a <strong>data engine</strong> for a fourth. No human ever draws a box.</p>
@@ -271,7 +306,7 @@ Figure&nbsp;1: A sample of the auto-built training set: Creative-Commons images 
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Auto-sourced, auto-labelled data is <strong>noisy</strong> — the CLIP gate and box filter remove most junk, but some mislabelling survives, and the val labels are themselves model-generated. So the mAP below measures <em>how well YOLO distilled Grounding DINO</em>, not human ground truth. The qualitative before/after and the honest “what’s needed for production” note matter more than the number. The path to <strong>highly reliable</strong> is more images and a pass of human label cleanup — or your own photos, which the pipeline accepts directly.</p>
+<p>Auto-sourced, auto-labelled data is <strong>noisy</strong> — the CLIP gate and box filter remove most junk, but some mislabelling survives, and the val labels are themselves model-generated. So the mAP below (<strong>mAP</strong> — mean Average Precision — is the standard detection score, from 0 to 1, where higher is better; the “50” in <em>mAP50</em> refers to the box-overlap threshold used to count a detection as correct) measures <em>how well YOLO distilled Grounding DINO</em>, not human ground truth. The qualitative before/after and the honest “what’s needed for production” note matter more than the number. The path to <strong>highly reliable</strong> is more images and a pass of human label cleanup — or your own photos, which the pipeline accepts directly.</p>
 </div>
 </div>
 </section>
@@ -345,6 +380,7 @@ Figure&nbsp;3: Training curves — losses fall and validation mAP rises over epo
 </figcaption>
 </figure>
 </div>
+<p>An <strong>epoch</strong> is one full pass of training over the whole dataset; the curves below span many such passes.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="What to notice">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

@@ -131,6 +131,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-start-here" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Start here</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-start-here">    
+        <li>
+    <a class="dropdown-item" href="../../foundations.html">
+ <span class="dropdown-text">Foundations (read first)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../models.html">
+ <span class="dropdown-text">Model families</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
@@ -239,13 +258,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled" title="New here? Read this first">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>New here? Read this first
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No prior knowledge needed — but this report is easier if you’ve skimmed <strong><a href="../../foundations.html">Foundations</a></strong> (how a computer sees an image, what a model is, how we measure success). Stuck on a word? See the <strong><a href="../../glossary.html">Glossary</a></strong>. Stuck on a model name? See <strong><a href="../../models.html">Model families</a></strong>. Key terms are explained inline the first time they appear.</p>
+</div>
+</div>
+</div>
 <section id="the-task" class="level2">
 <h2 class="anchored" data-anchor-id="the-task">The task</h2>
 <p><strong>Image classification</strong> assigns a single label to a whole image — the oldest and most foundational CV task, and the one the deep-learning era was launched on (AlexNet on ImageNet, 2012). Here it’s also the cleanest place to see the field’s biggest recent shift, because the <em>same</em> benchmark can be attacked two completely different ways.</p>
-<p>We evaluate on <strong>Imagenette</strong> — a 10-class, Apache-licensed subset of ImageNet (tench, English springer, cassette player, chainsaw, church, French horn, garbage truck, gas pump, golf ball, parachute) — reporting <strong>top-1 accuracy</strong> and latency.</p>
+<p>We evaluate on <strong>Imagenette</strong> — a 10-class, Apache-licensed subset of ImageNet (tench, English springer, cassette player, chainsaw, church, French horn, garbage truck, gas pump, golf ball, parachute) — reporting <strong>top-1 accuracy</strong> and latency. (<em>Top-1 accuracy</em> means the model’s single best guess was the right one; <em>top-5</em> would mean the right answer was among its five best guesses. <em>Latency</em> is the time taken per image.)</p>
 </section>
 <section id="two-paradigms" class="level2">
 <h2 class="anchored" data-anchor-id="two-paradigms">Two paradigms</h2>
+<p>Two very different ways to label an image. A <strong>supervised</strong> model is <em>trained on labelled examples of exactly the classes it predicts</em> — show it thousands of tagged photos, and it learns to recognise those tags. A <strong>zero-shot</strong> model is used on categories it was <em>never explicitly trained on</em>, by description: you hand it the words for each class and it matches the picture to the words. The three models below come from two families (see <strong><a href="../../models.html">Model families</a></strong> for the bigger picture):</p>
+<ul>
+<li><strong>ConvNeXt-Tiny</strong> — a modern image-recognition network (a “convolutional” one) that was trained the classic supervised way on ImageNet. <strong>timm</strong> is just the popular open-source library that ships it ready to use.</li>
+<li><strong>SigLIP 2</strong> and <strong>OpenCLIP</strong> — <em>CLIP</em>-style models trained on huge numbers of image–caption pairs scraped from the web, so a photo and its caption end up described by similar lists of numbers. <strong>OpenCLIP</strong> is an open re-creation of OpenAI’s original <strong>CLIP</strong>; <strong>SigLIP 2</strong> is a newer, refined version of the same idea.</li>
+</ul>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -281,8 +321,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-each-model-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-each-model-works">How each model works</h2>
 <ul>
-<li><strong>Supervised (ConvNeXt-Tiny).</strong> A modern convolutional backbone with a 1000-way ImageNet head. To score Imagenette we simply read off the 10 relevant logits — no fine-tuning.</li>
-<li><strong>Zero-shot (CLIP / SigLIP 2).</strong> Two encoders — one for images, one for text — trained so that matching image/caption pairs land nearby in a shared space. Classification becomes: encode the image, encode each candidate label as a sentence, return the nearest. <strong>SigLIP 2</strong> refines CLIP with a <em>sigmoid</em> loss (each pair judged independently) and stronger training, which generally lifts accuracy.</li>
+<li><strong>Supervised (ConvNeXt-Tiny).</strong> A modern convolutional <em>backbone</em> — the main body of the network that turns an image into useful features — with a 1000-way ImageNet <em>head</em> (the small final part that produces a score per class). To score Imagenette we simply read off the 10 relevant <em>logits</em> — the raw numeric scores a classifier outputs before picking the highest — no fine-tuning needed.</li>
+<li><strong>Zero-shot (CLIP / SigLIP 2).</strong> Two encoders — one for images, one for text — each turning its input into an <em>embedding</em> (a list of numbers, or <em>vector</em>, summarising it so similar things get similar lists). They are trained <em>contrastively</em> so that matching image/caption pairs land nearby in a shared space. Classification becomes: encode the image, encode each candidate label as a sentence, return the nearest. <strong>SigLIP 2</strong> refines CLIP with a <em>sigmoid</em> loss (each pair judged independently) and stronger training, which generally lifts accuracy.</li>
 </ul>
 </section>
 <section id="how-we-measured" class="level2">
@@ -350,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <ul>
 <li><strong>Zero-shot is not a toy.</strong> SigLIP 2 (<strong>99.4%</strong>) and OpenCLIP (<strong>99.0%</strong>) land within a point of the supervised ConvNeXt-Tiny (<strong>99.9%</strong>) — despite never training on Imagenette. The decades-old assumption that you must train <em>on your classes</em> to classify them no longer holds for coarse, common categories.</li>
-<li><strong>Flexibility isn’t necessarily slower.</strong> The fastest model here is the zero-shot, permissively licensed <strong>OpenCLIP ViT-B/32 (99 fps, MIT)</strong> — and it’s within a point of the supervised model. You can swap its label set by editing a list of strings.</li>
+<li><strong>Flexibility isn’t necessarily slower.</strong> The fastest model here is the zero-shot, permissively licensed <strong>OpenCLIP ViT-B/32 (99 fps, MIT)</strong> — and it’s within a point of the supervised model. (<em>FPS</em> = frames, i.e.&nbsp;images, processed per second; around 30 is fast enough for real-time video.) You can swap its label set by editing a list of strings.</li>
 <li><strong>SigLIP 2’s recipe shows.</strong> Its sigmoid-loss training edges OpenCLIP on accuracy (99.4 vs 99.0) at roughly half the throughput — a small, real accuracy/speed trade.</li>
 <li><strong>Imagenette is deliberately easy</strong> (10 distinct classes), so everything clusters above 99%. The takeaway isn’t the leaderboard order — it’s that the <em>supervised advantage has nearly vanished</em> on a task like this. On fine-grained or rare classes the gap reopens.</li>
 </ul>
