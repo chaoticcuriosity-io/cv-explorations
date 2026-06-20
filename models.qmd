@@ -1,0 +1,159 @@
+---
+title: "Model families: who's who"
+subtitle: "Plain-language background on every model and architecture named in the reports"
+---
+
+The reports mention a lot of model names — YOLO, RF-DETR, SAM, CLIP, DINO… If those are just
+unfamiliar words, this page is for you. Each entry says **what it is**, **the key idea**, and
+**where it appears** here. For the underlying concepts (CNN, transformer, embedding, mAP), see
+[Foundations](foundations.qmd).
+
+---
+
+## Detection & segmentation models
+
+### YOLO ("You Only Look Once")
+
+- **What:** the most famous real-time **object detector** family; a CNN that finds and labels
+  objects in one fast pass. Now maintained by the company **Ultralytics**; the current generation is
+  **YOLO26** (2026), with **YOLO11** the prior one. Versions come in sizes n/s/m/l/x (nano → extra
+  large); "n" is tiny and fast.
+- **Key idea:** look at the whole image once and predict all boxes simultaneously (hence the name) —
+  that's what makes it fast enough for video. **YOLO26** is **NMS-free** (it emits one clean box per
+  object without the usual duplicate-removal step) and **anchor-free** (no template boxes).
+- **Licence:** AGPL-3.0 (free to learn with; commercial use has conditions).
+- **Where:** [01 detection](modules/01-object-detection/report.qmd),
+  [03 segmentation](modules/03-segmentation/report.qmd),
+  [05 pose](modules/05-pose/report.qmd), [06 tracking](modules/06-tracking/report.qmd),
+  [10 fine-tuning](modules/10-finetuning/report.qmd). YOLO is the workhorse of the site.
+
+### DETR and RF-DETR
+
+- **What:** **DETR** ("DEtection TRansformer") is a different way to do object detection, using a
+  **transformer** instead of the YOLO-style CNN pipeline. **RF-DETR** (by Roboflow, 2025) is a
+  modern, fast, accurate member of this family and the permissively-licensed (Apache-2.0) accuracy
+  leader in module 01.
+- **Key idea:** treat detection as **set prediction** — the model has a fixed set of "**object
+  queries**," each of which learns to go find one object. Because it's designed to output a clean set
+  directly, it needs no anchors and no NMS. Built on a transformer **backbone** (RF-DETR uses DINOv2,
+  below).
+- **Where:** [01 detection](modules/01-object-detection/report.qmd).
+
+### SAM ("Segment Anything Model")
+
+- **What:** Meta's **promptable segmentation** foundation model — it outlines the exact pixels of
+  whatever you point at. **SAM 2.1** is used here; **SAM 3** is the newest. Apache-2.0 (SAM 2.1).
+- **Key idea:** instead of a fixed list of classes, you give it a **prompt** — a click, a box, or
+  (in SAM 3) a text phrase — and it returns a precise **mask**. It has no notion of *what* the thing
+  is ("object-ness," not "cat"), which is exactly why it generalises to objects no labelled detector
+  knows.
+- **Where:** [03 segmentation](modules/03-segmentation/report.qmd).
+
+### Grounding DINO
+
+- **What:** an **open-vocabulary detector** — you give it free **text** and it draws boxes around
+  whatever you named, even categories no fixed-list detector was trained on. (Unrelated to the DINO
+  backbone below despite the shared name.) Apache-2.0.
+- **Key idea:** it fuses a detector with a language understanding of your prompt, so "a person
+  wearing a hard hat" becomes boxes without any retraining.
+- **Where:** [01 detection](modules/01-object-detection/report.qmd) (the open-vocabulary demo) and as
+  the auto-labeller in [10 fine-tuning](modules/10-finetuning/report.qmd).
+
+---
+
+## Backbones & embedding models
+
+### DINO / DINOv2
+
+- **What:** Meta's **self-supervised** image **backbone** — a Vision Transformer that learned to
+  produce excellent general-purpose image **embeddings** *without any labels at all*. **DINOv2** is
+  the version used here (Apache-2.0).
+- **Key idea:** "self-supervised" means it taught itself by making different cropped/altered views of
+  the same photo agree with each other — no human labels needed. The resulting features are so strong
+  they power retrieval, and even serve as the backbone inside other models (RF-DETR uses DINOv2).
+- **Where:** [07 retrieval](modules/07-retrieval/report.qmd); inside RF-DETR in module 01.
+
+### CLIP / SigLIP / OpenCLIP
+
+- **What:** **vision-language embedding** models that put images and text into the *same* space, so
+  you can compare a picture to a sentence. **CLIP** (OpenAI) started it; **OpenCLIP** is an open
+  re-implementation; **SigLIP 2** (Google) is a stronger modern version. All permissive.
+- **Key idea:** trained on hundreds of millions of (image, caption) pairs to make a photo's vector
+  land near its caption's vector. This unlocks **zero-shot** classification (score an image against
+  "a photo of a {class}") and text-image retrieval — no task-specific training.
+- **Where:** [02 classification](modules/02-classification/report.qmd) (zero-shot),
+  [07 retrieval](modules/07-retrieval/report.qmd), and as the relevance filter in
+  [10 fine-tuning](modules/10-finetuning/report.qmd).
+
+### ConvNeXt & timm
+
+- **What:** **ConvNeXt** is a modern, high-performance **CNN** image classifier. **timm** is the
+  popular library that hosts hundreds of pretrained classification backbones like it. Apache-2.0.
+- **Key idea:** ConvNeXt shows a well-designed CNN can still match transformers on classification —
+  a useful "supervised baseline" to compare zero-shot models against.
+- **Where:** [02 classification](modules/02-classification/report.qmd).
+
+---
+
+## Depth, and other specialists
+
+### Depth Anything
+
+- **What:** a **monocular depth** foundation model — estimates how far away every pixel is from a
+  single ordinary photo. **Depth Anything V2** (S/B sizes) is used here; **Depth Anything 3** is
+  newest. Built on a DINOv2 backbone. Apache-2.0 (small/base).
+- **Key idea:** trained on a huge mix of real and auto-generated depth data, it reads the monocular
+  cues humans use (perspective, relative size, occlusion) to turn one flat image into 3-D structure —
+  the perception primitive most relevant to robotics.
+- **Where:** [04 depth](modules/04-depth/report.qmd).
+
+### RTMPose / ViTPose (pose)
+
+- **What:** dedicated **pose-estimation** models (mentioned as the accuracy-first alternative to
+  YOLO-pose). They take the "**top-down**" approach: first detect each person, then run a specialised
+  network on each to place the joints.
+- **Where:** discussed in [05 pose](modules/05-pose/report.qmd) (which benchmarks the faster
+  single-stage YOLO-pose).
+
+### ByteTrack (tracking)
+
+- **What:** not a neural network but a **tracking algorithm** — it links a detector's boxes across
+  video frames so each object keeps a stable ID. MIT-licensed.
+- **Key idea:** predict where each tracked object should move next (a simple motion model) and match
+  it to the new frame's detections — cleverly using even low-confidence detections to bridge brief
+  occlusions. This is "tracking-by-detection": the detector finds, ByteTrack remembers.
+- **Where:** [06 tracking](modules/06-tracking/report.qmd).
+
+---
+
+## Vision-language models (VLMs)
+
+### Qwen2.5-VL (and Florence-2, Moondream, …)
+
+- **What:** **vision-language models** — a vision encoder bolted onto a **large language model**, so
+  you can ask an image questions in plain English and get text back. **Qwen2.5-VL** (Alibaba,
+  Apache-2.0) is used here. **Florence-2** (Microsoft) is a tiny unified alternative;
+  **Moondream**, **PaliGemma** are others.
+- **Key idea:** the image is converted into tokens the language model can "read," so a single model
+  can caption, answer questions, count, read text, and reason — whichever you ask for in the prompt.
+  The most general capability on the site, and the slowest.
+- **Where:** [08 vision-language models](modules/08-vlm/report.qmd).
+
+---
+
+## Classical (pre-deep-learning) techniques
+
+### OpenCV: Canny, ORB, optical flow
+
+- **What:** **OpenCV** is the standard library of *classical*, hand-designed vision algorithms — no
+  training, no neural networks. **Canny** finds edges; **ORB** finds and matches distinctive points
+  between images; **optical flow** estimates pixel motion between video frames. MIT/BSD.
+- **Key idea:** explicit math, not learning — fast, transparent, and still the backbone of camera
+  calibration, panorama stitching, and the geometry front-end of robot navigation (SLAM).
+- **Where:** [09 classical CV](modules/09-classical/report.qmd) — the contrast that makes the learned
+  models legible.
+
+---
+
+*Licences here are summarised for orientation; each module's results table records the exact licence
+of each model it benchmarks, and why it matters for real use.*

@@ -3,21 +3,41 @@ title: "07 · Embeddings & retrieval"
 subtitle: "How similar are two images? — DINOv2 vs SigLIP nearest-neighbour search"
 ---
 
+::: {.callout-note title="New here? Read this first" collapse="true"}
+No prior knowledge needed — but this report is easier if you've skimmed
+**[Foundations](../../foundations.qmd)** (how a computer sees an image, what a model is, how we
+measure success). Stuck on a word? See the **[Glossary](../../glossary.qmd)**. Stuck on a model
+name? See **[Model families](../../models.qmd)**. Key terms are explained inline the first time they
+appear.
+:::
+
 ## The task
 
 Most of this curriculum predicts *labels*. This module predicts a **vector**: an embedding
-that places similar images near each other in a high-dimensional space. That single idea
+that places similar images near each other in a high-dimensional space. (An *embedding* or
+*vector* is just a list of numbers summarising an image so that similar images get similar
+lists — and *retrieval* means finding the most similar images to a query by comparing those
+embeddings.) That single idea
 underpins **reverse image search, deduplication, clustering, recommendation, anomaly
 detection, and few-shot recognition** — none of which need a classifier head. To "classify"
 you just look at your neighbours.
 
-The workflow:
+The workflow (the **gallery** is the searchable set of images; a **query** is the image you
+search with):
 
-1. Embed every gallery image to an L2-normalised vector.
+1. Embed every gallery image to an L2-normalised vector (*L2-normalised* = scaled so each
+   vector has length 1, which makes the similarity comparison clean).
 2. Embed a query the same way.
-3. Rank gallery vectors by cosine similarity (a dot product) and return the nearest.
+3. Rank gallery vectors by cosine similarity (a dot product — both are simple ways to measure
+   how alike two vectors/embeddings are) and return the nearest.
 
 ## Two kinds of embedding
+
+We compare two **backbones** — the network body that turns an image into its embedding.
+**DINOv2** (built on the earlier **DINO**) is *self-supervised*: trained without any human
+labels, e.g. by making different views of the same image agree. **SigLIP 2** is *image-text*
+(*contrastive*): trained on image–caption pairs so an image's vector lands near its caption's.
+For more on where these models come from, see [Model families](../../models.qmd).
 
 | Model | Trained on | Signal it captures |
 |---|---|---|
@@ -41,8 +61,9 @@ the nearest neighbours share the query's class — **using no labels at search t
 
 ::: {.callout-note title="What to notice"}
 - **Search beats training, for free.** Both embedders retrieve the correct class **>99%** of the
-  time (Recall@1) with *no* classifier and *no* labels at query time — add a new class by just
-  dropping its images into the gallery.
+  time (Recall@1 — did the single nearest image share the query's class; a related measure,
+  Precision@5, asks what fraction of the 5 nearest do) with *no* classifier and *no* labels at
+  query time — add a new class by just dropping its images into the gallery.
 - **Self-supervised is competitive with image-text.** DINOv2 (never saw a single label or
   caption) trails SigLIP 2 by only a few tenths of a point here — a striking result for a model
   trained purely on images.
@@ -55,7 +76,8 @@ the nearest neighbours share the query's class — **using no labels at search t
 - **Fine-grained distinctions** — near-duplicate categories (specific dog breeds, product
   variants) can blur in a general embedding; specialised/fine-tuned embeddings help.
 - **Gallery quality & scale** — retrieval is only as good as what's indexed; at millions of
-  items you need an ANN index (FAISS) and recall/speed trade-offs appear.
+  items you need an ANN index (FAISS) — fast *approximate nearest-neighbour* search for large
+  galleries — and recall/speed trade-offs appear.
 - **Domain gap** — embeddings trained on web images underperform on medical, satellite, or
   industrial imagery without adaptation.
 

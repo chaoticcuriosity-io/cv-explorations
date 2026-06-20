@@ -3,18 +3,34 @@ title: "01 · Object detection"
 subtitle: "What is in the image, and where? — benchmarking YOLO vs RF-DETR on COCO val2017"
 ---
 
+::: {.callout-note title="New here? Read this first" collapse="true"}
+No prior knowledge needed — but this report is easier if you've skimmed
+**[Foundations](../../foundations.qmd)** (how a computer sees an image, what a model is, how we
+measure success). Stuck on a word? See the **[Glossary](../../glossary.qmd)**. Stuck on a model
+name? See **[Model families](../../models.qmd)**. Key terms are explained inline the first time they
+appear.
+:::
+
 ## The task
 
 **Object detection** answers two questions at once: *what* objects are present and
-*where* they are, as axis-aligned bounding boxes with class labels and confidence
-scores. It sits between **classification** (one label for the whole image) and
+*where* they are, as axis-aligned bounding boxes (a *bounding box* is just a rectangle drawn
+around an object — four numbers: left, top, right, bottom) with class labels and confidence
+scores (the model's own 0–1 certainty in each prediction). It sits between **classification**
+(one label for the whole image) and
 **segmentation** (a label for every pixel), and it underpins most real-world
 perception — including the robotics work this repo's hardware also serves.
 
-The headline metric is **mean Average Precision (mAP)**: for each class you sweep a
-confidence threshold to trace a precision–recall curve, take the area under it
-(Average Precision), and average across classes. COCO reports mAP averaged over ten
-IoU thresholds from 0.50 to 0.95 (written `mAP@[.50:.95]`), which rewards *tight*
+The headline metric is **mean Average Precision (mAP)** — the standard detection score from 0
+to 1, where higher is better: for each class you sweep a
+confidence threshold to trace a precision–recall curve (*precision* = of the model's
+predictions, the fraction that were correct; *recall* = of the real objects, the fraction the
+model found), take the area under it
+(Average Precision), and average across classes. COCO (a standard 80-class dataset of everyday
+photos used to train and compare detectors) reports mAP averaged over ten
+IoU thresholds from 0.50 to 0.95 (written `mAP@[.50:.95]`) — *IoU*, or Intersection over Union,
+measures how much a predicted box overlaps the true box (shared area ÷ combined area, so 1.0 is
+a perfect match), which rewards *tight*
 boxes, not just roughly-right ones.
 
 ## Two paradigms
@@ -27,6 +43,9 @@ The most important idea to carry across this whole curriculum is the split betwe
 - **Open-vocabulary** models (Grounding DINO, YOLO-World) take *text* at inference
   time and detect whatever you name — "a forklift", "a person wearing hi-vis" — with
   no retraining. More flexible, generally slower and lower-AP on the fixed COCO set.
+  (*Open-vocabulary* means detecting by free-text prompt instead of from a fixed class list.)
+
+For background on each model named here, see [Model families](../../models.qmd).
 
 This report benchmarks the closed-set models head-to-head (they share the COCO label
 space, so mAP is a fair comparison), then demonstrates the open-vocabulary alternative
@@ -35,10 +54,16 @@ wouldn't be meaningful.
 
 ## The architectures benchmarked
 
+The two families below take different routes to the same goal. **YOLO26** is the newest of the
+fast, real-time YOLO detectors; **RF-DETR** is a transformer-based detector that trades a little
+speed for accuracy. Two architecture words recur: a *CNN* slides small pattern-matching filters
+across the image (the classic image architecture), while a *transformer* instead relates every
+part of the image to every other part (an idea called "attention").
+
 | Family | Member(s) | How it localises | Notable trait |
 |---|---|---|---|
-| **YOLO** | YOLO26-n, YOLO11-n | Dense grid of predictions over a CNN/feature pyramid | YOLO26 is **NMS-free** — it learns to emit one box per object, removing the non-maximum-suppression post-step that older YOLOs need |
-| **RF-DETR** | Nano, Medium | A transformer **decoder** with a fixed set of learned "object queries", each attending to the image | DETR-style; no anchors, no NMS by design; built on a DINOv2 backbone |
+| **YOLO** | YOLO26-n, YOLO11-n | Dense grid of predictions over a CNN/feature pyramid | YOLO26 is **NMS-free** — it learns to emit one box per object, removing the non-maximum-suppression (NMS, a clean-up step that deletes duplicate overlapping boxes for the same object and keeps the most confident) post-step that older YOLOs need |
+| **RF-DETR** | Nano, Medium | A transformer **decoder** with a fixed set of learned "object queries" (each query is one "slot" the model uses to find one object), each attending to the image | DETR-style; no anchors (older detectors nudge pre-set template boxes called *anchors*; anchor-free models predict boxes directly), no NMS by design; built on a DINOv2 backbone (the *backbone* is the main body of the network that turns an image into features) |
 
 The interesting contrast: YOLO descends from dense, anchor-based CNN detectors that
 were *engineered* to suppress duplicates; DETR-family models reframe detection as
@@ -100,7 +125,8 @@ threshold for legibility):
 
 ## Open-vocabulary in action
 
-The four models above can *only ever* emit one of the 80 COCO names. **Grounding DINO**
+The four models above can *only ever* emit one of the 80 COCO names. **Grounding DINO** (an
+open-vocabulary detector that matches free-text phrases to regions of the image)
 removes that ceiling: you hand it a sentence of phrases at inference time and it localises
 whatever it can find — no retraining, no fixed label set.
 

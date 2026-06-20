@@ -9,6 +9,15 @@ a reusable CLI/engine, an interactive notebook, and a **rigorous benchmark repor
 — multiple models per task, real metrics, latency measured on the local GPU, and
 honest failure cases.
 
+::: {.callout-tip title="New to computer vision? Start here."}
+You don't need any background — these reports are written to teach the field from scratch.
+**Read [Foundations](foundations.qmd) first** (how a computer sees an image, what a model is,
+how we measure success — every term explained). Keep the [Glossary](glossary.qmd) and
+[Model families](models.qmd) pages open as references. Then a gentle order through the modules is
+[02 · Classification](modules/02-classification/report.qmd) →
+[01 · Object detection](modules/01-object-detection/report.qmd) → follow your curiosity.
+:::
+
 The reports you're reading were rendered from results computed locally on an
 **NVIDIA RTX 3090 Ti (24 GB)**; heavier or Linux-only work runs on an **NVIDIA
 DGX Spark** (ARM64 / GB10 Grace-Blackwell). Site rendering itself needs no GPU.

@@ -3,6 +3,14 @@ title: "02 · Image classification"
 subtitle: "Supervised vs zero-shot — can a model classify images it was never trained to label?"
 ---
 
+::: {.callout-note title="New here? Read this first" collapse="true"}
+No prior knowledge needed — but this report is easier if you've skimmed
+**[Foundations](../../foundations.qmd)** (how a computer sees an image, what a model is, how we
+measure success). Stuck on a word? See the **[Glossary](../../glossary.qmd)**. Stuck on a model
+name? See **[Model families](../../models.qmd)**. Key terms are explained inline the first time they
+appear.
+:::
+
 ## The task
 
 **Image classification** assigns a single label to a whole image — the oldest and most
@@ -12,9 +20,26 @@ shift, because the *same* benchmark can be attacked two completely different way
 
 We evaluate on **Imagenette** — a 10-class, Apache-licensed subset of ImageNet (tench,
 English springer, cassette player, chainsaw, church, French horn, garbage truck, gas
-pump, golf ball, parachute) — reporting **top-1 accuracy** and latency.
+pump, golf ball, parachute) — reporting **top-1 accuracy** and latency. (*Top-1 accuracy*
+means the model's single best guess was the right one; *top-5* would mean the right answer was
+among its five best guesses. *Latency* is the time taken per image.)
 
 ## Two paradigms
+
+Two very different ways to label an image. A **supervised** model is *trained on labelled
+examples of exactly the classes it predicts* — show it thousands of tagged photos, and it learns
+to recognise those tags. A **zero-shot** model is used on categories it was *never explicitly
+trained on*, by description: you hand it the words for each class and it matches the picture to the
+words. The three models below come from two families (see **[Model families](../../models.qmd)**
+for the bigger picture):
+
+- **ConvNeXt-Tiny** — a modern image-recognition network (a "convolutional" one) that was trained
+  the classic supervised way on ImageNet. **timm** is just the popular open-source library that
+  ships it ready to use.
+- **SigLIP 2** and **OpenCLIP** — *CLIP*-style models trained on huge numbers of image–caption
+  pairs scraped from the web, so a photo and its caption end up described by similar lists of
+  numbers. **OpenCLIP** is an open re-creation of OpenAI's original **CLIP**; **SigLIP 2** is a
+  newer, refined version of the same idea.
 
 | Paradigm | Model here | How it decides | Changing the label set |
 |---|---|---|---|
@@ -29,13 +54,17 @@ image to text descriptions.
 
 ## How each model works
 
-- **Supervised (ConvNeXt-Tiny).** A modern convolutional backbone with a 1000-way ImageNet
-  head. To score Imagenette we simply read off the 10 relevant logits — no fine-tuning.
-- **Zero-shot (CLIP / SigLIP 2).** Two encoders — one for images, one for text — trained so
-  that matching image/caption pairs land nearby in a shared space. Classification becomes:
-  encode the image, encode each candidate label as a sentence, return the nearest. **SigLIP 2**
-  refines CLIP with a *sigmoid* loss (each pair judged independently) and stronger training,
-  which generally lifts accuracy.
+- **Supervised (ConvNeXt-Tiny).** A modern convolutional *backbone* — the main body of the
+  network that turns an image into useful features — with a 1000-way ImageNet *head* (the small
+  final part that produces a score per class). To score Imagenette we simply read off the 10
+  relevant *logits* — the raw numeric scores a classifier outputs before picking the highest — no
+  fine-tuning needed.
+- **Zero-shot (CLIP / SigLIP 2).** Two encoders — one for images, one for text — each turning its
+  input into an *embedding* (a list of numbers, or *vector*, summarising it so similar things get
+  similar lists). They are trained *contrastively* so that matching image/caption pairs land
+  nearby in a shared space. Classification becomes: encode the image, encode each candidate label
+  as a sentence, return the nearest. **SigLIP 2** refines CLIP with a *sigmoid* loss (each pair
+  judged independently) and stronger training, which generally lifts accuracy.
 
 ## How we measured
 
@@ -58,7 +87,8 @@ image to text descriptions.
   for coarse, common categories.
 - **Flexibility isn't necessarily slower.** The fastest model here is the zero-shot, permissively
   licensed **OpenCLIP ViT-B/32 (99 fps, MIT)** — and it's within a point of the supervised model.
-  You can swap its label set by editing a list of strings.
+  (*FPS* = frames, i.e. images, processed per second; around 30 is fast enough for real-time
+  video.) You can swap its label set by editing a list of strings.
 - **SigLIP 2's recipe shows.** Its sigmoid-loss training edges OpenCLIP on accuracy
   (99.4 vs 99.0) at roughly half the throughput — a small, real accuracy/speed trade.
 - **Imagenette is deliberately easy** (10 distinct classes), so everything clusters above 99%.

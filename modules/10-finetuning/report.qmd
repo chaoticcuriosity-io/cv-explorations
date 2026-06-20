@@ -3,28 +3,55 @@ title: "10 · Fine-tuning a custom detector"
 subtitle: "Teaching YOLO a class COCO never had — air vents — with auto-built data, trained on a DGX Spark"
 ---
 
+::: {.callout-note title="New here? Read this first" collapse="true"}
+No prior knowledge needed — but this report is easier if you've skimmed
+**[Foundations](../../foundations.qmd)** (how a computer sees an image, what a model is, how we
+measure success). Stuck on a word? See the **[Glossary](../../glossary.qmd)**. Stuck on a model
+name? See **[Model families](../../models.qmd)**. Key terms are explained inline the first time they
+appear.
+:::
+
 ## The task
 
-Every module so far *ran* a pretrained model. This one **trains** one — the capstone skill,
-because real projects almost always need a class the off-the-shelf models don't have. Here that
+Every module so far *ran* a **pretrained** model (one whose internal numbers — its *weights* — were
+already learned and saved in a file you load). This one **trains** one — the capstone skill,
+because real projects almost always need a class the off-the-shelf models don't have. (Two words
+worth pinning down: *training* adjusts a model's internal numbers from labelled examples, while
+*inference* just runs the finished model. Every earlier module did inference; this one does
+training.) Here that
 class is **air vents**: not in COCO, so [module 01's](../01-object-detection/report.qmd) detectors
-are blind to it. We fine-tune a YOLO detector to find vents, and — the interesting part — we do it
+are blind to it. We **fine-tune** a YOLO detector to find vents — fine-tuning means continuing to
+train an already-pretrained model on your own smaller dataset to specialise it, which is far
+cheaper than training from scratch. **YOLO** (here YOLO11, a small, fast object detector that draws
+boxes around things; see [Model families](../../models.qmd)) is what we specialise. And — the
+interesting part — we do it
 **without hand-labelling a single image**, then train **on the DGX Spark**.
 
 ## The data engine: this repo, labelling itself
 
-Fine-tuning needs labelled data, and labelling is the expensive, boring bottleneck of applied CV.
+Fine-tuning needs labelled data — and a *label* (or *annotation*) is just the correct answer
+attached to a training image; here, a box drawn around a vent. Labelling is the expensive, boring
+bottleneck of applied CV.
 So we manufacture the dataset from capabilities built earlier in this very curriculum — the
-"distill an open-vocabulary model into a specialist" workflow that
-[module 01](../01-object-detection/report.qmd) promised:
+"**distill** an open-vocabulary model into a specialist" workflow that
+[module 01](../01-object-detection/report.qmd) promised. (*Distillation* means training a small,
+fast model to copy a big, slow one's outputs. *Open-vocabulary* — or *zero-shot* — means a model
+that detects or classifies things from a text *description* rather than from a fixed list it was
+trained on, which is exactly how CLIP and Grounding DINO are used below to build the data.) The
+recipe:
 
 1. **Source** — pull Creative-Commons vent images from Wikimedia Commons (no API key).
-2. **Filter (zero-shot)** — score each image with **CLIP** ([module 02](../02-classification/report.qmd))
+2. **Filter (zero-shot)** — score each image with **CLIP** (a model that scores how well an image
+   matches a text description; [module 02](../02-classification/report.qmd), and
+   [Model families](../../models.qmd))
    against vent prompts vs distractor prompts (smokestacks, landscapes, documents, **cars**,
    people…) and keep only the vent-like ones. This gate is essential — a raw "air vent" web
    search is mostly *not* air vents.
-3. **Auto-label** — run **Grounding DINO** ([module 01](../01-object-detection/report.qmd)) with vent
-   text prompts; its boxes (after a size-sanity filter) become YOLO labels.
+3. **Auto-label** — run **Grounding DINO** (an open-vocabulary detector that draws boxes from a text
+   prompt; [module 01](../01-object-detection/report.qmd)) with vent
+   text prompts; its boxes (after a size-sanity filter) become YOLO labels. Because *another* model
+   produces them rather than a human, these are **pseudo-labels** — cheap to generate, but noisier
+   than human annotations.
 4. **Fine-tune** — train YOLO on the result, on the Spark.
 
 So three earlier modules become a **data engine** for a fourth. No human ever draws a box.
@@ -34,7 +61,9 @@ So three earlier modules become a **data engine** for a fourth. No human ever dr
 ::: {.callout-warning title="Honest about auto-labelled data"}
 Auto-sourced, auto-labelled data is **noisy** — the CLIP gate and box filter remove most junk,
 but some mislabelling survives, and the val labels are themselves model-generated. So the mAP
-below measures *how well YOLO distilled Grounding DINO*, not human ground truth. The qualitative
+below (**mAP** — mean Average Precision — is the standard detection score, from 0 to 1, where
+higher is better; the "50" in *mAP50* refers to the box-overlap threshold used to count a
+detection as correct) measures *how well YOLO distilled Grounding DINO*, not human ground truth. The qualitative
 before/after and the honest "what's needed for production" note matter more than the number. The
 path to **highly reliable** is more images and a pass of human label cleanup — or your own
 photos, which the pipeline accepts directly.
@@ -62,6 +91,9 @@ The headline: the **base** model has no "air vent" class, so it detects **zero**
 {{< include results/metrics.md >}}
 
 ![Training curves — losses fall and validation mAP rises over epochs.](results/curves.png){#fig-curves}
+
+An **epoch** is one full pass of training over the whole dataset; the curves below span many such
+passes.
 
 ::: {.callout-note title="What to notice"}
 - **From zero to a working detector.** The base model cannot detect a vent — there is no such

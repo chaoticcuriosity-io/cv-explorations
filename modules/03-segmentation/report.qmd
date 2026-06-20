@@ -3,17 +3,39 @@ title: "03 · Segmentation"
 subtitle: "From boxes to pixels — closed-set instance masks vs promptable SAM 2.1"
 ---
 
+::: {.callout-note title="New here? Read this first" collapse="true"}
+No prior knowledge needed — but this report is easier if you've skimmed
+**[Foundations](../../foundations.qmd)** (how a computer sees an image, what a model is, how we
+measure success). Stuck on a word? See the **[Glossary](../../glossary.qmd)**. Stuck on a model
+name? See **[Model families](../../models.qmd)**. Key terms are explained inline the first time they
+appear.
+:::
+
 ## The task
 
-**Segmentation** assigns labels at the *pixel* level rather than the box level. Two flavours
+**Segmentation** assigns labels at the *pixel* level rather than the box level. In plain terms,
+segmentation means *labelling every pixel* — saying which object each dot of the image belongs to —
+instead of just drawing a **bounding box** (a rectangle around an object). The output is a **mask**:
+a per-pixel yes/no marking of exactly which pixels belong to a given object. Two flavours
 matter here:
 
 - **Instance segmentation** — a separate mask per object (two people → two masks), each with
-  a class. This is detection + a mask head.
+  a class. This is detection + a mask head. (*Instance* segmentation separates individual objects;
+  *semantic* segmentation, by contrast, labels pixels by category only — all people become one "person"
+  blob — without telling them apart.)
 - **Promptable segmentation** — "segment whatever I point at / box / name", with no fixed class
-  set. This is the **foundation-model** approach, embodied by Segment Anything.
+  set. **Promptable** means you steer the model with a prompt — a click, a box, or text — rather than
+  picking from a fixed class list. This is the **foundation-model** approach (a large model
+  pretrained broadly and reused for many tasks, often just by prompting), embodied by Segment Anything.
+  For a map of the model families mentioned below, see **[Model families](../../models.qmd)**.
 
 ## Two paradigms
+
+Two very different model families show up below. **YOLO-seg** (the segmentation variant of the
+fast, popular YOLO object detectors — here the **YOLO26-seg** and **YOLO11-seg** versions) is quick
+and always tells you *what* each mask is. **SAM 2.1** (Segment Anything Model 2.1, a promptable
+segmentation foundation model from Meta) is slower but will outline almost anything you point at.
+SAM is **class-agnostic**: it produces masks without saying what the object is.
 
 | Model | Approach | Label set | Trait |
 |---|---|---|---|
@@ -37,9 +59,13 @@ prompted with the YOLO26-seg boxes.
 ## How we measured
 
 This module is **qualitative + latency** (warmed-up single-image forwards on the local
-**RTX 3090 Ti**); full mask-mAP on COCO is a deeper follow-up. The point here is to *see* the
-difference between a fast labelled instance segmenter and a slower, class-agnostic, promptable
-one.
+**RTX 3090 Ti**); full mask-mAP on COCO is a deeper follow-up. *Latency* is the time to process one
+image (in milliseconds), often reported as **FPS** (frames/images per second — roughly 30 means
+real-time). *mask mAP* is the usual detection score (**mAP**) computed using mask overlap instead of
+box overlap; the standard pixel-level segmentation score you may also meet elsewhere is **mIoU**
+(mean Intersection-over-Union — the average pixel overlap between prediction and truth, across
+classes). The point here is to *see* the difference between a fast labelled instance segmenter and a
+slower, class-agnostic, promptable one.
 
 ## Results
 
