@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>metrics – CV Explorations</title>
+<title>06 · Multi-object tracking – CV Explorations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,26 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -81,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">CV Explorations</span>
     </a>
   </div>
@@ -92,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -101,27 +136,27 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
         <li>
-    <a class="dropdown-item" href="../../../modules/01-object-detection/report.html">
+    <a class="dropdown-item" href="../../modules/01-object-detection/report.html">
  <span class="dropdown-text">01 · Object detection</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/02-classification/report.html">
+    <a class="dropdown-item" href="../../modules/02-classification/report.html">
  <span class="dropdown-text">02 · Image classification</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/03-segmentation/report.html">
+    <a class="dropdown-item" href="../../modules/03-segmentation/report.html">
  <span class="dropdown-text">03 · Segmentation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/04-depth/report.html">
+    <a class="dropdown-item" href="../../modules/04-depth/report.html">
  <span class="dropdown-text">04 · Monocular depth</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/05-pose/report.html">
+    <a class="dropdown-item" href="../../modules/05-pose/report.html">
  <span class="dropdown-text">05 · Human pose</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/06-tracking/report.html">
+    <a class="dropdown-item" href="../../modules/06-tracking/report.html">
  <span class="dropdown-text">06 · Tracking</span></a>
   </li>  
     </ul>
@@ -149,57 +184,136 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#imagenette-classification-benchmark" id="toc-imagenette-classification-benchmark" class="nav-link active" data-scroll-target="#imagenette-classification-benchmark">Imagenette classification benchmark</a></li>
+  <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task">The task</a></li>
+  <li><a href="#result" id="toc-result" class="nav-link" data-scroll-target="#result">Result</a></li>
+  <li><a href="#multi-object-tracking" id="toc-multi-object-tracking" class="nav-link" data-scroll-target="#multi-object-tracking">Multi-object tracking</a></li>
+  <li><a href="#where-tracking-fails" id="toc-where-tracking-fails" class="nav-link" data-scroll-target="#where-tracking-fails">Where tracking fails</a></li>
+  <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproduce</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/02-classification/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/06-tracking/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">06 · Multi-object tracking</h1>
+<p class="subtitle lead">Same object across frames — YOLO detection + ByteTrack</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="imagenette-classification-benchmark" class="level2">
-<h2 class="anchored" data-anchor-id="imagenette-classification-benchmark">Imagenette classification benchmark</h2>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-task" class="level2">
+<h2 class="anchored" data-anchor-id="the-task">The task</h2>
+<p>A detector answers <em>“what’s here right now”</em> — independently, every frame, with no memory. <strong>Tracking</strong> adds the missing dimension: <strong>identity over time</strong>, so the same person keeps the same id as they move. That id is what lets you count, measure dwell time, analyse motion, or have a robot follow a specific person.</p>
+<p>The dominant recipe is <strong>tracking-by-detection</strong>:</p>
+<ol type="1">
+<li>Run a detector on each frame (here: YOLO26, person class only).</li>
+<li><strong>Associate</strong> this frame’s boxes with the existing tracks — match by predicted position (a Kalman motion model) and box overlap.</li>
+<li>Births/deaths: unmatched detections start new tracks; tracks unseen for a while are retired.</li>
+</ol>
+<p><strong>ByteTrack</strong> is the associator. Its trick is to use <em>low</em>-confidence detections during association (not just high-confidence ones), which recovers objects through brief occlusion and reduces dropped tracks.</p>
+</section>
+<section id="result" class="level2">
+<h2 class="anchored" data-anchor-id="result">Result</h2>
+<div id="fig-track" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-track-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/tracking.gif" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-track-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Detection + ByteTrack with motion traces. Each box carries a persistent id (<code>#n</code>); the tails show recent trajectory.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="multi-object-tracking" class="level2">
+<h2 class="anchored" data-anchor-id="multi-object-tracking">Multi-object tracking</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Model</th>
-<th>Paradigm</th>
-<th>License</th>
-<th>Top-1 (%)</th>
-<th>Latency (ms)</th>
-<th>FPS</th>
+<th>Metric</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>ConvNeXt-Tiny</td>
-<td>Supervised</td>
-<td>Apache-2.0</td>
-<td>99.9</td>
-<td>12.31</td>
-<td>81.2</td>
+<td>Unique tracks (ids)</td>
+<td>62</td>
 </tr>
 <tr class="even">
-<td>SigLIP 2 Base</td>
-<td>Zero-shot</td>
-<td>Apache-2.0</td>
-<td>99.4</td>
-<td>23.4</td>
-<td>42.7</td>
+<td>Frames processed</td>
+<td>200</td>
 </tr>
 <tr class="odd">
-<td>OpenCLIP ViT-B/32</td>
-<td>Zero-shot</td>
-<td>MIT</td>
-<td>99.0</td>
-<td>10.09</td>
-<td>99.1</td>
+<td>Processing speed</td>
+<td>21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)</td>
+</tr>
+<tr class="even">
+<td>Source video</td>
+<td>1920x1080 @ 25 fps</td>
 </tr>
 </tbody>
 </table>
-<p><em>Top-1 accuracy on 3925 Imagenette val images (10 classes). Latency = mean of 30 warmed-up single-image forwards on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>. Zero-shot models were never trained on Imagenette — they classify by image-text similarity.</em></p>
+<p><em>YOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up.</em></p>
+<div id="fig-keyframes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-keyframes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/keyframes.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-keyframes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Three frames across the clip — note how ids persist as people move.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="What to notice">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What to notice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Identity is the product, not boxes.</strong> The same code as module 01 produces the boxes; the value here is that box <code>#7</code> in frame 0 is <em>the same person</em> as box <code>#7</code> in frame 100.</li>
+<li><strong>More ids than people = fragmentation.</strong> This 200-frame clip yielded ~60 ids for far fewer actual pedestrians. When someone is occluded and reappears, the tracker often issues a <em>new</em> id — the classic <strong>ID-switch / fragmentation</strong> failure that HOTA and IDF1 are designed to penalise.</li>
+<li><strong>Tracking is detector-bound.</strong> Every missed detection is a gap the associator must bridge; a better detector usually means a better tracker, for free.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="where-tracking-fails" class="level2">
+<h2 class="anchored" data-anchor-id="where-tracking-fails">Where tracking fails</h2>
+<ul>
+<li><strong>Long / full occlusion</strong> — a person hidden for many frames usually returns with a new id.</li>
+<li><strong>Crowds &amp; similar appearance</strong> — ByteTrack uses motion + overlap, not appearance, so it can swap ids between people who cross paths (appearance-based trackers like Deep OC-SORT help).</li>
+<li><strong>Fast motion / low frame-rate</strong> — the Kalman prediction drifts and association breaks.</li>
+<li><strong>Detector misses</strong> — propagate directly into track gaps.</li>
+</ul>
+</section>
+<section id="reproduce" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> detection      <span class="co"># ultralytics + supervision (ByteTrack)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/06-tracking/run.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><em>(The sample clip is downloaded by <code>supervision</code>’s asset helper into <code>data/</code>.)</em></p>
 
 
 </section>
@@ -613,7 +727,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/02-classification/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/06-tracking/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
