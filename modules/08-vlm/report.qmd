@@ -1,0 +1,67 @@
+---
+title: "08 · Vision-language models"
+subtitle: "One model, many tasks — caption, reason, count, and read with Qwen2.5-VL"
+---
+
+## The task
+
+Every earlier module solved *one* capability with a purpose-built model. A **vision-language
+model (VLM)** collapses many of them into a single network you steer with a **prompt**. Ask it
+to caption, answer a question, count, read text, or reason about what happens next — no
+task-specific head, no retraining. This is the frontier of "general" computer vision and the
+closest thing here to *understanding* a scene rather than just labelling it.
+
+## How it works
+
+A VLM bolts a **vision encoder** onto a **language model**: image patches are projected into
+the LLM's token space, so the model "sees" the picture as a sequence of tokens and then
+*generates* text conditioned on both the image and your question. Because the output is
+language, the same model can do tasks that would each need a separate architecture in the
+classic stack — the prompt selects the behaviour.
+
+::: {.callout-tip title="A note on the model choice"}
+The natural pick here was Microsoft's **Florence-2**, a tiny unified model with explicit task
+tokens (`<CAPTION>`, `<OD>`, `<OCR>`). Its custom modelling code doesn't load under
+**transformers v5** (a config incompatibility), so we use **Qwen2.5-VL 3B** — a
+transformers-native generative VLM — instead. The lesson (one model, many tasks via prompts)
+is the same; only the interface differs (free-form chat vs task tokens).
+:::
+
+## Results — real transcripts
+
+Below is the model's *actual* output on three images, for four different tasks, all from the
+same weights:
+
+{{< include results/transcript.md >}}
+
+![Qwen2.5-VL captions on the same images.](results/captions.png){#fig-captions}
+
+{{< include results/metrics.md >}}
+
+::: {.callout-note title="What to notice"}
+- **One model, four capabilities.** Captioning, open-ended reasoning, counting, and OCR all
+  came from a single network — selected entirely by the prompt. That generality is the whole
+  point of a VLM.
+- **Grounded and mostly correct.** Counts (0 / 4 / 5 people) match the scenes; OCR correctly
+  reports "none" when there's no text; captions are accurate. It reasons about *what might
+  happen next* — something a classifier or detector simply cannot do.
+- **Generality has a price: latency.** At **~3.7 s per short answer**, this 3B VLM is
+  *~100× slower* than the YOLO detector. VLMs are the heavyweight of the curriculum — you reach
+  for them when you need language-level flexibility, not real-time throughput.
+- **Confident but fallible.** Free-form generation can hallucinate details not in the image;
+  outputs should be treated as strong suggestions, not ground truth.
+:::
+
+## Where VLMs fail
+
+- **Hallucination** — fluent text can assert objects/attributes that aren't there.
+- **Precise spatial / counting tasks** — better than older models, still unreliable in clutter.
+- **Fine OCR & small text** — general VLMs trail dedicated OCR systems on dense documents.
+- **Latency & cost** — orders of magnitude heavier than the specialist models in modules 01–07.
+
+## Reproduce
+
+```bash
+uv sync --group dev
+uv run python modules/08-vlm/run.py --images 3
+```

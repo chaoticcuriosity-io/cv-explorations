@@ -28,6 +28,8 @@ website:
             text: "06 · Tracking"
           - href: modules/07-retrieval/report.qmd
             text: "07 · Embeddings & retrieval"
+          - href: modules/08-vlm/report.qmd
+            text: "08 · Vision-language models"
     right:
       - icon: github
         href: https://github.com/chaoticcuriosity-io/cv-explorations
