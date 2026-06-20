@@ -131,6 +131,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-start-here" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Start here</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-start-here">    
+        <li>
+    <a class="dropdown-item" href="../../foundations.html">
+ <span class="dropdown-text">Foundations (read first)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../models.html">
+ <span class="dropdown-text">Model families</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
@@ -242,13 +261,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled" title="New here? Read this first">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>New here? Read this first
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No prior knowledge needed — but this report is easier if you’ve skimmed <strong><a href="../../foundations.html">Foundations</a></strong> (how a computer sees an image, what a model is, how we measure success). Stuck on a word? See the <strong><a href="../../glossary.html">Glossary</a></strong>. Stuck on a model name? See <strong><a href="../../models.html">Model families</a></strong>. Key terms are explained inline the first time they appear.</p>
+</div>
+</div>
+</div>
 <section id="the-task" class="level2">
 <h2 class="anchored" data-anchor-id="the-task">The task</h2>
-<p>Every earlier module solved <em>one</em> capability with a purpose-built model. A <strong>vision-language model (VLM)</strong> collapses many of them into a single network you steer with a <strong>prompt</strong>. Ask it to caption, answer a question, count, read text, or reason about what happens next — no task-specific head, no retraining. This is the frontier of “general” computer vision and the closest thing here to <em>understanding</em> a scene rather than just labelling it.</p>
+<p>Every earlier module solved <em>one</em> capability with a purpose-built model. A <strong>vision-language model (VLM)</strong> — a model that takes an image (and text) and produces text: captions, answers, reasoning — collapses many of them into a single network you steer with a <strong>prompt</strong> (the instruction or question you give the model in plain language). Ask it to caption, answer a question, count, read text, or reason about what happens next — no task-specific head, no retraining. This is the frontier of “general” computer vision and the closest thing here to <em>understanding</em> a scene rather than just labelling it.</p>
 </section>
 <section id="how-it-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
-<p>A VLM bolts a <strong>vision encoder</strong> onto a <strong>language model</strong>: image patches are projected into the LLM’s token space, so the model “sees” the picture as a sequence of tokens and then <em>generates</em> text conditioned on both the image and your question. Because the output is language, the same model can do tasks that would each need a separate architecture in the classic stack — the prompt selects the behaviour.</p>
+<p>A VLM bolts a <strong>vision encoder</strong> (the part that turns the image into tokens the language model can read) onto a <strong>large language model (LLM)</strong> — a model that generates text, like ChatGPT; a VLM simply attaches a vision encoder to one. Image patches are projected into the LLM’s <strong>token</strong> space — a token being a small chunk of text (or image) the model processes one at a time — so the model “sees” the picture as a sequence of tokens and then <em>generates</em> text conditioned on both the image and your question (<strong>generative</strong> means it produces free-form output, here text, rather than picking from a fixed list of classes). Because the output is language, the same model can do tasks that would each need a separate architecture in the classic stack — the prompt selects the behaviour. For how VLMs relate to the other model families in this curriculum, see <strong><a href="../../models.html">Model families</a></strong>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="A note on the model choice">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -259,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The natural pick here was Microsoft’s <strong>Florence-2</strong>, a tiny unified model with explicit task tokens (<code>&lt;CAPTION&gt;</code>, <code>&lt;OD&gt;</code>, <code>&lt;OCR&gt;</code>). Its custom modelling code doesn’t load under <strong>transformers v5</strong> (a config incompatibility), so we use <strong>Qwen2.5-VL 3B</strong> — a transformers-native generative VLM — instead. The lesson (one model, many tasks via prompts) is the same; only the interface differs (free-form chat vs task tokens).</p>
+<p>The natural pick here was Microsoft’s <strong>Florence-2</strong>, a tiny unified vision-language model that you steer with explicit task tokens (<code>&lt;CAPTION&gt;</code>, <code>&lt;OD&gt;</code>, <code>&lt;OCR&gt;</code>). Its custom modelling code doesn’t load under <strong>transformers v5</strong> (a config incompatibility), so we use <strong>Qwen2.5-VL 3B</strong> — a small, transformers-native generative VLM (the “3B” means 3 billion parameters, the model’s adjustable internal numbers) — instead. The lesson (one model, many tasks via prompts) is the same; only the interface differs (free-form chat vs task tokens).</p>
 </div>
 </div>
 </section>
@@ -337,9 +372,9 @@ Figure&nbsp;1: Qwen2.5-VL captions on the same images.
 <div class="callout-body-container callout-body">
 <ul>
 <li><strong>One model, four capabilities.</strong> Captioning, open-ended reasoning, counting, and OCR all came from a single network — selected entirely by the prompt. That generality is the whole point of a VLM.</li>
-<li><strong>Grounded and mostly correct.</strong> Counts (0 / 4 / 5 people) match the scenes; OCR correctly reports “none” when there’s no text; captions are accurate. It reasons about <em>what might happen next</em> — something a classifier or detector simply cannot do.</li>
-<li><strong>Generality has a price: latency.</strong> At <strong>~3.7 s per short answer</strong>, this 3B VLM is <em>~100× slower</em> than the YOLO detector. VLMs are the heavyweight of the curriculum — you reach for them when you need language-level flexibility, not real-time throughput.</li>
-<li><strong>Confident but fallible.</strong> Free-form generation can hallucinate details not in the image; outputs should be treated as strong suggestions, not ground truth.</li>
+<li><strong>Grounded and mostly correct.</strong> Counts (0 / 4 / 5 people) match the scenes; OCR (reading text that appears in an image) correctly reports “none” when there’s no text; captions are accurate. It reasons about <em>what might happen next</em> — something a classifier or detector simply cannot do.</li>
+<li><strong>Generality has a price: latency.</strong> Latency is the time to produce an answer — here measured in seconds, far slower than the other modules. At <strong>~3.7 s per short answer</strong>, this 3B VLM is <em>~100× slower</em> than the YOLO detector. VLMs are the heavyweight of the curriculum — you reach for them when you need language-level flexibility, not real-time throughput.</li>
+<li><strong>Confident but fallible.</strong> Free-form generation can hallucinate (confidently state details not actually in the image); outputs should be treated as strong suggestions, not ground truth.</li>
 </ul>
 </div>
 </div>

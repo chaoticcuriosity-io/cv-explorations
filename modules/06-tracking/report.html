@@ -131,6 +131,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-start-here" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Start here</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-start-here">    
+        <li>
+    <a class="dropdown-item" href="../../foundations.html">
+ <span class="dropdown-text">Foundations (read first)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../models.html">
+ <span class="dropdown-text">Model families</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
@@ -235,16 +254,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled" title="New here? Read this first">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>New here? Read this first
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No prior knowledge needed — but this report is easier if you’ve skimmed <strong><a href="../../foundations.html">Foundations</a></strong> (how a computer sees an image, what a model is, how we measure success). Stuck on a word? See the <strong><a href="../../glossary.html">Glossary</a></strong>. Stuck on a model name? See <strong><a href="../../models.html">Model families</a></strong>. Key terms are explained inline the first time they appear.</p>
+</div>
+</div>
+</div>
 <section id="the-task" class="level2">
 <h2 class="anchored" data-anchor-id="the-task">The task</h2>
-<p>A detector answers <em>“what’s here right now”</em> — independently, every frame, with no memory. <strong>Tracking</strong> adds the missing dimension: <strong>identity over time</strong>, so the same person keeps the same id as they move. That id is what lets you count, measure dwell time, analyse motion, or have a robot follow a specific person.</p>
-<p>The dominant recipe is <strong>tracking-by-detection</strong>:</p>
+<p>A <strong>detector</strong> (the model that finds objects and draws a <strong>bounding box</strong> — the rectangle around each one) answers <em>“what’s here right now”</em> — independently, every frame, with no memory. <strong>Tracking</strong> (also called <strong>multi-object tracking</strong>, or <strong>MOT</strong> — following the same objects across video frames so each keeps a stable id) adds the missing dimension: <strong>identity over time</strong>, so the same person keeps the same <strong>id</strong> (the persistent number identifying one tracked object across frames — also called a <strong>tracker id</strong>) as they move. That id is what lets you count, measure dwell time, analyse motion, or have a robot follow a specific person.</p>
+<p>The dominant recipe is <strong>tracking-by-detection</strong> (run a detector each frame, then link this frame’s boxes to the tracks you already have):</p>
 <ol type="1">
-<li>Run a detector on each frame (here: YOLO26, person class only).</li>
-<li><strong>Associate</strong> this frame’s boxes with the existing tracks — match by predicted position (a Kalman motion model) and box overlap.</li>
+<li>Run a detector on each frame (here: YOLO26 — a fast, widely used object-detection model; see <a href="../../models.html">Model families</a> — person class only).</li>
+<li><strong>Associate</strong> this frame’s boxes with the existing tracks — i.e.&nbsp;decide which new box belongs to which existing track — matching by predicted position (a <strong>Kalman / motion model</strong>: a simple predictor of where a tracked object will move next) and box overlap.</li>
 <li>Births/deaths: unmatched detections start new tracks; tracks unseen for a while are retired.</li>
 </ol>
-<p><strong>ByteTrack</strong> is the associator. Its trick is to use <em>low</em>-confidence detections during association (not just high-confidence ones), which recovers objects through brief occlusion and reduces dropped tracks.</p>
+<p><strong>ByteTrack</strong> is the associator. (It is an <em>algorithm</em> — a fixed set of matching rules — not a neural network that learns; see <a href="../../models.html">Model families</a>.) Its trick is to use <em>low</em>-confidence detections during association (not just high-confidence ones), which recovers objects through brief <strong>occlusion</strong> (when an object is temporarily hidden behind something) and reduces dropped tracks.</p>
 </section>
 <section id="result" class="level2">
 <h2 class="anchored" data-anchor-id="result">Result</h2>
@@ -314,7 +349,7 @@ Figure&nbsp;2: Three frames across the clip — note how ids persist as people m
 <div class="callout-body-container callout-body">
 <ul>
 <li><strong>Identity is the product, not boxes.</strong> The same code as module 01 produces the boxes; the value here is that box <code>#7</code> in frame 0 is <em>the same person</em> as box <code>#7</code> in frame 100.</li>
-<li><strong>More ids than people = fragmentation.</strong> This 200-frame clip yielded ~60 ids for far fewer actual pedestrians. When someone is occluded and reappears, the tracker often issues a <em>new</em> id — the classic <strong>ID-switch / fragmentation</strong> failure that HOTA and IDF1 are designed to penalise.</li>
+<li><strong>More ids than people = fragmentation.</strong> This 200-frame clip yielded ~60 ids for far fewer actual pedestrians. When someone is occluded and reappears, the tracker often issues a <em>new</em> id — the classic <strong>ID-switch / fragmentation</strong> failure (a tracked object wrongly getting a <em>new</em> id, e.g.&nbsp;after being hidden) that HOTA and IDF1 are designed to penalise. (<strong>HOTA</strong>, <strong>MOTA</strong> and <strong>IDF1</strong> are standard tracking scores for how well ids stay correct over time.)</li>
 <li><strong>Tracking is detector-bound.</strong> Every missed detection is a gap the associator must bridge; a better detector usually means a better tracker, for free.</li>
 </ul>
 </div>
@@ -331,6 +366,7 @@ Figure&nbsp;2: Three frames across the clip — note how ids persist as people m
 </section>
 <section id="reproduce" class="level2">
 <h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
+<p>Here <strong>supervision</strong> is a Python helper library that bundles ready-made tracking and annotation tools (including a ByteTrack implementation); see <a href="../../models.html">Model families</a>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> detection      <span class="co"># ultralytics + supervision (ByteTrack)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/06-tracking/run.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em>(The sample clip is downloaded by <code>supervision</code>’s asset helper into <code>data/</code>.)</em></p>

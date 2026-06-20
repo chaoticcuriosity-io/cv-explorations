@@ -14,31 +14,31 @@
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/08-vlm/report.html</loc>
-    <lastmod>2026-06-20T13:33:18.613Z</lastmod>
+    <lastmod>2026-06-20T23:37:20.333Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/07-retrieval/report.html</loc>
-    <lastmod>2026-06-20T13:24:38.091Z</lastmod>
+    <lastmod>2026-06-20T23:37:00.737Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/06-tracking/report.html</loc>
-    <lastmod>2026-06-20T13:16:46.965Z</lastmod>
+    <lastmod>2026-06-20T23:37:06.198Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/05-pose/report.html</loc>
-    <lastmod>2026-06-20T13:10:46.600Z</lastmod>
+    <lastmod>2026-06-20T23:37:13.176Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/04-depth/report.html</loc>
-    <lastmod>2026-06-20T13:07:11.318Z</lastmod>
+    <lastmod>2026-06-20T23:36:27.797Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/03-segmentation/report.html</loc>
-    <lastmod>2026-06-20T13:02:14.028Z</lastmod>
+    <lastmod>2026-06-20T23:36:20.642Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/02-classification/report.html</loc>
-    <lastmod>2026-06-20T06:51:52.965Z</lastmod>
+    <lastmod>2026-06-20T23:36:21.277Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/01-object-detection/results/metrics.html</loc>
@@ -49,16 +49,28 @@
     <lastmod>2026-06-20T06:39:03.393Z</lastmod>
   </url>
   <url>
+    <loc>https://chaoticcuriosity-io.github.io/cv-explorations/index.html</loc>
+    <lastmod>2026-06-20T23:33:53.658Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chaoticcuriosity-io.github.io/cv-explorations/foundations.html</loc>
+    <lastmod>2026-06-20T23:31:47.740Z</lastmod>
+  </url>
+  <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/cross-platform.html</loc>
     <lastmod>2026-06-20T14:52:14.703Z</lastmod>
   </url>
   <url>
-    <loc>https://chaoticcuriosity-io.github.io/cv-explorations/index.html</loc>
-    <lastmod>2026-06-20T19:04:01.775Z</lastmod>
+    <loc>https://chaoticcuriosity-io.github.io/cv-explorations/glossary.html</loc>
+    <lastmod>2026-06-20T23:32:35.978Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chaoticcuriosity-io.github.io/cv-explorations/models.html</loc>
+    <lastmod>2026-06-20T23:33:29.176Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/01-object-detection/report.html</loc>
-    <lastmod>2026-06-20T06:38:16.049Z</lastmod>
+    <lastmod>2026-06-20T23:36:15.443Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/02-classification/explore.html</loc>
@@ -94,10 +106,10 @@
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/09-classical/report.html</loc>
-    <lastmod>2026-06-20T13:36:38.909Z</lastmod>
+    <lastmod>2026-06-20T23:37:28.941Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/10-finetuning/report.html</loc>
-    <lastmod>2026-06-20T19:03:49.968Z</lastmod>
+    <lastmod>2026-06-20T23:37:40.314Z</lastmod>
   </url>
 </urlset>

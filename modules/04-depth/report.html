@@ -131,6 +131,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-start-here" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Start here</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-start-here">    
+        <li>
+    <a class="dropdown-item" href="../../foundations.html">
+ <span class="dropdown-text">Foundations (read first)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../glossary.html">
+ <span class="dropdown-text">Glossary</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../models.html">
+ <span class="dropdown-text">Model families</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
@@ -236,22 +255,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled" title="New here? Read this first">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>New here? Read this first
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No prior knowledge needed — but this report is easier if you’ve skimmed <strong><a href="../../foundations.html">Foundations</a></strong> (how a computer sees an image, what a model is, how we measure success). Stuck on a word? See the <strong><a href="../../glossary.html">Glossary</a></strong>. Stuck on a model name? See <strong><a href="../../models.html">Model families</a></strong>. Key terms are explained inline the first time they appear.</p>
+</div>
+</div>
+</div>
 <section id="the-task" class="level2">
 <h2 class="anchored" data-anchor-id="the-task">The task</h2>
-<p><strong>Monocular depth estimation</strong> predicts a distance for every pixel from one ordinary RGB image — no stereo pair, no LiDAR. It’s the perception capability most directly relevant to <strong>robotics</strong>: turning a flat photo into 3D structure for navigation, grasping, and obstacle avoidance.</p>
-<p>A key distinction:</p>
+<p><strong>Monocular depth estimation</strong> predicts a distance for every pixel from one ordinary RGB image — no stereo pair, no LiDAR. (<em>Monocular depth</em> just means estimating how far away each pixel is from a <strong>single</strong> image — no two-camera stereo pair and no laser/LiDAR sensor.) It’s the perception capability most directly relevant to <strong>robotics</strong>: turning a flat photo into 3D structure for navigation, grasping, and obstacle avoidance.</p>
+<p>A key distinction (<em>relative vs metric depth</em>: relative orders pixels near-to-far without real units, while metric gives actual metres):</p>
 <ul>
 <li><strong>Relative depth</strong> — orders pixels near-to-far without real-world units. Enough for “what’s in front of what”. Depth Anything V2 predicts this.</li>
-<li><strong>Metric depth</strong> — actual metres. Needed for measurement/control; harder, and usually fine-tuned per camera (e.g.&nbsp;Depth Anything’s metric heads, Apple Depth Pro).</li>
+<li><strong>Metric depth</strong> — actual metres. Needed for measurement/control; harder, and usually fine-tuned per camera (e.g.&nbsp;Depth Anything’s metric heads, Apple Depth Pro). Depth Anything V2 is a popular open model for predicting depth from a single image; <em>Depth Pro</em> (from Apple) is a model aimed at metric depth. (See <strong><a href="../../models.html">Model families</a></strong> for how these fit among other vision models.)</li>
 </ul>
 </section>
 <section id="how-it-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
-<p>Depth Anything V2 is a <strong>DINOv2 vision-transformer encoder</strong> plus a lightweight depth head, trained on a huge mix of labelled + pseudo-labelled images. The transformer’s global receptive field lets it use scene-wide cues — perspective, relative size, texture gradients, occlusion — exactly the monocular cues humans use to perceive depth with one eye closed. It outputs <em>inverse</em> depth (larger = nearer).</p>
+<p>Depth Anything V2 is a <strong>DINOv2 vision-transformer encoder</strong> plus a lightweight depth head, trained on a huge mix of labelled + pseudo-labelled images. (A <em>transformer</em> is a network architecture that relates all parts of an image to each other through “attention”; a <em>Vision Transformer (ViT)</em> applies this by splitting the image into small patches. The encoder here acts as the <em>backbone</em> — the main body of the network that turns an image into useful features.) The transformer’s global receptive field lets it use scene-wide cues — perspective, relative size, texture gradients, occlusion — exactly the <em>monocular cues</em> (depth hints in a single image, like perspective, relative size, and occlusion) humans use to perceive depth with one eye closed. It outputs <em>inverse</em> depth — a representation where larger values mean nearer.</p>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>We run two sizes on the same images. Larger backbones generally produce sharper boundaries and better thin-structure handling, at a latency cost.</p>
+<p>We run two sizes on the same images. Larger backbones generally produce sharper boundaries and better thin-structure handling, at a latency cost. (<em>Latency</em> is the time to process one image, usually in milliseconds; <em>FPS</em> — frames per second — is how many images it handles per second, where roughly 30 FPS counts as real-time.)</p>
 </section>
 <section id="monocular-depth-speed" class="level2">
 <h2 class="anchored" data-anchor-id="monocular-depth-speed">Monocular depth: speed</h2>
