@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>04 · Monocular depth – CV Explorations</title>
+<title>metrics – CV Explorations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,61 +23,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -116,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">CV Explorations</span>
     </a>
   </div>
@@ -127,7 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -136,39 +101,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
         <li>
-    <a class="dropdown-item" href="../../modules/01-object-detection/report.html">
+    <a class="dropdown-item" href="../../../modules/01-object-detection/report.html">
  <span class="dropdown-text">01 · Object detection</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/02-classification/report.html">
+    <a class="dropdown-item" href="../../../modules/02-classification/report.html">
  <span class="dropdown-text">02 · Image classification</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/03-segmentation/report.html">
+    <a class="dropdown-item" href="../../../modules/03-segmentation/report.html">
  <span class="dropdown-text">03 · Segmentation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/04-depth/report.html">
+    <a class="dropdown-item" href="../../../modules/04-depth/report.html">
  <span class="dropdown-text">04 · Monocular depth</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/05-pose/report.html">
+    <a class="dropdown-item" href="../../../modules/05-pose/report.html">
  <span class="dropdown-text">05 · Human pose</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/06-tracking/report.html">
+    <a class="dropdown-item" href="../../../modules/06-tracking/report.html">
  <span class="dropdown-text">06 · Tracking</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/07-retrieval/report.html">
+    <a class="dropdown-item" href="../../../modules/07-retrieval/report.html">
  <span class="dropdown-text">07 · Embeddings &amp; retrieval</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/08-vlm/report.html">
+    <a class="dropdown-item" href="../../../modules/08-vlm/report.html">
  <span class="dropdown-text">08 · Vision-language models</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/09-classical/report.html">
+    <a class="dropdown-item" href="../../../modules/09-classical/report.html">
  <span class="dropdown-text">09 · Classical CV</span></a>
   </li>  
     </ul>
@@ -196,123 +161,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task">The task</a></li>
-  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">How it works</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#monocular-depth-speed" id="toc-monocular-depth-speed" class="nav-link" data-scroll-target="#monocular-depth-speed">Monocular depth: speed</a></li>
-  <li><a href="#where-monocular-depth-fails" id="toc-where-monocular-depth-fails" class="nav-link" data-scroll-target="#where-monocular-depth-fails">Where monocular depth fails</a></li>
-  <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproduce</a></li>
+  <li><a href="#classical-cv-operation-timings-cpu" id="toc-classical-cv-operation-timings-cpu" class="nav-link active" data-scroll-target="#classical-cv-operation-timings-cpu">Classical CV: operation timings (CPU)</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/04-depth/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/09-classical/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">04 · Monocular depth</h1>
-<p class="subtitle lead">How far is each pixel, from a single image? — Depth Anything V2</p>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="the-task" class="level2">
-<h2 class="anchored" data-anchor-id="the-task">The task</h2>
-<p><strong>Monocular depth estimation</strong> predicts a distance for every pixel from one ordinary RGB image — no stereo pair, no LiDAR. It’s the perception capability most directly relevant to <strong>robotics</strong>: turning a flat photo into 3D structure for navigation, grasping, and obstacle avoidance.</p>
-<p>A key distinction:</p>
-<ul>
-<li><strong>Relative depth</strong> — orders pixels near-to-far without real-world units. Enough for “what’s in front of what”. Depth Anything V2 predicts this.</li>
-<li><strong>Metric depth</strong> — actual metres. Needed for measurement/control; harder, and usually fine-tuned per camera (e.g.&nbsp;Depth Anything’s metric heads, Apple Depth Pro).</li>
-</ul>
-</section>
-<section id="how-it-works" class="level2">
-<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
-<p>Depth Anything V2 is a <strong>DINOv2 vision-transformer encoder</strong> plus a lightweight depth head, trained on a huge mix of labelled + pseudo-labelled images. The transformer’s global receptive field lets it use scene-wide cues — perspective, relative size, texture gradients, occlusion — exactly the monocular cues humans use to perceive depth with one eye closed. It outputs <em>inverse</em> depth (larger = nearer).</p>
-</section>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>We run two sizes on the same images. Larger backbones generally produce sharper boundaries and better thin-structure handling, at a latency cost.</p>
-</section>
-<section id="monocular-depth-speed" class="level2">
-<h2 class="anchored" data-anchor-id="monocular-depth-speed">Monocular depth: speed</h2>
+<section id="classical-cv-operation-timings-cpu" class="level2">
+<h2 class="anchored" data-anchor-id="classical-cv-operation-timings-cpu">Classical CV: operation timings (CPU)</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Model</th>
-<th>License</th>
+<th>Operation</th>
 <th>Latency (ms)</th>
-<th>FPS</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Depth Anything V2 (Small)</td>
-<td>Apache-2.0</td>
-<td>38.44</td>
-<td>26.0</td>
+<td>Canny edges</td>
+<td>0.76</td>
 </tr>
 <tr class="even">
-<td>Depth Anything V2 (Base)</td>
-<td>Apache-2.0</td>
-<td>78.19</td>
-<td>12.8</td>
+<td>ORB detect+match</td>
+<td>8.23</td>
+</tr>
+<tr class="odd">
+<td>Farneback optical flow</td>
+<td>96.94</td>
 </tr>
 </tbody>
 </table>
-<p><em>Relative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up.</em></p>
-<div id="fig-depth" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-depth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="results/depth_maps.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-depth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: RGB input vs predicted depth (brighter = nearer). Note how both models recover ground-plane gradient, object separation, and rough scene layout from a single photo.
-</figcaption>
-</figure>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="What to notice">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>What to notice
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Real 3D structure from one image.</strong> With no stereo or sensor, the model separates foreground from background, recovers the ground plane, and orders objects in depth — the cue set a robot can turn into a rough 3D map.</li>
-<li><strong>Size buys sharpness, not speed.</strong> Depth Anything V2 Base (~13 fps) gives crisper edges than Small (~26 fps); the right pick depends on whether you need real-time or best quality.</li>
-<li><strong>Relative, not metric.</strong> These maps tell you <em>nearer/farther</em>, not <em>how many metres</em> — for control you’d use a metric variant calibrated to your camera.</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="where-monocular-depth-fails" class="level2">
-<h2 class="anchored" data-anchor-id="where-monocular-depth-fails">Where monocular depth fails</h2>
-<ul>
-<li><strong>Absolute scale ambiguity</strong> — a doll-house and a real house look identical to a single camera; relative depth can’t resolve true size.</li>
-<li><strong>Reflective / transparent surfaces</strong> (mirrors, glass, water) — violate the visual cues the model relies on.</li>
-<li><strong>Untextured walls &amp; sky</strong> — few gradients to reason from.</li>
-<li><strong>Out-of-distribution cameras</strong> — fisheye, aerial, or endoscopic views differ from the training mix and degrade.</li>
-</ul>
-</section>
-<section id="reproduce" class="level2">
-<h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> dev      <span class="co"># transformers provides the Depth Anything V2 pipeline</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/04-depth/run.py <span class="at">--images</span> 4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><em>All on CPU, no GPU, no training, no model download. Compare these millisecond timings to the deep models in modules 01–08 — classical CV is essentially free, which is why it still underpins calibration, SLAM front-ends, and stabilisation.</em></p>
 
 
 </section>
@@ -726,7 +609,7 @@ Figure&nbsp;1: RGB input vs predicted depth (brighter = nearer). Note how both m
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/04-depth/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/09-classical/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
