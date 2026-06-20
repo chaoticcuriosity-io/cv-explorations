@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>metrics – CV Explorations</title>
+<title>10 · Fine-tuning a custom detector – CV Explorations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,26 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -81,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">CV Explorations</span>
     </a>
   </div>
@@ -92,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -101,49 +136,49 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
         <li>
-    <a class="dropdown-item" href="../../../modules/01-object-detection/report.html">
+    <a class="dropdown-item" href="../../modules/01-object-detection/report.html">
  <span class="dropdown-text">01 · Object detection</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/02-classification/report.html">
+    <a class="dropdown-item" href="../../modules/02-classification/report.html">
  <span class="dropdown-text">02 · Image classification</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/03-segmentation/report.html">
+    <a class="dropdown-item" href="../../modules/03-segmentation/report.html">
  <span class="dropdown-text">03 · Segmentation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/04-depth/report.html">
+    <a class="dropdown-item" href="../../modules/04-depth/report.html">
  <span class="dropdown-text">04 · Monocular depth</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/05-pose/report.html">
+    <a class="dropdown-item" href="../../modules/05-pose/report.html">
  <span class="dropdown-text">05 · Human pose</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/06-tracking/report.html">
+    <a class="dropdown-item" href="../../modules/06-tracking/report.html">
  <span class="dropdown-text">06 · Tracking</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/07-retrieval/report.html">
+    <a class="dropdown-item" href="../../modules/07-retrieval/report.html">
  <span class="dropdown-text">07 · Embeddings &amp; retrieval</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/08-vlm/report.html">
+    <a class="dropdown-item" href="../../modules/08-vlm/report.html">
  <span class="dropdown-text">08 · Vision-language models</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/09-classical/report.html">
+    <a class="dropdown-item" href="../../modules/09-classical/report.html">
  <span class="dropdown-text">09 · Classical CV</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/10-finetuning/report.html">
+    <a class="dropdown-item" href="../../modules/10-finetuning/report.html">
  <span class="dropdown-text">10 · Fine-tuning (Spark)</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../../cross-platform.html"> 
+    <a class="nav-link" href="../../cross-platform.html"> 
 <span class="menu-text">Cross-platform</span></a>
   </li>  
 </ul>
@@ -169,91 +204,182 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#coco-detection-benchmark" id="toc-coco-detection-benchmark" class="nav-link active" data-scroll-target="#coco-detection-benchmark">COCO detection benchmark</a></li>
+  <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task">The task</a></li>
+  <li><a href="#the-data-engine-this-repo-labelling-itself" id="toc-the-data-engine-this-repo-labelling-itself" class="nav-link" data-scroll-target="#the-data-engine-this-repo-labelling-itself">The data engine: this repo, labelling itself</a></li>
+  <li><a href="#why-the-dgx-spark" id="toc-why-the-dgx-spark" class="nav-link" data-scroll-target="#why-the-dgx-spark">Why the DGX Spark</a></li>
+  <li><a href="#results-before-vs-after" id="toc-results-before-vs-after" class="nav-link" data-scroll-target="#results-before-vs-after">Results — before vs after</a></li>
+  <li><a href="#fine-tuned-air-vent-detector-trained-on-the-dgx-spark-gb10" id="toc-fine-tuned-air-vent-detector-trained-on-the-dgx-spark-gb10" class="nav-link" data-scroll-target="#fine-tuned-air-vent-detector-trained-on-the-dgx-spark-gb10">Fine-tuned air-vent detector (trained on the DGX Spark GB10)</a></li>
+  <li><a href="#how-to-reproduce" id="toc-how-to-reproduce" class="nav-link" data-scroll-target="#how-to-reproduce">How to reproduce</a></li>
+  <li><a href="#where-fine-tuning-this-way-falls-short" id="toc-where-fine-tuning-this-way-falls-short" class="nav-link" data-scroll-target="#where-fine-tuning-this-way-falls-short">Where fine-tuning (this way) falls short</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/01-object-detection/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/10-finetuning/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">10 · Fine-tuning a custom detector</h1>
+<p class="subtitle lead">Teaching YOLO a class COCO never had — air vents — with auto-built data, trained on a DGX Spark</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="coco-detection-benchmark" class="level2">
-<h2 class="anchored" data-anchor-id="coco-detection-benchmark">COCO detection benchmark</h2>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-task" class="level2">
+<h2 class="anchored" data-anchor-id="the-task">The task</h2>
+<p>Every module so far <em>ran</em> a pretrained model. This one <strong>trains</strong> one — the capstone skill, because real projects almost always need a class the off-the-shelf models don’t have. Here that class is <strong>air vents</strong>: not in COCO, so <a href="../../modules/01-object-detection/report.html">module 01’s</a> detectors are blind to it. We fine-tune a YOLO detector to find vents, and — the interesting part — we do it <strong>without hand-labelling a single image</strong>, then train <strong>on the DGX Spark</strong>.</p>
+</section>
+<section id="the-data-engine-this-repo-labelling-itself" class="level2">
+<h2 class="anchored" data-anchor-id="the-data-engine-this-repo-labelling-itself">The data engine: this repo, labelling itself</h2>
+<p>Fine-tuning needs labelled data, and labelling is the expensive, boring bottleneck of applied CV. So we manufacture the dataset from capabilities built earlier in this very curriculum — the “distill an open-vocabulary model into a specialist” workflow that <a href="../../modules/01-object-detection/report.html">module 01</a> promised:</p>
+<ol type="1">
+<li><strong>Source</strong> — pull Creative-Commons vent images from Wikimedia Commons (no API key).</li>
+<li><strong>Filter (zero-shot)</strong> — score each image with <strong>CLIP</strong> (<a href="../../modules/02-classification/report.html">module 02</a>) against vent prompts vs distractor prompts (smokestacks, landscapes, documents, <strong>cars</strong>, people…) and keep only the vent-like ones. This gate is essential — a raw “air vent” web search is mostly <em>not</em> air vents.</li>
+<li><strong>Auto-label</strong> — run <strong>Grounding DINO</strong> (<a href="../../modules/01-object-detection/report.html">module 01</a>) with vent text prompts; its boxes (after a size-sanity filter) become YOLO labels.</li>
+<li><strong>Fine-tune</strong> — train YOLO on the result, on the Spark.</li>
+</ol>
+<p>So three earlier modules become a <strong>data engine</strong> for a fourth. No human ever draws a box.</p>
+<div id="fig-dataset" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/dataset_sample.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A sample of the auto-built training set: Creative-Commons images that passed the CLIP relevance gate, with Grounding DINO’s boxes (green) used as labels.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Honest about auto-labelled data">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Honest about auto-labelled data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Auto-sourced, auto-labelled data is <strong>noisy</strong> — the CLIP gate and box filter remove most junk, but some mislabelling survives, and the val labels are themselves model-generated. So the mAP below measures <em>how well YOLO distilled Grounding DINO</em>, not human ground truth. The qualitative before/after and the honest “what’s needed for production” note matter more than the number. The path to <strong>highly reliable</strong> is more images and a pass of human label cleanup — or your own photos, which the pipeline accepts directly.</p>
+</div>
+</div>
+</section>
+<section id="why-the-dgx-spark" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-dgx-spark">Why the DGX Spark</h2>
+<p>Inference runs anywhere; <strong>training</strong> is where compute and memory matter, and it’s where this project’s scale-up box earns its place: the <strong>GB10 Grace-Blackwell</strong> with ~120 GB unified memory (ARM64, CUDA 13). Training also happens to be the operation you’d repeat as the dataset grows and the model gets larger, so it belongs on the Spark — which is also the robotics deployment target these perception skills feed. (See <a href="../../cross-platform.html">Cross-platform validation</a> for how the same code runs on both machines.)</p>
+<p>The training ran inside the Spark’s NGC PyTorch container; the dataset was built on the local 3090 Ti (Grounding DINO + CLIP) and shipped over.</p>
+</section>
+<section id="results-before-vs-after" class="level2">
+<h2 class="anchored" data-anchor-id="results-before-vs-after">Results — before vs after</h2>
+<p>The headline: the <strong>base</strong> model has no “air vent” class, so it detects <strong>zero</strong> vents. The <strong>fine-tuned</strong> model localises them.</p>
+<div id="fig-beforeafter" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-beforeafter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/before_after.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-beforeafter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Top row: the base COCO YOLO (no vent class) finds nothing. Bottom row: the fine-tuned model detects air vents.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="fine-tuned-air-vent-detector-trained-on-the-dgx-spark-gb10" class="level2">
+<h2 class="anchored" data-anchor-id="fine-tuned-air-vent-detector-trained-on-the-dgx-spark-gb10">Fine-tuned air-vent detector (trained on the DGX Spark GB10)</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Model</th>
-<th>Family</th>
-<th>License</th>
-<th>mAP</th>
+<th>Class</th>
 <th>mAP@50</th>
-<th>mAP@75</th>
-<th>mAP (small)</th>
-<th>Latency (ms)</th>
-<th>FPS</th>
+<th>mAP@[.5:.95]</th>
+<th>Precision</th>
+<th>Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>RF-DETR Medium</td>
-<td>DETR (transformer)</td>
-<td>Apache-2.0</td>
-<td>59.4</td>
-<td>78.2</td>
-<td>63.7</td>
-<td>31.6</td>
-<td>36.3</td>
-<td>27.5</td>
+<td>YOLO11-s (base, COCO)</td>
+<td>air_vent</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
 </tr>
 <tr class="even">
-<td>RF-DETR Nano</td>
-<td>DETR (transformer)</td>
-<td>Apache-2.0</td>
-<td>51.3</td>
-<td>69.9</td>
-<td>54.2</td>
-<td>22.4</td>
-<td>36.43</td>
-<td>27.5</td>
-</tr>
-<tr class="odd">
-<td>YOLO26-n</td>
-<td>YOLO (NMS-free)</td>
-<td>AGPL-3.0</td>
-<td>43.0</td>
-<td>58.1</td>
-<td>47.2</td>
-<td>20.1</td>
-<td>18.75</td>
-<td>53.3</td>
-</tr>
-<tr class="even">
-<td>YOLO11-n</td>
-<td>YOLO (anchor-free)</td>
-<td>AGPL-3.0</td>
-<td>37.6</td>
-<td>52.1</td>
-<td>40.5</td>
-<td>17.9</td>
-<td>18.0</td>
-<td>55.6</td>
+<td><strong>YOLO11-s (fine-tuned)</strong></td>
+<td>air_vent</td>
+<td><strong>0.40</strong></td>
+<td><strong>0.26</strong></td>
+<td><strong>0.58</strong></td>
+<td><strong>0.43</strong></td>
 </tr>
 </tbody>
 </table>
-<p><em>Evaluated on 200 COCO val2017 images; mAP via pycocotools-equivalent torchmetrics at IoU=.50:.95. Latency = mean over 30 warmed-up single-image forwards on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>.</em></p>
+<p><em>The base model has no <code>air_vent</code> class, so it cannot score on this task at all (—): it detects <strong>zero</strong> vents. The fine-tuned model was trained for 80 epochs on 33 auto-labelled images (~0.5 s/epoch on the GB10). Metrics are on a 9-image / 14-instance val split whose labels are themselves Grounding DINO pseudo-labels, so they measure distillation fidelity, not human truth — read them together with the qualitative before/after.</em></p>
+<div id="fig-curves" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-curves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/curves.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-curves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Training curves — losses fall and validation mAP rises over epochs.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="What to notice">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What to notice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>From zero to a working detector.</strong> The base model cannot detect a vent — there is no such class — so “before” is a blank. After 80 epochs on <strong>33 auto-labelled images</strong> (trained in <strong>under a minute</strong> on the GB10 at ~0.5 s/epoch), the model localises vents and louvers the base model is blind to. That capability did not exist an hour earlier and required <strong>no manual labelling</strong>.</li>
+<li><strong>The numbers are modest, and honestly so.</strong> mAP@50 ≈ 0.40 on a 9-image val split — respectable for a few dozen noisy auto-labelled examples, but not “production reliable”. The val labels are themselves pseudo-labels, so treat the figure as distillation fidelity, not ground truth.</li>
+<li><strong>The workflow is the deliverable.</strong> Source → CLIP-filter → Grounding-DINO-label → fine-tune is a repeatable recipe for <em>any</em> new class. Scaling the image count, a short human label-cleanup pass, and adding on-site photos are the obvious, high-leverage levers to push reliability up from here.</li>
+<li><strong>The Spark did the training; the laptop built the data.</strong> The exact same code trains on ARM64 / GB10 / CUDA 13 as on the x86 / 3090 Ti — the <a href="../../cross-platform.html">cross-platform</a> story in practice.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="how-to-reproduce" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-reproduce">How to reproduce</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Build the dataset locally (Grounding DINO + CLIP on the GPU)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/10-finetuning/prepare_data.py <span class="at">--max-images</span> 200</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Ship it to the Spark and train inside the NGC container</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#    (Tailscale SSH alias `spark`; dataset tar'd over, docker-cp'd into mjlab-dev)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> finetune.py <span class="at">--data</span> data/airvents/data.yaml <span class="at">--model</span> yolo11s.pt <span class="at">--epochs</span> 80 <span class="at">--out</span> out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="where-fine-tuning-this-way-falls-short" class="level2">
+<h2 class="anchored" data-anchor-id="where-fine-tuning-this-way-falls-short">Where fine-tuning (this way) falls short</h2>
+<ul>
+<li><strong>Data volume &amp; noise</strong> — a few dozen auto-labelled images demonstrates the workflow and a real before→after, but “highly reliable” needs hundreds of cleaner examples.</li>
+<li><strong>Pseudo-label ceiling</strong> — the student can’t exceed the teacher; Grounding DINO’s mistakes become the model’s mistakes. A short human cleanup pass is the highest-leverage next step.</li>
+<li><strong>Domain match</strong> — web vents ≠ your building’s vents; a handful of on-site photos added to the set would lift real-world reliability fast.</li>
+</ul>
 
 
 </section>
@@ -667,7 +793,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/01-object-detection/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/10-finetuning/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
