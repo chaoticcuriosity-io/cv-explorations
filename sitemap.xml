@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/05-pose/results/metrics.html</loc>
+    <lastmod>2026-06-20T13:10:26.672Z</lastmod>
+  </url>
+  <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/04-depth/results/metrics.html</loc>
     <lastmod>2026-06-20T13:06:49.916Z</lastmod>
   </url>
@@ -22,7 +26,7 @@
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/index.html</loc>
-    <lastmod>2026-06-20T13:07:29.942Z</lastmod>
+    <lastmod>2026-06-20T13:11:06.451Z</lastmod>
   </url>
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/01-object-detection/explore.html</loc>
@@ -43,5 +47,9 @@
   <url>
     <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/04-depth/report.html</loc>
     <lastmod>2026-06-20T13:07:11.318Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chaoticcuriosity-io.github.io/cv-explorations/modules/05-pose/report.html</loc>
+    <lastmod>2026-06-20T13:10:46.600Z</lastmod>
   </url>
 </urlset>
