@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "modules/03-segmentation/results/metrics.html",
+    "href": "modules/03-segmentation/results/metrics.html",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nFamily\nLicense\nLatency (ms)\nFPS\nMasks/img\n\n\n\n\nYOLO26-n-seg\ninstance (YOLO)\nAGPL-3.0\n23.79\n42.0\n7.0\n\n\nYOLO11-n-seg\ninstance (YOLO)\nAGPL-3.0\n22.9\n43.7\n6.5\n\n\nSAM 2.1 (base)\npromptable\nApache-2.0\n93.39\n10.7\nn/a\n\n\n\nLatency = mean over warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. SAM 2.1 is prompted with the YOLO26-seg boxes (detect-then-segment). This module is qualitative + latency; mask-mAP on COCO is a deeper follow-up."
+  },
+  {
+    "objectID": "modules/03-segmentation/results/metrics.html#segmentation-speed-masks",
+    "href": "modules/03-segmentation/results/metrics.html#segmentation-speed-masks",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nFamily\nLicense\nLatency (ms)\nFPS\nMasks/img\n\n\n\n\nYOLO26-n-seg\ninstance (YOLO)\nAGPL-3.0\n23.79\n42.0\n7.0\n\n\nYOLO11-n-seg\ninstance (YOLO)\nAGPL-3.0\n22.9\n43.7\n6.5\n\n\nSAM 2.1 (base)\npromptable\nApache-2.0\n93.39\n10.7\nn/a\n\n\n\nLatency = mean over warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. SAM 2.1 is prompted with the YOLO26-seg boxes (detect-then-segment). This module is qualitative + latency; mask-mAP on COCO is a deeper follow-up."
+  },
+  {
     "objectID": "modules/02-classification/results/metrics.html",
     "href": "modules/02-classification/results/metrics.html",
     "title": "CV Explorations",
@@ -130,7 +144,7 @@
     "href": "index.html#the-curriculum",
     "title": "CV Explorations",
     "section": "The curriculum",
-    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nSAM 2.1 · SAM 3 · Mask2Former\n⏳ planned\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2/3 · Depth Pro\n⏳ planned\n\n\n05\nPose / keypoints\nWhere are the joints?\nRTMPose · ViTPose++ · MediaPipe\n⏳ planned\n\n\n06\nTracking\nSame object across frames?\nByteTrack · BoT-SORT\n⏳ planned\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
+    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2/3 · Depth Pro\n⏳ planned\n\n\n05\nPose / keypoints\nWhere are the joints?\nRTMPose · ViTPose++ · MediaPipe\n⏳ planned\n\n\n06\nTracking\nSame object across frames?\nByteTrack · BoT-SORT\n⏳ planned\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
   },
   {
     "objectID": "index.html#a-useful-mental-model",
@@ -271,5 +285,75 @@
     "title": "02 · Image classification",
     "section": "Reproduce",
     "text": "Reproduce\nuv sync --group dev\nuv run python modules/02-classification/run.py        # full val (3,925 images)"
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html",
+    "href": "modules/03-segmentation/report.html",
+    "title": "03 · Segmentation",
+    "section": "",
+    "text": "Segmentation assigns labels at the pixel level rather than the box level. Two flavours matter here:\n\nInstance segmentation — a separate mask per object (two people → two masks), each with a class. This is detection + a mask head.\nPromptable segmentation — “segment whatever I point at / box / name”, with no fixed class set. This is the foundation-model approach, embodied by Segment Anything."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#the-task",
+    "href": "modules/03-segmentation/report.html#the-task",
+    "title": "03 · Segmentation",
+    "section": "",
+    "text": "Segmentation assigns labels at the pixel level rather than the box level. Two flavours matter here:\n\nInstance segmentation — a separate mask per object (two people → two masks), each with a class. This is detection + a mask head.\nPromptable segmentation — “segment whatever I point at / box / name”, with no fixed class set. This is the foundation-model approach, embodied by Segment Anything."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#two-paradigms",
+    "href": "modules/03-segmentation/report.html#two-paradigms",
+    "title": "03 · Segmentation",
+    "section": "Two paradigms",
+    "text": "Two paradigms\n\n\n\n\n\n\n\n\n\nModel\nApproach\nLabel set\nTrait\n\n\n\n\nYOLO26-seg / YOLO11-seg\nClosed-set instance segmentation\n80 COCO classes\nFast; every mask comes with a class label\n\n\nSAM 2.1\nPromptable segmentation\nnone — class-agnostic\nSegments anything from a point/box/mask prompt; no labels\n\n\n\nThe natural way they combine is the detect-then-segment pipeline: a detector proposes boxes, and SAM turns each box into a high-quality mask. We use exactly that here — SAM 2.1 is prompted with the YOLO26-seg boxes."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#how-each-works",
+    "href": "modules/03-segmentation/report.html#how-each-works",
+    "title": "03 · Segmentation",
+    "section": "How each works",
+    "text": "How each works\n\nYOLO-seg adds a mask-prototype head to the detector: it predicts a handful of prototype masks per image plus per-object coefficients that linearly combine them — cheap, hence the high frame-rate.\nSAM 2.1 is a promptable transformer with a heavy image encoder and a light mask decoder. Encode the image once, then any prompt (point, box) decodes to a mask in milliseconds. It knows nothing about classes — it only knows “object-ness”, which is why it generalises to things no COCO model has names for."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#how-we-measured",
+    "href": "modules/03-segmentation/report.html#how-we-measured",
+    "title": "03 · Segmentation",
+    "section": "How we measured",
+    "text": "How we measured\nThis module is qualitative + latency (warmed-up single-image forwards on the local RTX 3090 Ti); full mask-mAP on COCO is a deeper follow-up. The point here is to see the difference between a fast labelled instance segmenter and a slower, class-agnostic, promptable one."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#results",
+    "href": "modules/03-segmentation/report.html#results",
+    "title": "03 · Segmentation",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#segmentation-speed-masks",
+    "href": "modules/03-segmentation/report.html#segmentation-speed-masks",
+    "title": "03 · Segmentation",
+    "section": "Segmentation: speed & masks",
+    "text": "Segmentation: speed & masks\n\n\n\nModel\nFamily\nLicense\nLatency (ms)\nFPS\nMasks/img\n\n\n\n\nYOLO26-n-seg\ninstance (YOLO)\nAGPL-3.0\n23.79\n42.0\n7.0\n\n\nYOLO11-n-seg\ninstance (YOLO)\nAGPL-3.0\n22.9\n43.7\n6.5\n\n\nSAM 2.1 (base)\npromptable\nApache-2.0\n93.39\n10.7\nn/a\n\n\n\nLatency = mean over warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. SAM 2.1 is prompted with the YOLO26-seg boxes (detect-then-segment). This module is qualitative + latency; mask-mAP on COCO is a deeper follow-up.\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nLabels vs flexibility. YOLO-seg runs at ~43 fps and hands you a class with every mask — but only for its 80 COCO categories. SAM 2.1 is ~4× slower (~11 fps) and returns no label, yet will segment anything you can point at, including objects no detector was trained on.\nThey compose. The figures show the standard pattern: the detector finds and names objects; SAM refines each box into a crisp mask. Open-vocab detection (module 01) + SAM gives you “segment anything you can describe in words”.\nMask quality differs from box quality. A correct box with a sloppy mask is a common failure; SAM’s masks are typically tighter around object boundaries than a fast instance head’s."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#qualitative-results",
+    "href": "modules/03-segmentation/report.html#qualitative-results",
+    "title": "03 · Segmentation",
+    "section": "Qualitative results",
+    "text": "Qualitative results\n\n\n\n\n\n\n\n\n\nFigure 1: YOLO26-n-seg — instance masks + COCO labels\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: YOLO11-n-seg — instance masks + COCO labels\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: SAM 2.1, prompted with the detector’s boxes — crisp, class-agnostic masks"
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#where-segmentation-fails",
+    "href": "modules/03-segmentation/report.html#where-segmentation-fails",
+    "title": "03 · Segmentation",
+    "section": "Where segmentation fails",
+    "text": "Where segmentation fails\n\nThin / wispy structures (hair, wires, chain-link) — hard for any mask head.\nOverlapping instances — instance segmenters merge or split touching objects.\nAmbiguous prompts — a single SAM point can mean “the shirt” or “the whole person”; SAM resolves ambiguity by returning multiple candidate masks.\nClass limits (instance) — YOLO-seg simply can’t mask a class it never trained on."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#reproduce",
+    "href": "modules/03-segmentation/report.html#reproduce",
+    "title": "03 · Segmentation",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group detection      # ultralytics provides YOLO-seg and SAM\nuv run python modules/03-segmentation/run.py --images 4"
   }
 ]

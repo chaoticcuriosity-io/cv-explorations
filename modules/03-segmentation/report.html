@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CV Explorations</title>
+<title>03 · Segmentation – CV Explorations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -61,23 +61,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">CV Explorations</span>
     </a>
   </div>
@@ -127,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -136,15 +136,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
         <li>
-    <a class="dropdown-item" href="./modules/01-object-detection/report.html">
+    <a class="dropdown-item" href="../../modules/01-object-detection/report.html">
  <span class="dropdown-text">01 · Object detection</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./modules/02-classification/report.html">
+    <a class="dropdown-item" href="../../modules/02-classification/report.html">
  <span class="dropdown-text">02 · Image classification</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./modules/03-segmentation/report.html">
+    <a class="dropdown-item" href="../../modules/03-segmentation/report.html">
  <span class="dropdown-text">03 · Segmentation</span></a>
   </li>  
     </ul>
@@ -172,19 +172,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-curriculum" id="toc-the-curriculum" class="nav-link active" data-scroll-target="#the-curriculum">The curriculum</a></li>
-  <li><a href="#a-useful-mental-model" id="toc-a-useful-mental-model" class="nav-link" data-scroll-target="#a-useful-mental-model">A useful mental model</a></li>
-  <li><a href="#how-to-run-it-yourself" id="toc-how-to-run-it-yourself" class="nav-link" data-scroll-target="#how-to-run-it-yourself">How to run it yourself</a></li>
+  <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task">The task</a></li>
+  <li><a href="#two-paradigms" id="toc-two-paradigms" class="nav-link" data-scroll-target="#two-paradigms">Two paradigms</a></li>
+  <li><a href="#how-each-works" id="toc-how-each-works" class="nav-link" data-scroll-target="#how-each-works">How each works</a></li>
+  <li><a href="#how-we-measured" id="toc-how-we-measured" class="nav-link" data-scroll-target="#how-we-measured">How we measured</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#segmentation-speed-masks" id="toc-segmentation-speed-masks" class="nav-link" data-scroll-target="#segmentation-speed-masks">Segmentation: speed &amp; masks</a></li>
+  <li><a href="#qualitative-results" id="toc-qualitative-results" class="nav-link" data-scroll-target="#qualitative-results">Qualitative results</a></li>
+  <li><a href="#where-segmentation-fails" id="toc-where-segmentation-fails" class="nav-link" data-scroll-target="#where-segmentation-fails">Where segmentation fails</a></li>
+  <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproduce</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/03-segmentation/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">CV Explorations</h1>
-<p class="subtitle lead">A hands-on, benchmark-driven tour of modern computer vision</p>
+<h1 class="title">03 · Segmentation</h1>
+<p class="subtitle lead">From boxes to pixels — closed-set instance masks vs promptable SAM 2.1</p>
 </div>
 
 
@@ -201,102 +207,175 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This is a <strong>repo-as-curriculum</strong>: each major computer-vision capability is a self-contained module that is both <em>runnable</em> and <em>explained</em>. Every module ships a reusable CLI/engine, an interactive notebook, and a <strong>rigorous benchmark report</strong> — multiple models per task, real metrics, latency measured on the local GPU, and honest failure cases.</p>
-<p>The reports you’re reading were rendered from results computed locally on an <strong>NVIDIA RTX 3090 Ti (24 GB)</strong>; heavier or Linux-only work runs on an <strong>NVIDIA DGX Spark</strong> over Tailscale. Site rendering itself needs no GPU.</p>
-<section id="the-curriculum" class="level2">
-<h2 class="anchored" data-anchor-id="the-curriculum">The curriculum</h2>
+<section id="the-task" class="level2">
+<h2 class="anchored" data-anchor-id="the-task">The task</h2>
+<p><strong>Segmentation</strong> assigns labels at the <em>pixel</em> level rather than the box level. Two flavours matter here:</p>
+<ul>
+<li><strong>Instance segmentation</strong> — a separate mask per object (two people → two masks), each with a class. This is detection + a mask head.</li>
+<li><strong>Promptable segmentation</strong> — “segment whatever I point at / box / name”, with no fixed class set. This is the <strong>foundation-model</strong> approach, embodied by Segment Anything.</li>
+</ul>
+</section>
+<section id="two-paradigms" class="level2">
+<h2 class="anchored" data-anchor-id="two-paradigms">Two paradigms</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>#</th>
-<th>Module</th>
-<th>What it answers</th>
-<th>Models benchmarked</th>
-<th>Status</th>
+<th>Model</th>
+<th>Approach</th>
+<th>Label set</th>
+<th>Trait</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>01</td>
-<td><a href="./modules/01-object-detection/report.html"><strong>Object detection</strong></a></td>
-<td><em>What &amp; where (boxes)?</em></td>
-<td>RF-DETR · YOLO26 · YOLO11 · Grounding DINO</td>
-<td>✅ done</td>
+<td><strong>YOLO26-seg / YOLO11-seg</strong></td>
+<td>Closed-set instance segmentation</td>
+<td>80 COCO classes</td>
+<td>Fast; every mask comes with a class label</td>
 </tr>
 <tr class="even">
-<td>02</td>
-<td><a href="./modules/02-classification/report.html">Classification + zero-shot</a></td>
-<td><em>What is this image?</em></td>
-<td>ConvNeXt · SigLIP 2 · OpenCLIP</td>
-<td>✅ done</td>
-</tr>
-<tr class="odd">
-<td>03</td>
-<td><a href="./modules/03-segmentation/report.html">Segmentation</a></td>
-<td><em>Which pixels (masks)?</em></td>
-<td>YOLO-seg · SAM 2.1</td>
-<td>✅ done</td>
-</tr>
-<tr class="even">
-<td>04</td>
-<td>Monocular depth</td>
-<td><em>How far is each pixel?</em></td>
-<td>Depth Anything V2/3 · Depth Pro</td>
-<td>⏳ planned</td>
-</tr>
-<tr class="odd">
-<td>05</td>
-<td>Pose / keypoints</td>
-<td><em>Where are the joints?</em></td>
-<td>RTMPose · ViTPose++ · MediaPipe</td>
-<td>⏳ planned</td>
-</tr>
-<tr class="even">
-<td>06</td>
-<td>Tracking</td>
-<td><em>Same object across frames?</em></td>
-<td>ByteTrack · BoT-SORT</td>
-<td>⏳ planned</td>
-</tr>
-<tr class="odd">
-<td>07</td>
-<td>Embeddings / retrieval</td>
-<td><em>How similar are two images?</em></td>
-<td>DINOv2 · SigLIP 2</td>
-<td>⏳ planned</td>
-</tr>
-<tr class="even">
-<td>08</td>
-<td>Vision-language models</td>
-<td><em>Describe / answer / ground</em></td>
-<td>Florence-2 · Qwen3-VL · Moondream 3</td>
-<td>⏳ planned</td>
-</tr>
-<tr class="odd">
-<td>09</td>
-<td>Classical CV</td>
-<td><em>(pre-deep-learning)</em></td>
-<td>OpenCV: edges, flow, ORB/SIFT</td>
-<td>⏳ planned</td>
+<td><strong>SAM 2.1</strong></td>
+<td>Promptable segmentation</td>
+<td><em>none</em> — class-agnostic</td>
+<td>Segments anything from a point/box/mask prompt; no labels</td>
 </tr>
 </tbody>
 </table>
+<p>The natural way they combine is the <strong>detect-then-segment</strong> pipeline: a detector proposes boxes, and SAM turns each box into a high-quality mask. We use exactly that here — SAM 2.1 is prompted with the YOLO26-seg boxes.</p>
 </section>
-<section id="a-useful-mental-model" class="level2">
-<h2 class="anchored" data-anchor-id="a-useful-mental-model">A useful mental model</h2>
-<p>The biggest shift in modern CV is <strong>task-specific models → promptable foundation models</strong>:</p>
+<section id="how-each-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-each-works">How each works</h2>
 <ul>
-<li><strong>Old way:</strong> train one model per task on a fixed label set.</li>
-<li><strong>New way:</strong> one model you <em>prompt</em> — SAM (“segment whatever I point at”), Grounding DINO (“detect anything I name in text”), CLIP (“classify against any labels”), Florence-2 (“detect, caption, OCR, and ground from one checkpoint”).</li>
+<li><strong>YOLO-seg</strong> adds a mask-prototype head to the detector: it predicts a handful of prototype masks per image plus per-object coefficients that linearly combine them — cheap, hence the high frame-rate.</li>
+<li><strong>SAM 2.1</strong> is a promptable transformer with a heavy image encoder and a light mask decoder. Encode the image once, then <em>any</em> prompt (point, box) decodes to a mask in milliseconds. It knows nothing about classes — it only knows “object-ness”, which is why it generalises to things no COCO model has names for.</li>
 </ul>
-<p>Each module shows both, side by side, so the <em>why</em> of the modern approach is visible rather than asserted.</p>
 </section>
-<section id="how-to-run-it-yourself" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-run-it-yourself">How to run it yourself</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> dev                <span class="co"># core env (PyTorch + CV stack)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> data <span class="at">--group</span> detection   <span class="co"># extras for the detection module</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/01-object-detection/run.py <span class="at">--help</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>See the repository <a href="https://github.com/chaoticcuriosity-io/cv-explorations">README</a> for the full setup and hardware notes.</p>
+<section id="how-we-measured" class="level2">
+<h2 class="anchored" data-anchor-id="how-we-measured">How we measured</h2>
+<p>This module is <strong>qualitative + latency</strong> (warmed-up single-image forwards on the local <strong>RTX 3090 Ti</strong>); full mask-mAP on COCO is a deeper follow-up. The point here is to <em>see</em> the difference between a fast labelled instance segmenter and a slower, class-agnostic, promptable one.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+</section>
+<section id="segmentation-speed-masks" class="level2">
+<h2 class="anchored" data-anchor-id="segmentation-speed-masks">Segmentation: speed &amp; masks</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Family</th>
+<th>License</th>
+<th>Latency (ms)</th>
+<th>FPS</th>
+<th>Masks/img</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>YOLO26-n-seg</td>
+<td>instance (YOLO)</td>
+<td>AGPL-3.0</td>
+<td>23.79</td>
+<td>42.0</td>
+<td>7.0</td>
+</tr>
+<tr class="even">
+<td>YOLO11-n-seg</td>
+<td>instance (YOLO)</td>
+<td>AGPL-3.0</td>
+<td>22.9</td>
+<td>43.7</td>
+<td>6.5</td>
+</tr>
+<tr class="odd">
+<td>SAM 2.1 (base)</td>
+<td>promptable</td>
+<td>Apache-2.0</td>
+<td>93.39</td>
+<td>10.7</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<p><em>Latency = mean over warmed-up single-image forwards on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>. SAM 2.1 is prompted with the YOLO26-seg boxes (detect-then-segment). This module is qualitative + latency; mask-mAP on COCO is a deeper follow-up.</em></p>
+<div class="callout callout-style-default callout-note callout-titled" title="What to notice">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What to notice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Labels vs flexibility.</strong> YOLO-seg runs at <strong>~43 fps</strong> and hands you a <em>class</em> with every mask — but only for its 80 COCO categories. SAM 2.1 is <strong>~4× slower (~11 fps)</strong> and returns <em>no</em> label, yet will segment anything you can point at, including objects no detector was trained on.</li>
+<li><strong>They compose.</strong> The figures show the standard pattern: the detector finds and <em>names</em> objects; SAM refines each box into a crisp mask. Open-vocab detection (module 01) + SAM gives you “segment anything you can describe in words”.</li>
+<li><strong>Mask quality differs from box quality.</strong> A correct box with a sloppy mask is a common failure; SAM’s masks are typically tighter around object boundaries than a fast instance head’s.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="qualitative-results" class="level2">
+<h2 class="anchored" data-anchor-id="qualitative-results">Qualitative results</h2>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-y26" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-y26-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/samples_yolo26-seg.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-y26-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: YOLO26-n-seg — instance masks + COCO labels
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-y11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-y11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/samples_yolo11-seg.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-y11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: YOLO11-n-seg — instance masks + COCO labels
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="fig-sam" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/samples_sam2.1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: SAM 2.1, prompted with the detector’s boxes — crisp, class-agnostic masks
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="where-segmentation-fails" class="level2">
+<h2 class="anchored" data-anchor-id="where-segmentation-fails">Where segmentation fails</h2>
+<ul>
+<li><strong>Thin / wispy structures</strong> (hair, wires, chain-link) — hard for any mask head.</li>
+<li><strong>Overlapping instances</strong> — instance segmenters merge or split touching objects.</li>
+<li><strong>Ambiguous prompts</strong> — a single SAM point can mean “the shirt” or “the whole person”; SAM resolves ambiguity by returning multiple candidate masks.</li>
+<li><strong>Class limits (instance)</strong> — YOLO-seg simply can’t mask a class it never trained on.</li>
+</ul>
+</section>
+<section id="reproduce" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> detection      <span class="co"># ultralytics provides YOLO-seg and SAM</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/03-segmentation/run.py <span class="at">--images</span> 4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -710,7 +789,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/03-segmentation/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
