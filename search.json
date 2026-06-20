@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "modules/06-tracking/results/metrics.html",
+    "href": "modules/06-tracking/results/metrics.html",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Metric\nValue\n\n\n\n\nUnique tracks (ids)\n62\n\n\nFrames processed\n200\n\n\nProcessing speed\n21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)\n\n\nSource video\n1920x1080 @ 25 fps\n\n\n\nYOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up."
+  },
+  {
+    "objectID": "modules/06-tracking/results/metrics.html#multi-object-tracking",
+    "href": "modules/06-tracking/results/metrics.html#multi-object-tracking",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Metric\nValue\n\n\n\n\nUnique tracks (ids)\n62\n\n\nFrames processed\n200\n\n\nProcessing speed\n21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)\n\n\nSource video\n1920x1080 @ 25 fps\n\n\n\nYOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up."
+  },
+  {
     "objectID": "modules/05-pose/results/metrics.html",
     "href": "modules/05-pose/results/metrics.html",
     "title": "CV Explorations",
@@ -172,7 +186,7 @@
     "href": "index.html#the-curriculum",
     "title": "CV Explorations",
     "section": "The curriculum",
-    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nByteTrack · BoT-SORT\n⏳ planned\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
+    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nYOLO26 + ByteTrack\n✅ done\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
   },
   {
     "objectID": "index.html#a-useful-mental-model",
@@ -488,5 +502,47 @@
     "title": "05 · Human pose estimation",
     "section": "Reproduce",
     "text": "Reproduce\nuv sync --group detection\nuv run python modules/05-pose/run.py --images 4"
+  },
+  {
+    "objectID": "modules/06-tracking/report.html",
+    "href": "modules/06-tracking/report.html",
+    "title": "06 · Multi-object tracking",
+    "section": "",
+    "text": "A detector answers “what’s here right now” — independently, every frame, with no memory. Tracking adds the missing dimension: identity over time, so the same person keeps the same id as they move. That id is what lets you count, measure dwell time, analyse motion, or have a robot follow a specific person.\nThe dominant recipe is tracking-by-detection:\n\nRun a detector on each frame (here: YOLO26, person class only).\nAssociate this frame’s boxes with the existing tracks — match by predicted position (a Kalman motion model) and box overlap.\nBirths/deaths: unmatched detections start new tracks; tracks unseen for a while are retired.\n\nByteTrack is the associator. Its trick is to use low-confidence detections during association (not just high-confidence ones), which recovers objects through brief occlusion and reduces dropped tracks."
+  },
+  {
+    "objectID": "modules/06-tracking/report.html#the-task",
+    "href": "modules/06-tracking/report.html#the-task",
+    "title": "06 · Multi-object tracking",
+    "section": "",
+    "text": "A detector answers “what’s here right now” — independently, every frame, with no memory. Tracking adds the missing dimension: identity over time, so the same person keeps the same id as they move. That id is what lets you count, measure dwell time, analyse motion, or have a robot follow a specific person.\nThe dominant recipe is tracking-by-detection:\n\nRun a detector on each frame (here: YOLO26, person class only).\nAssociate this frame’s boxes with the existing tracks — match by predicted position (a Kalman motion model) and box overlap.\nBirths/deaths: unmatched detections start new tracks; tracks unseen for a while are retired.\n\nByteTrack is the associator. Its trick is to use low-confidence detections during association (not just high-confidence ones), which recovers objects through brief occlusion and reduces dropped tracks."
+  },
+  {
+    "objectID": "modules/06-tracking/report.html#result",
+    "href": "modules/06-tracking/report.html#result",
+    "title": "06 · Multi-object tracking",
+    "section": "Result",
+    "text": "Result\n\n\n\n\n\n\nFigure 1: Detection + ByteTrack with motion traces. Each box carries a persistent id (#n); the tails show recent trajectory."
+  },
+  {
+    "objectID": "modules/06-tracking/report.html#multi-object-tracking",
+    "href": "modules/06-tracking/report.html#multi-object-tracking",
+    "title": "06 · Multi-object tracking",
+    "section": "Multi-object tracking",
+    "text": "Multi-object tracking\n\n\n\n\n\n\n\nMetric\nValue\n\n\n\n\nUnique tracks (ids)\n62\n\n\nFrames processed\n200\n\n\nProcessing speed\n21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)\n\n\nSource video\n1920x1080 @ 25 fps\n\n\n\nYOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up.\n\n\n\n\n\n\nFigure 2: Three frames across the clip — note how ids persist as people move.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nIdentity is the product, not boxes. The same code as module 01 produces the boxes; the value here is that box #7 in frame 0 is the same person as box #7 in frame 100.\nMore ids than people = fragmentation. This 200-frame clip yielded ~60 ids for far fewer actual pedestrians. When someone is occluded and reappears, the tracker often issues a new id — the classic ID-switch / fragmentation failure that HOTA and IDF1 are designed to penalise.\nTracking is detector-bound. Every missed detection is a gap the associator must bridge; a better detector usually means a better tracker, for free."
+  },
+  {
+    "objectID": "modules/06-tracking/report.html#where-tracking-fails",
+    "href": "modules/06-tracking/report.html#where-tracking-fails",
+    "title": "06 · Multi-object tracking",
+    "section": "Where tracking fails",
+    "text": "Where tracking fails\n\nLong / full occlusion — a person hidden for many frames usually returns with a new id.\nCrowds & similar appearance — ByteTrack uses motion + overlap, not appearance, so it can swap ids between people who cross paths (appearance-based trackers like Deep OC-SORT help).\nFast motion / low frame-rate — the Kalman prediction drifts and association breaks.\nDetector misses — propagate directly into track gaps."
+  },
+  {
+    "objectID": "modules/06-tracking/report.html#reproduce",
+    "href": "modules/06-tracking/report.html#reproduce",
+    "title": "06 · Multi-object tracking",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group detection      # ultralytics + supervision (ByteTrack)\nuv run python modules/06-tracking/run.py\n(The sample clip is downloaded by supervision’s asset helper into data/.)"
   }
 ]
