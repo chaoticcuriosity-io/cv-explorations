@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "modules/10-finetuning/results/metrics.html",
+    "href": "modules/10-finetuning/results/metrics.html",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nClass\nmAP@50\nmAP@[.5:.95]\nPrecision\nRecall\n\n\n\n\nYOLO11-s (base, COCO)\nair_vent\n—\n—\n—\n—\n\n\nYOLO11-s (fine-tuned)\nair_vent\n0.40\n0.26\n0.58\n0.43\n\n\n\nThe base model has no air_vent class, so it cannot score on this task at all (—): it detects zero vents. The fine-tuned model was trained for 80 epochs on 33 auto-labelled images (~0.5 s/epoch on the GB10). Metrics are on a 9-image / 14-instance val split whose labels are themselves Grounding DINO pseudo-labels, so they measure distillation fidelity, not human truth — read them together with the qualitative before/after."
+  },
+  {
+    "objectID": "modules/10-finetuning/results/metrics.html#fine-tuned-air-vent-detector-trained-on-the-dgx-spark-gb10",
+    "href": "modules/10-finetuning/results/metrics.html#fine-tuned-air-vent-detector-trained-on-the-dgx-spark-gb10",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nClass\nmAP@50\nmAP@[.5:.95]\nPrecision\nRecall\n\n\n\n\nYOLO11-s (base, COCO)\nair_vent\n—\n—\n—\n—\n\n\nYOLO11-s (fine-tuned)\nair_vent\n0.40\n0.26\n0.58\n0.43\n\n\n\nThe base model has no air_vent class, so it cannot score on this task at all (—): it detects zero vents. The fine-tuned model was trained for 80 epochs on 33 auto-labelled images (~0.5 s/epoch on the GB10). Metrics are on a 9-image / 14-instance val split whose labels are themselves Grounding DINO pseudo-labels, so they measure distillation fidelity, not human truth — read them together with the qualitative before/after."
+  },
+  {
     "objectID": "modules/09-classical/results/metrics.html",
     "href": "modules/09-classical/results/metrics.html",
     "title": "CV Explorations",
@@ -515,7 +529,7 @@
     "href": "index.html#the-curriculum",
     "title": "CV Explorations",
     "section": "The curriculum",
-    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nYOLO26 + ByteTrack\n✅ done\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n✅ done\n\n\n08\nVision-language models\nDescribe / answer / ground\nQwen2.5-VL 3B\n✅ done\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB\n✅ done"
+    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nYOLO26 + ByteTrack\n✅ done\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n✅ done\n\n\n08\nVision-language models\nDescribe / answer / ground\nQwen2.5-VL 3B\n✅ done\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB\n✅ done\n\n\n10\nFine-tuning (on the Spark)\nTeach a model a new class\nYOLO11 · auto-labeled via CLIP + Grounding DINO\n✅ done"
   },
   {
     "objectID": "index.html#a-useful-mental-model",
@@ -782,5 +796,61 @@
     "title": "09 · Classical computer vision",
     "section": "Reproduce",
     "text": "Reproduce\nuv sync --group dev      # opencv-python only; no model downloads\nuv run python modules/09-classical/run.py"
+  },
+  {
+    "objectID": "modules/10-finetuning/report.html",
+    "href": "modules/10-finetuning/report.html",
+    "title": "10 · Fine-tuning a custom detector",
+    "section": "",
+    "text": "Every module so far ran a pretrained model. This one trains one — the capstone skill, because real projects almost always need a class the off-the-shelf models don’t have. Here that class is air vents: not in COCO, so module 01’s detectors are blind to it. We fine-tune a YOLO detector to find vents, and — the interesting part — we do it without hand-labelling a single image, then train on the DGX Spark."
+  },
+  {
+    "objectID": "modules/10-finetuning/report.html#the-task",
+    "href": "modules/10-finetuning/report.html#the-task",
+    "title": "10 · Fine-tuning a custom detector",
+    "section": "",
+    "text": "Every module so far ran a pretrained model. This one trains one — the capstone skill, because real projects almost always need a class the off-the-shelf models don’t have. Here that class is air vents: not in COCO, so module 01’s detectors are blind to it. We fine-tune a YOLO detector to find vents, and — the interesting part — we do it without hand-labelling a single image, then train on the DGX Spark."
+  },
+  {
+    "objectID": "modules/10-finetuning/report.html#the-data-engine-this-repo-labelling-itself",
+    "href": "modules/10-finetuning/report.html#the-data-engine-this-repo-labelling-itself",
+    "title": "10 · Fine-tuning a custom detector",
+    "section": "The data engine: this repo, labelling itself",
+    "text": "The data engine: this repo, labelling itself\nFine-tuning needs labelled data, and labelling is the expensive, boring bottleneck of applied CV. So we manufacture the dataset from capabilities built earlier in this very curriculum — the “distill an open-vocabulary model into a specialist” workflow that module 01 promised:\n\nSource — pull Creative-Commons vent images from Wikimedia Commons (no API key).\nFilter (zero-shot) — score each image with CLIP (module 02) against vent prompts vs distractor prompts (smokestacks, landscapes, documents, cars, people…) and keep only the vent-like ones. This gate is essential — a raw “air vent” web search is mostly not air vents.\nAuto-label — run Grounding DINO (module 01) with vent text prompts; its boxes (after a size-sanity filter) become YOLO labels.\nFine-tune — train YOLO on the result, on the Spark.\n\nSo three earlier modules become a data engine for a fourth. No human ever draws a box.\n\n\n\n\n\n\nFigure 1: A sample of the auto-built training set: Creative-Commons images that passed the CLIP relevance gate, with Grounding DINO’s boxes (green) used as labels.\n\n\n\n\n\n\n\n\n\nWarningHonest about auto-labelled data\n\n\n\nAuto-sourced, auto-labelled data is noisy — the CLIP gate and box filter remove most junk, but some mislabelling survives, and the val labels are themselves model-generated. So the mAP below measures how well YOLO distilled Grounding DINO, not human ground truth. The qualitative before/after and the honest “what’s needed for production” note matter more than the number. The path to highly reliable is more images and a pass of human label cleanup — or your own photos, which the pipeline accepts directly."
+  },
+  {
+    "objectID": "modules/10-finetuning/report.html#why-the-dgx-spark",
+    "href": "modules/10-finetuning/report.html#why-the-dgx-spark",
+    "title": "10 · Fine-tuning a custom detector",
+    "section": "Why the DGX Spark",
+    "text": "Why the DGX Spark\nInference runs anywhere; training is where compute and memory matter, and it’s where this project’s scale-up box earns its place: the GB10 Grace-Blackwell with ~120 GB unified memory (ARM64, CUDA 13). Training also happens to be the operation you’d repeat as the dataset grows and the model gets larger, so it belongs on the Spark — which is also the robotics deployment target these perception skills feed. (See Cross-platform validation for how the same code runs on both machines.)\nThe training ran inside the Spark’s NGC PyTorch container; the dataset was built on the local 3090 Ti (Grounding DINO + CLIP) and shipped over."
+  },
+  {
+    "objectID": "modules/10-finetuning/report.html#results-before-vs-after",
+    "href": "modules/10-finetuning/report.html#results-before-vs-after",
+    "title": "10 · Fine-tuning a custom detector",
+    "section": "Results — before vs after",
+    "text": "Results — before vs after\nThe headline: the base model has no “air vent” class, so it detects zero vents. The fine-tuned model localises them.\n\n\n\n\n\n\nFigure 2: Top row: the base COCO YOLO (no vent class) finds nothing. Bottom row: the fine-tuned model detects air vents."
+  },
+  {
+    "objectID": "modules/10-finetuning/report.html#fine-tuned-air-vent-detector-trained-on-the-dgx-spark-gb10",
+    "href": "modules/10-finetuning/report.html#fine-tuned-air-vent-detector-trained-on-the-dgx-spark-gb10",
+    "title": "10 · Fine-tuning a custom detector",
+    "section": "Fine-tuned air-vent detector (trained on the DGX Spark GB10)",
+    "text": "Fine-tuned air-vent detector (trained on the DGX Spark GB10)\n\n\n\n\n\n\n\n\n\n\n\nModel\nClass\nmAP@50\nmAP@[.5:.95]\nPrecision\nRecall\n\n\n\n\nYOLO11-s (base, COCO)\nair_vent\n—\n—\n—\n—\n\n\nYOLO11-s (fine-tuned)\nair_vent\n0.40\n0.26\n0.58\n0.43\n\n\n\nThe base model has no air_vent class, so it cannot score on this task at all (—): it detects zero vents. The fine-tuned model was trained for 80 epochs on 33 auto-labelled images (~0.5 s/epoch on the GB10). Metrics are on a 9-image / 14-instance val split whose labels are themselves Grounding DINO pseudo-labels, so they measure distillation fidelity, not human truth — read them together with the qualitative before/after.\n\n\n\n\n\n\nFigure 3: Training curves — losses fall and validation mAP rises over epochs.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nFrom zero to a working detector. The base model cannot detect a vent — there is no such class — so “before” is a blank. After 80 epochs on 33 auto-labelled images (trained in under a minute on the GB10 at ~0.5 s/epoch), the model localises vents and louvers the base model is blind to. That capability did not exist an hour earlier and required no manual labelling.\nThe numbers are modest, and honestly so. mAP@50 ≈ 0.40 on a 9-image val split — respectable for a few dozen noisy auto-labelled examples, but not “production reliable”. The val labels are themselves pseudo-labels, so treat the figure as distillation fidelity, not ground truth.\nThe workflow is the deliverable. Source → CLIP-filter → Grounding-DINO-label → fine-tune is a repeatable recipe for any new class. Scaling the image count, a short human label-cleanup pass, and adding on-site photos are the obvious, high-leverage levers to push reliability up from here.\nThe Spark did the training; the laptop built the data. The exact same code trains on ARM64 / GB10 / CUDA 13 as on the x86 / 3090 Ti — the cross-platform story in practice."
+  },
+  {
+    "objectID": "modules/10-finetuning/report.html#how-to-reproduce",
+    "href": "modules/10-finetuning/report.html#how-to-reproduce",
+    "title": "10 · Fine-tuning a custom detector",
+    "section": "How to reproduce",
+    "text": "How to reproduce\n# 1) Build the dataset locally (Grounding DINO + CLIP on the GPU)\nuv run python modules/10-finetuning/prepare_data.py --max-images 200\n\n# 2) Ship it to the Spark and train inside the NGC container\n#    (Tailscale SSH alias `spark`; dataset tar'd over, docker-cp'd into mjlab-dev)\npython finetune.py --data data/airvents/data.yaml --model yolo11s.pt --epochs 80 --out out"
+  },
+  {
+    "objectID": "modules/10-finetuning/report.html#where-fine-tuning-this-way-falls-short",
+    "href": "modules/10-finetuning/report.html#where-fine-tuning-this-way-falls-short",
+    "title": "10 · Fine-tuning a custom detector",
+    "section": "Where fine-tuning (this way) falls short",
+    "text": "Where fine-tuning (this way) falls short\n\nData volume & noise — a few dozen auto-labelled images demonstrates the workflow and a real before→after, but “highly reliable” needs hundreds of cleaner examples.\nPseudo-label ceiling — the student can’t exceed the teacher; Grounding DINO’s mistakes become the model’s mistakes. A short human cleanup pass is the highest-leverage next step.\nDomain match — web vents ≠ your building’s vents; a handful of on-site photos added to the set would lift real-world reliability fast."
   }
 ]
