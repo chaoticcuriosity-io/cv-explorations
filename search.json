@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "modules/04-depth/results/metrics.html",
+    "href": "modules/04-depth/results/metrics.html",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nLicense\nLatency (ms)\nFPS\n\n\n\n\nDepth Anything V2 (Small)\nApache-2.0\n38.44\n26.0\n\n\nDepth Anything V2 (Base)\nApache-2.0\n78.19\n12.8\n\n\n\nRelative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up."
+  },
+  {
+    "objectID": "modules/04-depth/results/metrics.html#monocular-depth-speed",
+    "href": "modules/04-depth/results/metrics.html#monocular-depth-speed",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nLicense\nLatency (ms)\nFPS\n\n\n\n\nDepth Anything V2 (Small)\nApache-2.0\n38.44\n26.0\n\n\nDepth Anything V2 (Base)\nApache-2.0\n78.19\n12.8\n\n\n\nRelative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up."
+  },
+  {
     "objectID": "modules/03-segmentation/results/metrics.html",
     "href": "modules/03-segmentation/results/metrics.html",
     "title": "CV Explorations",
@@ -144,7 +158,7 @@
     "href": "index.html#the-curriculum",
     "title": "CV Explorations",
     "section": "The curriculum",
-    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2/3 · Depth Pro\n⏳ planned\n\n\n05\nPose / keypoints\nWhere are the joints?\nRTMPose · ViTPose++ · MediaPipe\n⏳ planned\n\n\n06\nTracking\nSame object across frames?\nByteTrack · BoT-SORT\n⏳ planned\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
+    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nRTMPose · ViTPose++ · MediaPipe\n⏳ planned\n\n\n06\nTracking\nSame object across frames?\nByteTrack · BoT-SORT\n⏳ planned\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
   },
   {
     "objectID": "index.html#a-useful-mental-model",
@@ -355,5 +369,54 @@
     "title": "03 · Segmentation",
     "section": "Reproduce",
     "text": "Reproduce\nuv sync --group detection      # ultralytics provides YOLO-seg and SAM\nuv run python modules/03-segmentation/run.py --images 4"
+  },
+  {
+    "objectID": "modules/04-depth/report.html",
+    "href": "modules/04-depth/report.html",
+    "title": "04 · Monocular depth",
+    "section": "",
+    "text": "Monocular depth estimation predicts a distance for every pixel from one ordinary RGB image — no stereo pair, no LiDAR. It’s the perception capability most directly relevant to robotics: turning a flat photo into 3D structure for navigation, grasping, and obstacle avoidance.\nA key distinction:\n\nRelative depth — orders pixels near-to-far without real-world units. Enough for “what’s in front of what”. Depth Anything V2 predicts this.\nMetric depth — actual metres. Needed for measurement/control; harder, and usually fine-tuned per camera (e.g. Depth Anything’s metric heads, Apple Depth Pro)."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#the-task",
+    "href": "modules/04-depth/report.html#the-task",
+    "title": "04 · Monocular depth",
+    "section": "",
+    "text": "Monocular depth estimation predicts a distance for every pixel from one ordinary RGB image — no stereo pair, no LiDAR. It’s the perception capability most directly relevant to robotics: turning a flat photo into 3D structure for navigation, grasping, and obstacle avoidance.\nA key distinction:\n\nRelative depth — orders pixels near-to-far without real-world units. Enough for “what’s in front of what”. Depth Anything V2 predicts this.\nMetric depth — actual metres. Needed for measurement/control; harder, and usually fine-tuned per camera (e.g. Depth Anything’s metric heads, Apple Depth Pro)."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#how-it-works",
+    "href": "modules/04-depth/report.html#how-it-works",
+    "title": "04 · Monocular depth",
+    "section": "How it works",
+    "text": "How it works\nDepth Anything V2 is a DINOv2 vision-transformer encoder plus a lightweight depth head, trained on a huge mix of labelled + pseudo-labelled images. The transformer’s global receptive field lets it use scene-wide cues — perspective, relative size, texture gradients, occlusion — exactly the monocular cues humans use to perceive depth with one eye closed. It outputs inverse depth (larger = nearer)."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#results",
+    "href": "modules/04-depth/report.html#results",
+    "title": "04 · Monocular depth",
+    "section": "Results",
+    "text": "Results\nWe run two sizes on the same images. Larger backbones generally produce sharper boundaries and better thin-structure handling, at a latency cost."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#monocular-depth-speed",
+    "href": "modules/04-depth/report.html#monocular-depth-speed",
+    "title": "04 · Monocular depth",
+    "section": "Monocular depth: speed",
+    "text": "Monocular depth: speed\n\n\n\nModel\nLicense\nLatency (ms)\nFPS\n\n\n\n\nDepth Anything V2 (Small)\nApache-2.0\n38.44\n26.0\n\n\nDepth Anything V2 (Base)\nApache-2.0\n78.19\n12.8\n\n\n\nRelative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up.\n\n\n\n\n\n\nFigure 1: RGB input vs predicted depth (brighter = nearer). Note how both models recover ground-plane gradient, object separation, and rough scene layout from a single photo.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nReal 3D structure from one image. With no stereo or sensor, the model separates foreground from background, recovers the ground plane, and orders objects in depth — the cue set a robot can turn into a rough 3D map.\nSize buys sharpness, not speed. Depth Anything V2 Base (~13 fps) gives crisper edges than Small (~26 fps); the right pick depends on whether you need real-time or best quality.\nRelative, not metric. These maps tell you nearer/farther, not how many metres — for control you’d use a metric variant calibrated to your camera."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#where-monocular-depth-fails",
+    "href": "modules/04-depth/report.html#where-monocular-depth-fails",
+    "title": "04 · Monocular depth",
+    "section": "Where monocular depth fails",
+    "text": "Where monocular depth fails\n\nAbsolute scale ambiguity — a doll-house and a real house look identical to a single camera; relative depth can’t resolve true size.\nReflective / transparent surfaces (mirrors, glass, water) — violate the visual cues the model relies on.\nUntextured walls & sky — few gradients to reason from.\nOut-of-distribution cameras — fisheye, aerial, or endoscopic views differ from the training mix and degrade."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#reproduce",
+    "href": "modules/04-depth/report.html#reproduce",
+    "title": "04 · Monocular depth",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group dev      # transformers provides the Depth Anything V2 pipeline\nuv run python modules/04-depth/run.py --images 4"
   }
 ]

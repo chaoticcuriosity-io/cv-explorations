@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>02 · Image classification – CV Explorations</title>
+<title>metrics – CV Explorations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,61 +23,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -116,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">CV Explorations</span>
     </a>
   </div>
@@ -127,7 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -136,19 +101,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
         <li>
-    <a class="dropdown-item" href="../../modules/01-object-detection/report.html">
+    <a class="dropdown-item" href="../../../modules/01-object-detection/report.html">
  <span class="dropdown-text">01 · Object detection</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/02-classification/report.html">
+    <a class="dropdown-item" href="../../../modules/02-classification/report.html">
  <span class="dropdown-text">02 · Image classification</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/03-segmentation/report.html">
+    <a class="dropdown-item" href="../../../modules/03-segmentation/report.html">
  <span class="dropdown-text">03 · Segmentation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../modules/04-depth/report.html">
+    <a class="dropdown-item" href="../../../modules/04-depth/report.html">
  <span class="dropdown-text">04 · Monocular depth</span></a>
   </li>  
     </ul>
@@ -176,185 +141,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task">The task</a></li>
-  <li><a href="#two-paradigms" id="toc-two-paradigms" class="nav-link" data-scroll-target="#two-paradigms">Two paradigms</a></li>
-  <li><a href="#how-each-model-works" id="toc-how-each-model-works" class="nav-link" data-scroll-target="#how-each-model-works">How each model works</a></li>
-  <li><a href="#how-we-measured" id="toc-how-we-measured" class="nav-link" data-scroll-target="#how-we-measured">How we measured</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#imagenette-classification-benchmark" id="toc-imagenette-classification-benchmark" class="nav-link" data-scroll-target="#imagenette-classification-benchmark">Imagenette classification benchmark</a></li>
-  <li><a href="#predictions" id="toc-predictions" class="nav-link" data-scroll-target="#predictions">Predictions</a></li>
-  <li><a href="#where-classifiers-fail" id="toc-where-classifiers-fail" class="nav-link" data-scroll-target="#where-classifiers-fail">Where classifiers fail</a></li>
-  <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproduce</a></li>
+  <li><a href="#monocular-depth-speed" id="toc-monocular-depth-speed" class="nav-link active" data-scroll-target="#monocular-depth-speed">Monocular depth: speed</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/02-classification/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/04-depth/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">02 · Image classification</h1>
-<p class="subtitle lead">Supervised vs zero-shot — can a model classify images it was never trained to label?</p>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="the-task" class="level2">
-<h2 class="anchored" data-anchor-id="the-task">The task</h2>
-<p><strong>Image classification</strong> assigns a single label to a whole image — the oldest and most foundational CV task, and the one the deep-learning era was launched on (AlexNet on ImageNet, 2012). Here it’s also the cleanest place to see the field’s biggest recent shift, because the <em>same</em> benchmark can be attacked two completely different ways.</p>
-<p>We evaluate on <strong>Imagenette</strong> — a 10-class, Apache-licensed subset of ImageNet (tench, English springer, cassette player, chainsaw, church, French horn, garbage truck, gas pump, golf ball, parachute) — reporting <strong>top-1 accuracy</strong> and latency.</p>
-</section>
-<section id="two-paradigms" class="level2">
-<h2 class="anchored" data-anchor-id="two-paradigms">Two paradigms</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Paradigm</th>
-<th>Model here</th>
-<th>How it decides</th>
-<th>Changing the label set</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Supervised</strong></td>
-<td>ConvNeXt-Tiny (timm)</td>
-<td>A classification <em>head</em> trained on ImageNet outputs a score per class</td>
-<td>Requires retraining the head</td>
-</tr>
-<tr class="even">
-<td><strong>Zero-shot</strong></td>
-<td>SigLIP 2, OpenCLIP</td>
-<td>Embed the image and the text <code>"a photo of a {class}"</code>; pick the closest text</td>
-<td>Just edit the list of strings</td>
-</tr>
-</tbody>
-</table>
-<p>This is the classification analogue of closed-set vs open-vocabulary detection from <a href="../../modules/01-object-detection/report.html">module 01</a>. The supervised model has a fixed output space baked into its weights; the zero-shot models were trained on <em>image–text pairs from the web</em> and have never seen Imagenette’s task — yet they classify it by comparing the image to text descriptions.</p>
-</section>
-<section id="how-each-model-works" class="level2">
-<h2 class="anchored" data-anchor-id="how-each-model-works">How each model works</h2>
-<ul>
-<li><strong>Supervised (ConvNeXt-Tiny).</strong> A modern convolutional backbone with a 1000-way ImageNet head. To score Imagenette we simply read off the 10 relevant logits — no fine-tuning.</li>
-<li><strong>Zero-shot (CLIP / SigLIP 2).</strong> Two encoders — one for images, one for text — trained so that matching image/caption pairs land nearby in a shared space. Classification becomes: encode the image, encode each candidate label as a sentence, return the nearest. <strong>SigLIP 2</strong> refines CLIP with a <em>sigmoid</em> loss (each pair judged independently) and stronger training, which generally lifts accuracy.</li>
-</ul>
-</section>
-<section id="how-we-measured" class="level2">
-<h2 class="anchored" data-anchor-id="how-we-measured">How we measured</h2>
-<ul>
-<li><strong>Data:</strong> the full <strong>Imagenette validation split</strong> (3,925 images, 10 classes).</li>
-<li><strong>Metric:</strong> top-1 accuracy. For the supervised model, the prediction is the argmax over the 10 ImageNet logits that correspond to Imagenette’s classes; for zero-shot, the argmax over the 10 text-similarity scores.</li>
-<li><strong>Latency:</strong> mean of 30 warmed-up single-image forwards on the local <strong>RTX 3090 Ti</strong>.</li>
-<li><strong>Prompts</strong> for zero-shot are the simple template <code>"a photo of a {class}."</code> — prompt wording measurably affects zero-shot accuracy, so we fix it for a fair comparison.</li>
-</ul>
-</section>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
-</section>
-<section id="imagenette-classification-benchmark" class="level2">
-<h2 class="anchored" data-anchor-id="imagenette-classification-benchmark">Imagenette classification benchmark</h2>
+<section id="monocular-depth-speed" class="level2">
+<h2 class="anchored" data-anchor-id="monocular-depth-speed">Monocular depth: speed</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Model</th>
-<th>Paradigm</th>
 <th>License</th>
-<th>Top-1 (%)</th>
 <th>Latency (ms)</th>
 <th>FPS</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>ConvNeXt-Tiny</td>
-<td>Supervised</td>
+<td>Depth Anything V2 (Small)</td>
 <td>Apache-2.0</td>
-<td>99.9</td>
-<td>12.31</td>
-<td>81.2</td>
+<td>38.44</td>
+<td>26.0</td>
 </tr>
 <tr class="even">
-<td>SigLIP 2 Base</td>
-<td>Zero-shot</td>
+<td>Depth Anything V2 (Base)</td>
 <td>Apache-2.0</td>
-<td>99.4</td>
-<td>23.4</td>
-<td>42.7</td>
-</tr>
-<tr class="odd">
-<td>OpenCLIP ViT-B/32</td>
-<td>Zero-shot</td>
-<td>MIT</td>
-<td>99.0</td>
-<td>10.09</td>
-<td>99.1</td>
+<td>78.19</td>
+<td>12.8</td>
 </tr>
 </tbody>
 </table>
-<p><em>Top-1 accuracy on 3925 Imagenette val images (10 classes). Latency = mean of 30 warmed-up single-image forwards on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>. Zero-shot models were never trained on Imagenette — they classify by image-text similarity.</em></p>
-<div class="callout callout-style-default callout-note callout-titled" title="What to notice">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>What to notice
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Zero-shot is not a toy.</strong> SigLIP 2 (<strong>99.4%</strong>) and OpenCLIP (<strong>99.0%</strong>) land within a point of the supervised ConvNeXt-Tiny (<strong>99.9%</strong>) — despite never training on Imagenette. The decades-old assumption that you must train <em>on your classes</em> to classify them no longer holds for coarse, common categories.</li>
-<li><strong>Flexibility isn’t necessarily slower.</strong> The fastest model here is the zero-shot, permissively licensed <strong>OpenCLIP ViT-B/32 (99 fps, MIT)</strong> — and it’s within a point of the supervised model. You can swap its label set by editing a list of strings.</li>
-<li><strong>SigLIP 2’s recipe shows.</strong> Its sigmoid-loss training edges OpenCLIP on accuracy (99.4 vs 99.0) at roughly half the throughput — a small, real accuracy/speed trade.</li>
-<li><strong>Imagenette is deliberately easy</strong> (10 distinct classes), so everything clusters above 99%. The takeaway isn’t the leaderboard order — it’s that the <em>supervised advantage has nearly vanished</em> on a task like this. On fine-grained or rare classes the gap reopens.</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="predictions" class="level2">
-<h2 class="anchored" data-anchor-id="predictions">Predictions</h2>
-<p>A handful of validation images with each model’s top-1 call (<code>correct</code> / <code>WRONG</code>):</p>
-<div id="fig-predictions" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-predictions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="results/predictions.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-predictions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Per-model predictions on Imagenette val images.
-</figcaption>
-</figure>
-</div>
-</section>
-<section id="where-classifiers-fail" class="level2">
-<h2 class="anchored" data-anchor-id="where-classifiers-fail">Where classifiers fail</h2>
-<ul>
-<li><strong>Fine-grained &amp; ambiguous images</strong> — an object photographed oddly, or a scene containing several classes at once (classification must commit to <em>one</em> label).</li>
-<li><strong>Zero-shot prompt sensitivity</strong> — <code>"a photo of a {class}"</code> vs the bare class name vs an ensemble of templates can swing accuracy by points; the label <em>wording</em> is now a hyperparameter.</li>
-<li><strong>Distribution shift</strong> — accuracy on clean ImageNet-style photos overstates real-world performance on blurry, occluded, or domain-specific imagery.</li>
-</ul>
-</section>
-<section id="reproduce" class="level2">
-<h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> dev</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/02-classification/run.py        <span class="co"># full val (3,925 images)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><em>Relative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up.</em></p>
 
 
 </section>
@@ -768,7 +591,7 @@ Figure&nbsp;1: Per-model predictions on Imagenette val images.
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/02-classification/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/04-depth/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
