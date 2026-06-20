@@ -20,6 +20,8 @@ website:
             text: "02 · Image classification"
           - href: modules/03-segmentation/report.qmd
             text: "03 · Segmentation"
+          - href: modules/04-depth/report.qmd
+            text: "04 · Monocular depth"
     right:
       - icon: github
         href: https://github.com/chaoticcuriosity-io/cv-explorations
