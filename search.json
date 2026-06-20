@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "This is a repo-as-curriculum: each major computer-vision capability is a self-contained module that is both runnable and explained. Every module ships a reusable CLI/engine, an interactive notebook, and a rigorous benchmark report — multiple models per task, real metrics, latency measured on the local GPU, and honest failure cases.\nThe reports you’re reading were rendered from results computed locally on an NVIDIA RTX 3090 Ti (24 GB); heavier or Linux-only work runs on an NVIDIA DGX Spark over Tailscale. Site rendering itself needs no GPU."
+  },
+  {
+    "objectID": "index.html#the-curriculum",
+    "href": "index.html#the-curriculum",
+    "title": "CV Explorations",
+    "section": "The curriculum",
+    "text": "The curriculum\n\n\n\n\n\n\n\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · RT-DETRv2 · YOLO26 · Grounding DINO\n🔨 in progress\n\n\n02\nClassification + zero-shot\nWhat is this image?\ntimm backbone · SigLIP 2 / OpenCLIP\n⏳ planned\n\n\n03\nSegmentation\nWhich pixels (masks)?\nSAM 2.1 · SAM 3 · Mask2Former\n⏳ planned\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2/3 · Depth Pro\n⏳ planned\n\n\n05\nPose / keypoints\nWhere are the joints?\nRTMPose · ViTPose++ · MediaPipe\n⏳ planned\n\n\n06\nTracking\nSame object across frames?\nByteTrack · BoT-SORT\n⏳ planned\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
+  },
+  {
+    "objectID": "index.html#a-useful-mental-model",
+    "href": "index.html#a-useful-mental-model",
+    "title": "CV Explorations",
+    "section": "A useful mental model",
+    "text": "A useful mental model\nThe biggest shift in modern CV is task-specific models → promptable foundation models:\n\nOld way: train one model per task on a fixed label set.\nNew way: one model you prompt — SAM (“segment whatever I point at”), Grounding DINO (“detect anything I name in text”), CLIP (“classify against any labels”), Florence-2 (“detect, caption, OCR, and ground from one checkpoint”).\n\nEach module shows both, side by side, so the why of the modern approach is visible rather than asserted."
+  },
+  {
+    "objectID": "index.html#how-to-run-it-yourself",
+    "href": "index.html#how-to-run-it-yourself",
+    "title": "CV Explorations",
+    "section": "How to run it yourself",
+    "text": "How to run it yourself\nuv sync --group dev                # core env (PyTorch + CV stack)\nuv sync --group data --group detection   # extras for the detection module\nuv run python modules/01-object-detection/run.py --help\nSee the repository README for the full setup and hardware notes."
+  }
+]
