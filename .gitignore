@@ -1,0 +1,28 @@
+# --- Python / uv ---
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.pytest_cache/
+
+# --- Downloaded data & weights (never commit; fetched via scripts) ---
+data/
+models/
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# --- Quarto build output (the _freeze/ cache IS committed; _site/ is not) ---
+/_site/
+.quarto/
+
+# --- Tooling caches ---
+.cache/
+~/.cache/
+.DS_Store
+Thumbs.db
+
+# --- FiftyOne local DB ---
+.fiftyone/
