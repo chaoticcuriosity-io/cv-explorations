@@ -26,3 +26,6 @@ Thumbs.db
 
 # --- FiftyOne local DB ---
 .fiftyone/
+
+/.quarto/
+**/*.quarto_ipynb
