@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>01 · Object detection — interactive walkthrough – CV Explorations</title>
+<title>05 · Human pose estimation – CV Explorations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -180,20 +180,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#grab-a-few-coco-images" id="toc-grab-a-few-coco-images" class="nav-link active" data-scroll-target="#grab-a-few-coco-images">Grab a few COCO images</a></li>
-  <li><a href="#run-a-closed-set-detector-yolo26" id="toc-run-a-closed-set-detector-yolo26" class="nav-link" data-scroll-target="#run-a-closed-set-detector-yolo26">Run a closed-set detector (YOLO26)</a></li>
-  <li><a href="#compare-two-models-on-the-same-image" id="toc-compare-two-models-on-the-same-image" class="nav-link" data-scroll-target="#compare-two-models-on-the-same-image">Compare two models on the same image</a></li>
-  <li><a href="#open-vocabulary-detect-anything-you-can-name" id="toc-open-vocabulary-detect-anything-you-can-name" class="nav-link" data-scroll-target="#open-vocabulary-detect-anything-you-can-name">Open-vocabulary: detect anything you can name</a></li>
-  <li><a href="#next" id="toc-next" class="nav-link" data-scroll-target="#next">Next</a></li>
+  <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task">The task</a></li>
+  <li><a href="#two-paradigms" id="toc-two-paradigms" class="nav-link" data-scroll-target="#two-paradigms">Two paradigms</a></li>
+  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">How it works</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#pose-estimation-speed" id="toc-pose-estimation-speed" class="nav-link" data-scroll-target="#pose-estimation-speed">Pose estimation: speed</a></li>
+  <li><a href="#where-pose-estimation-fails" id="toc-where-pose-estimation-fails" class="nav-link" data-scroll-target="#where-pose-estimation-fails">Where pose estimation fails</a></li>
+  <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproduce</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/01-object-detection/explore.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/05-pose/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">01 · Object detection — interactive walkthrough</h1>
+<h1 class="title">05 · Human pose estimation</h1>
+<p class="subtitle lead">Where are the joints? — 17-keypoint skeletons with YOLO-pose</p>
 </div>
 
 
@@ -210,73 +213,128 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>A hands-on companion to the <a href="../../modules/01-object-detection/report.html">report</a>. Every model adapter returns a <code>supervision.Detections</code>, so the same few lines annotate any model’s output.</p>
-<p>Requires the data + detection dependency groups, run from the repo root:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> data <span class="at">--group</span> detection</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run jupyter lab   <span class="co"># then open modules/01-object-detection/explore.ipynb</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="cell-2" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cvkit.devices <span class="im">import</span> get_device, describe_device</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cvkit.io <span class="im">import</span> load_image</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cvkit.viz <span class="im">import</span> annotate_detections</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> detect</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> get_device()</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(describe_device(device))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="the-task" class="level2">
+<h2 class="anchored" data-anchor-id="the-task">The task</h2>
+<p><strong>Pose estimation</strong> locates a set of body keypoints per person — for the COCO format, 17 of them (eyes, ears, shoulders, elbows, wrists, hips, knees, ankles) — and connects them into a skeleton. It powers motion capture, sports analytics, gesture interfaces, and <strong>human-aware robotics</strong> (a robot that must not bump the person reaching past it).</p>
+</section>
+<section id="two-paradigms" class="level2">
+<h2 class="anchored" data-anchor-id="two-paradigms">Two paradigms</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Paradigm</th>
+<th>How</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Bottom-up / single-stage</strong> (YOLO-pose here)</td>
+<td>One network predicts people <em>and</em> their keypoints in a single pass</td>
+<td>Constant cost regardless of crowd size; fast</td>
+</tr>
+<tr class="even">
+<td><strong>Top-down</strong> (ViTPose, RTMPose)</td>
+<td>Detect each person, then run a dedicated pose net on each crop</td>
+<td>Usually more accurate, but cost grows with the number of people</td>
+</tr>
+</tbody>
+</table>
+<p>This module benchmarks two YOLO-pose generations (single-stage). The top-down family is the accuracy-first alternative when you have few people and need precise joints.</p>
+</section>
+<section id="how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
+<p>YOLO-pose extends the detector: alongside each person box it regresses the 17 keypoint coordinates (and a per-keypoint visibility). Because keypoints are predicted jointly with detection in one forward pass, throughput stays high even in crowds — you can see this in the figures, where several skeletons are recovered at once.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+</section>
+<section id="pose-estimation-speed" class="level2">
+<h2 class="anchored" data-anchor-id="pose-estimation-speed">Pose estimation: speed</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>License</th>
+<th>Latency (ms)</th>
+<th>FPS</th>
+<th>People/img</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>YOLO26-n-pose</td>
+<td>AGPL-3.0</td>
+<td>21.52</td>
+<td>46.5</td>
+<td>3.2</td>
+</tr>
+<tr class="even">
+<td>YOLO11-n-pose</td>
+<td>AGPL-3.0</td>
+<td>18.33</td>
+<td>54.5</td>
+<td>2.5</td>
+</tr>
+</tbody>
+</table>
+<p><em>17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up.</em></p>
+<div id="fig-y26pose" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-y26pose-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/samples_yolo26-pose.png" class="img-fluid figure-img">
 </div>
-<section id="grab-a-few-coco-images" class="level2">
-<h2 class="anchored" data-anchor-id="grab-a-few-coco-images">Grab a few COCO images</h2>
-<p>Downloads (and caches) a small COCO val slice via the FiftyOne zoo.</p>
-<div id="cell-4" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cvkit.data <span class="im">import</span> load_coco_val_subset</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> load_coco_val_subset(max_samples<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>paths <span class="op">=</span> [s.filepath <span class="cf">for</span> s <span class="kw">in</span> ds][:<span class="dv">4</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> load_image(paths[<span class="dv">0</span>])</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(img)<span class="op">;</span> plt.axis(<span class="st">'off'</span>)<span class="op">;</span> plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-y26pose-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: YOLO26-n-pose — 17-keypoint skeletons.
+</figcaption>
+</figure>
+</div>
+<div id="fig-y11pose" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-y11pose-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/samples_yolo11-pose.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-y11pose-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: YOLO11-n-pose — same images, prior generation.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="What to notice">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What to notice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Crowd-constant speed.</strong> Both models stay at ~50 fps whether the image has one person or several — the single-stage win. A top-down model would slow down as people are added.</li>
+<li><strong>A newer generation recovers more people.</strong> YOLO26-pose found more people per image than YOLO11-pose here (better recall on partially-occluded figures), at a slightly lower frame-rate.</li>
+<li><strong>Keypoints carry visibility.</strong> Occluded joints are predicted with low confidence; downstream code should use that, not assume every joint is reliable.</li>
+</ul>
+</div>
 </div>
 </section>
-<section id="run-a-closed-set-detector-yolo26" class="level2">
-<h2 class="anchored" data-anchor-id="run-a-closed-set-detector-yolo26">Run a closed-set detector (YOLO26)</h2>
-<p>Predicts one of the 80 COCO classes per box. <code>data['class_name']</code> carries the labels.</p>
-<div id="cell-6" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> detect.build_detector(<span class="st">'yolo26n'</span>, device)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>det <span class="op">=</span> model.predict(img, conf<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>c<span class="sc">:.2f}</span><span class="ss">"</span> <span class="cf">for</span> n, c <span class="kw">in</span> <span class="bu">zip</span>(det.data.get(<span class="st">'class_name'</span>, []), det.confidence)]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(annotate_detections(img, det, labels<span class="op">=</span>labels))<span class="op">;</span> plt.axis(<span class="st">'off'</span>)<span class="op">;</span> plt.show()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(det.data.get(<span class="st">'class_name'</span>, [])))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<section id="where-pose-estimation-fails" class="level2">
+<h2 class="anchored" data-anchor-id="where-pose-estimation-fails">Where pose estimation fails</h2>
+<ul>
+<li><strong>Occlusion &amp; truncation</strong> — joints hidden behind objects or cropped out of frame.</li>
+<li><strong>Crowding &amp; overlap</strong> — skeletons can swap limbs between nearby people.</li>
+<li><strong>Unusual poses</strong> — gymnastics, lying down, or atypical viewpoints under-represented in training.</li>
+<li><strong>Small / distant people</strong> — too few pixels to localise joints precisely.</li>
+</ul>
 </section>
-<section id="compare-two-models-on-the-same-image" class="level2">
-<h2 class="anchored" data-anchor-id="compare-two-models-on-the-same-image">Compare two models on the same image</h2>
-<p>Same image, same code path — only the adapter key changes.</p>
-<div id="cell-8" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">7</span>))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, key <span class="kw">in</span> <span class="bu">zip</span>(axes, [<span class="st">'yolo26n'</span>, <span class="st">'rfdetr-nano'</span>]):</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> detect.build_detector(key, device)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> m.predict(img, conf<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    lbls <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>c<span class="sc">:.2f}</span><span class="ss">"</span> <span class="cf">for</span> n, c <span class="kw">in</span> <span class="bu">zip</span>(d.data.get(<span class="st">'class_name'</span>, []), d.confidence)]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    ax.imshow(annotate_detections(img, d, labels<span class="op">=</span>lbls))</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    ax.set_title(m.meta.display)<span class="op">;</span> ax.axis(<span class="st">'off'</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="open-vocabulary-detect-anything-you-can-name" class="level2">
-<h2 class="anchored" data-anchor-id="open-vocabulary-detect-anything-you-can-name">Open-vocabulary: detect anything you can name</h2>
-<p>Grounding DINO takes free text — try concepts that aren’t in COCO’s 80 classes.</p>
-<div id="cell-10" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gd <span class="op">=</span> detect.build_open_vocab(device)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>det <span class="op">=</span> gd.detect(img, [<span class="st">'plate'</span>, <span class="st">'napkin'</span>, <span class="st">'logo'</span>, <span class="st">'hand'</span>, <span class="st">'cup'</span>])</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>lbls <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>c<span class="sc">:.2f}</span><span class="ss">"</span> <span class="cf">for</span> n, c <span class="kw">in</span> <span class="bu">zip</span>(det.data.get(<span class="st">'class_name'</span>, []), det.confidence)]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(annotate_detections(img, det, labels<span class="op">=</span>lbls))<span class="op">;</span> plt.axis(<span class="st">'off'</span>)<span class="op">;</span> plt.show()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'out-of-COCO:'</span>, <span class="bu">sorted</span>({n <span class="cf">for</span> n <span class="kw">in</span> det.data.get(<span class="st">'class_name'</span>, []) <span class="cf">if</span> n.lower() <span class="kw">not</span> <span class="kw">in</span> detect.NAME_TO_IDX}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="next" class="level2">
-<h2 class="anchored" data-anchor-id="next">Next</h2>
-<p>Run the full benchmark with <code>uv run python run.py</code> from this folder, or read the <a href="../../modules/01-object-detection/report.html">report</a> for the rigorous numbers.</p>
+<section id="reproduce" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> detection</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/05-pose/run.py <span class="at">--images</span> 4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -690,7 +748,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/01-object-detection/explore.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/05-pose/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

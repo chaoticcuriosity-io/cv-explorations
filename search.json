@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "modules/05-pose/results/metrics.html",
+    "href": "modules/05-pose/results/metrics.html",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nLicense\nLatency (ms)\nFPS\nPeople/img\n\n\n\n\nYOLO26-n-pose\nAGPL-3.0\n21.52\n46.5\n3.2\n\n\nYOLO11-n-pose\nAGPL-3.0\n18.33\n54.5\n2.5\n\n\n\n17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up."
+  },
+  {
+    "objectID": "modules/05-pose/results/metrics.html#pose-estimation-speed",
+    "href": "modules/05-pose/results/metrics.html#pose-estimation-speed",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nLicense\nLatency (ms)\nFPS\nPeople/img\n\n\n\n\nYOLO26-n-pose\nAGPL-3.0\n21.52\n46.5\n3.2\n\n\nYOLO11-n-pose\nAGPL-3.0\n18.33\n54.5\n2.5\n\n\n\n17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up."
+  },
+  {
     "objectID": "modules/04-depth/results/metrics.html",
     "href": "modules/04-depth/results/metrics.html",
     "title": "CV Explorations",
@@ -158,7 +172,7 @@
     "href": "index.html#the-curriculum",
     "title": "CV Explorations",
     "section": "The curriculum",
-    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nRTMPose · ViTPose++ · MediaPipe\n⏳ planned\n\n\n06\nTracking\nSame object across frames?\nByteTrack · BoT-SORT\n⏳ planned\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
+    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nByteTrack · BoT-SORT\n⏳ planned\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
   },
   {
     "objectID": "index.html#a-useful-mental-model",
@@ -418,5 +432,61 @@
     "title": "04 · Monocular depth",
     "section": "Reproduce",
     "text": "Reproduce\nuv sync --group dev      # transformers provides the Depth Anything V2 pipeline\nuv run python modules/04-depth/run.py --images 4"
+  },
+  {
+    "objectID": "modules/05-pose/report.html",
+    "href": "modules/05-pose/report.html",
+    "title": "05 · Human pose estimation",
+    "section": "",
+    "text": "Pose estimation locates a set of body keypoints per person — for the COCO format, 17 of them (eyes, ears, shoulders, elbows, wrists, hips, knees, ankles) — and connects them into a skeleton. It powers motion capture, sports analytics, gesture interfaces, and human-aware robotics (a robot that must not bump the person reaching past it)."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#the-task",
+    "href": "modules/05-pose/report.html#the-task",
+    "title": "05 · Human pose estimation",
+    "section": "",
+    "text": "Pose estimation locates a set of body keypoints per person — for the COCO format, 17 of them (eyes, ears, shoulders, elbows, wrists, hips, knees, ankles) — and connects them into a skeleton. It powers motion capture, sports analytics, gesture interfaces, and human-aware robotics (a robot that must not bump the person reaching past it)."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#two-paradigms",
+    "href": "modules/05-pose/report.html#two-paradigms",
+    "title": "05 · Human pose estimation",
+    "section": "Two paradigms",
+    "text": "Two paradigms\n\n\n\n\n\n\n\n\nParadigm\nHow\nTrade-off\n\n\n\n\nBottom-up / single-stage (YOLO-pose here)\nOne network predicts people and their keypoints in a single pass\nConstant cost regardless of crowd size; fast\n\n\nTop-down (ViTPose, RTMPose)\nDetect each person, then run a dedicated pose net on each crop\nUsually more accurate, but cost grows with the number of people\n\n\n\nThis module benchmarks two YOLO-pose generations (single-stage). The top-down family is the accuracy-first alternative when you have few people and need precise joints."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#how-it-works",
+    "href": "modules/05-pose/report.html#how-it-works",
+    "title": "05 · Human pose estimation",
+    "section": "How it works",
+    "text": "How it works\nYOLO-pose extends the detector: alongside each person box it regresses the 17 keypoint coordinates (and a per-keypoint visibility). Because keypoints are predicted jointly with detection in one forward pass, throughput stays high even in crowds — you can see this in the figures, where several skeletons are recovered at once."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#results",
+    "href": "modules/05-pose/report.html#results",
+    "title": "05 · Human pose estimation",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "modules/05-pose/report.html#pose-estimation-speed",
+    "href": "modules/05-pose/report.html#pose-estimation-speed",
+    "title": "05 · Human pose estimation",
+    "section": "Pose estimation: speed",
+    "text": "Pose estimation: speed\n\n\n\nModel\nLicense\nLatency (ms)\nFPS\nPeople/img\n\n\n\n\nYOLO26-n-pose\nAGPL-3.0\n21.52\n46.5\n3.2\n\n\nYOLO11-n-pose\nAGPL-3.0\n18.33\n54.5\n2.5\n\n\n\n17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up.\n\n\n\n\n\n\nFigure 1: YOLO26-n-pose — 17-keypoint skeletons.\n\n\n\n\n\n\n\n\n\nFigure 2: YOLO11-n-pose — same images, prior generation.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nCrowd-constant speed. Both models stay at ~50 fps whether the image has one person or several — the single-stage win. A top-down model would slow down as people are added.\nA newer generation recovers more people. YOLO26-pose found more people per image than YOLO11-pose here (better recall on partially-occluded figures), at a slightly lower frame-rate.\nKeypoints carry visibility. Occluded joints are predicted with low confidence; downstream code should use that, not assume every joint is reliable."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#where-pose-estimation-fails",
+    "href": "modules/05-pose/report.html#where-pose-estimation-fails",
+    "title": "05 · Human pose estimation",
+    "section": "Where pose estimation fails",
+    "text": "Where pose estimation fails\n\nOcclusion & truncation — joints hidden behind objects or cropped out of frame.\nCrowding & overlap — skeletons can swap limbs between nearby people.\nUnusual poses — gymnastics, lying down, or atypical viewpoints under-represented in training.\nSmall / distant people — too few pixels to localise joints precisely."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#reproduce",
+    "href": "modules/05-pose/report.html#reproduce",
+    "title": "05 · Human pose estimation",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group detection\nuv run python modules/05-pose/run.py --images 4"
   }
 ]
