@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>metrics – CV Explorations</title>
+<title>transcript – CV Explorations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -157,9 +157,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#multi-object-tracking" id="toc-multi-object-tracking" class="nav-link active" data-scroll-target="#multi-object-tracking">Multi-object tracking</a></li>
+  <li><a href="#qwen2.5-vl-3b-one-model-many-tasks" id="toc-qwen2.5-vl-3b-one-model-many-tasks" class="nav-link active" data-scroll-target="#qwen2.5-vl-3b-one-model-many-tasks">Qwen2.5-VL 3B — one model, many tasks</a>
+  <ul class="collapse">
+  <li><a href="#jpg" id="toc-jpg" class="nav-link" data-scroll-target="#jpg"><code>000000002431.jpg</code></a></li>
+  <li><a href="#jpg-1" id="toc-jpg-1" class="nav-link" data-scroll-target="#jpg-1"><code>000000003255.jpg</code></a></li>
+  <li><a href="#jpg-2" id="toc-jpg-2" class="nav-link" data-scroll-target="#jpg-2"><code>000000009590.jpg</code></a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/06-tracking/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/08-vlm/results/transcript.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
@@ -167,41 +172,34 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="multi-object-tracking" class="level2">
-<h2 class="anchored" data-anchor-id="multi-object-tracking">Multi-object tracking</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Metric</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Unique tracks (ids)</td>
-<td>62</td>
-</tr>
-<tr class="even">
-<td>Frames processed</td>
-<td>200</td>
-</tr>
-<tr class="odd">
-<td>Processing speed</td>
-<td>21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)</td>
-</tr>
-<tr class="even">
-<td>Source video</td>
-<td>1920x1080 @ 25 fps</td>
-</tr>
-</tbody>
-</table>
-<p><em>YOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up.</em></p>
+<section id="qwen2.5-vl-3b-one-model-many-tasks" class="level2">
+<h2 class="anchored" data-anchor-id="qwen2.5-vl-3b-one-model-many-tasks">Qwen2.5-VL 3B — one model, many tasks</h2>
+<section id="jpg" class="level3">
+<h3 class="anchored" data-anchor-id="jpg"><code>000000002431.jpg</code></h3>
+<ul>
+<li><strong>Caption</strong> — <em>Describe this image in one sentence.</em> &gt; A plate of bread and a knife on a table next to a glass of wine.</li>
+<li><strong>Reasoning</strong> — <em>What is happening in this scene, and what might happen next?</em> &gt; In the image, there is a dining table with various items on it, including a plate of bread, a knife, a wine glass, and a cup. A person is present in the background, possibly enjoying a meal or preparing to eat. The scene suggests that someone is about to have a meal, which could involve eating the bread from the plate.</li>
+</ul>
+<p>As for what might happen next, it’s difficult to predict with certainty since the image does not provide enough context. However, one possibility is that the person in the background might take a bite of the bread, drink some wine, and enjoy their meal. Alternatively, they might use the - <strong>Counting</strong> — <em>How many people are in this image? Answer with just a number.</em> &gt; 0 - <strong>Reading (OCR)</strong> — <em>Is there any readable text in this image? If yes, quote it; if no, say ‘none’.</em> &gt; none</p>
+</section>
+<section id="jpg-1" class="level3">
+<h3 class="anchored" data-anchor-id="jpg-1"><code>000000003255.jpg</code></h3>
+<ul>
+<li><strong>Caption</strong> — <em>Describe this image in one sentence.</em> &gt; A group of people are standing on a snowy slope with a large mountain in the background.</li>
+<li><strong>Reasoning</strong> — <em>What is happening in this scene, and what might happen next?</em> &gt; In the image, a group of people is standing on a snow-covered slope, possibly preparing for skiing or snowboarding. They are surrounded by a beautiful mountain landscape with snow-capped peaks and a clear blue sky. The group appears to be enjoying their time outdoors, taking in the stunning scenery.</li>
+</ul>
+<p>As they stand there, they may decide to start their adventure by skiing or snowboarding down the slope. They could also engage in other winter activities such as building a snowman, having a picnic, or simply taking a leisurely walk through the snow. The group’s experience will likely be filled with excitement, fun, and the opportunity to connect - <strong>Counting</strong> — <em>How many people are in this image? Answer with just a number.</em> &gt; 4 - <strong>Reading (OCR)</strong> — <em>Is there any readable text in this image? If yes, quote it; if no, say ‘none’.</em> &gt; none</p>
+</section>
+<section id="jpg-2" class="level3">
+<h3 class="anchored" data-anchor-id="jpg-2"><code>000000009590.jpg</code></h3>
+<ul>
+<li><strong>Caption</strong> — <em>Describe this image in one sentence.</em> &gt; A group of men are sitting around a table having coffee and food.</li>
+<li><strong>Reasoning</strong> — <em>What is happening in this scene, and what might happen next?</em> &gt; In the image, a group of people is gathered around a dining table, enjoying a meal together. They are sitting on chairs and appear to be engaged in conversation while eating. The table is set with various dishes, cups, and utensils, indicating that they are having a meal.</li>
+</ul>
+<p>Given the relaxed atmosphere and the presence of multiple people, it’s likely that the group has known each other for some time or is friends. They may continue to enjoy their meal and engage in more conversations as they eat. It’s possible that someone might share a story or joke, or they could discuss their day or plans for the future. Overall, the - <strong>Counting</strong> — <em>How many people are in this image? Answer with just a number.</em> &gt; 5 - <strong>Reading (OCR)</strong> — <em>Is there any readable text in this image? If yes, quote it; if no, say ‘none’.</em> &gt; none</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -613,7 +611,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/06-tracking/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/08-vlm/results/transcript.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

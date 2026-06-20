@@ -1,115 +1,493 @@
 [
   {
-    "objectID": "modules/07-retrieval/results/metrics.html",
-    "href": "modules/07-retrieval/results/metrics.html",
+    "objectID": "modules/08-vlm/results/transcript.html",
+    "href": "modules/08-vlm/results/transcript.html",
     "title": "CV Explorations",
     "section": "",
-    "text": "Model\nType\nLicense\nRecall@1 (%)\nPrecision@5 (%)\nLatency (ms)\nFPS\n\n\n\n\nSigLIP 2 Base\nimage-text\nApache-2.0\n99.8\n99.2\n20.51\n48.8\n\n\nDINOv2 Base\nself-supervised\nApache-2.0\n99.3\n98.8\n19.45\n51.4\n\n\n\nRetrieval on 600 Imagenette images (60/class). Recall@1 = nearest neighbour shares the class; Precision@5 = fraction of top-5 that do. No labels used at search time — purely embedding similarity. Latency on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Figure uses DINOv2 Base."
+    "text": "Caption — Describe this image in one sentence. &gt; A plate of bread and a knife on a table next to a glass of wine.\nReasoning — What is happening in this scene, and what might happen next? &gt; In the image, there is a dining table with various items on it, including a plate of bread, a knife, a wine glass, and a cup. A person is present in the background, possibly enjoying a meal or preparing to eat. The scene suggests that someone is about to have a meal, which could involve eating the bread from the plate.\n\nAs for what might happen next, it’s difficult to predict with certainty since the image does not provide enough context. However, one possibility is that the person in the background might take a bite of the bread, drink some wine, and enjoy their meal. Alternatively, they might use the - Counting — How many people are in this image? Answer with just a number. &gt; 0 - Reading (OCR) — Is there any readable text in this image? If yes, quote it; if no, say ‘none’. &gt; none\n\n\n\n\nCaption — Describe this image in one sentence. &gt; A group of people are standing on a snowy slope with a large mountain in the background.\nReasoning — What is happening in this scene, and what might happen next? &gt; In the image, a group of people is standing on a snow-covered slope, possibly preparing for skiing or snowboarding. They are surrounded by a beautiful mountain landscape with snow-capped peaks and a clear blue sky. The group appears to be enjoying their time outdoors, taking in the stunning scenery.\n\nAs they stand there, they may decide to start their adventure by skiing or snowboarding down the slope. They could also engage in other winter activities such as building a snowman, having a picnic, or simply taking a leisurely walk through the snow. The group’s experience will likely be filled with excitement, fun, and the opportunity to connect - Counting — How many people are in this image? Answer with just a number. &gt; 4 - Reading (OCR) — Is there any readable text in this image? If yes, quote it; if no, say ‘none’. &gt; none\n\n\n\n\nCaption — Describe this image in one sentence. &gt; A group of men are sitting around a table having coffee and food.\nReasoning — What is happening in this scene, and what might happen next? &gt; In the image, a group of people is gathered around a dining table, enjoying a meal together. They are sitting on chairs and appear to be engaged in conversation while eating. The table is set with various dishes, cups, and utensils, indicating that they are having a meal.\n\nGiven the relaxed atmosphere and the presence of multiple people, it’s likely that the group has known each other for some time or is friends. They may continue to enjoy their meal and engage in more conversations as they eat. It’s possible that someone might share a story or joke, or they could discuss their day or plans for the future. Overall, the - Counting — How many people are in this image? Answer with just a number. &gt; 5 - Reading (OCR) — Is there any readable text in this image? If yes, quote it; if no, say ‘none’. &gt; none"
   },
   {
-    "objectID": "modules/07-retrieval/results/metrics.html#image-retrieval-imagenette",
-    "href": "modules/07-retrieval/results/metrics.html#image-retrieval-imagenette",
+    "objectID": "modules/08-vlm/results/transcript.html#qwen2.5-vl-3b-one-model-many-tasks",
+    "href": "modules/08-vlm/results/transcript.html#qwen2.5-vl-3b-one-model-many-tasks",
     "title": "CV Explorations",
     "section": "",
-    "text": "Model\nType\nLicense\nRecall@1 (%)\nPrecision@5 (%)\nLatency (ms)\nFPS\n\n\n\n\nSigLIP 2 Base\nimage-text\nApache-2.0\n99.8\n99.2\n20.51\n48.8\n\n\nDINOv2 Base\nself-supervised\nApache-2.0\n99.3\n98.8\n19.45\n51.4\n\n\n\nRetrieval on 600 Imagenette images (60/class). Recall@1 = nearest neighbour shares the class; Precision@5 = fraction of top-5 that do. No labels used at search time — purely embedding similarity. Latency on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Figure uses DINOv2 Base."
+    "text": "Caption — Describe this image in one sentence. &gt; A plate of bread and a knife on a table next to a glass of wine.\nReasoning — What is happening in this scene, and what might happen next? &gt; In the image, there is a dining table with various items on it, including a plate of bread, a knife, a wine glass, and a cup. A person is present in the background, possibly enjoying a meal or preparing to eat. The scene suggests that someone is about to have a meal, which could involve eating the bread from the plate.\n\nAs for what might happen next, it’s difficult to predict with certainty since the image does not provide enough context. However, one possibility is that the person in the background might take a bite of the bread, drink some wine, and enjoy their meal. Alternatively, they might use the - Counting — How many people are in this image? Answer with just a number. &gt; 0 - Reading (OCR) — Is there any readable text in this image? If yes, quote it; if no, say ‘none’. &gt; none\n\n\n\n\nCaption — Describe this image in one sentence. &gt; A group of people are standing on a snowy slope with a large mountain in the background.\nReasoning — What is happening in this scene, and what might happen next? &gt; In the image, a group of people is standing on a snow-covered slope, possibly preparing for skiing or snowboarding. They are surrounded by a beautiful mountain landscape with snow-capped peaks and a clear blue sky. The group appears to be enjoying their time outdoors, taking in the stunning scenery.\n\nAs they stand there, they may decide to start their adventure by skiing or snowboarding down the slope. They could also engage in other winter activities such as building a snowman, having a picnic, or simply taking a leisurely walk through the snow. The group’s experience will likely be filled with excitement, fun, and the opportunity to connect - Counting — How many people are in this image? Answer with just a number. &gt; 4 - Reading (OCR) — Is there any readable text in this image? If yes, quote it; if no, say ‘none’. &gt; none\n\n\n\n\nCaption — Describe this image in one sentence. &gt; A group of men are sitting around a table having coffee and food.\nReasoning — What is happening in this scene, and what might happen next? &gt; In the image, a group of people is gathered around a dining table, enjoying a meal together. They are sitting on chairs and appear to be engaged in conversation while eating. The table is set with various dishes, cups, and utensils, indicating that they are having a meal.\n\nGiven the relaxed atmosphere and the presence of multiple people, it’s likely that the group has known each other for some time or is friends. They may continue to enjoy their meal and engage in more conversations as they eat. It’s possible that someone might share a story or joke, or they could discuss their day or plans for the future. Overall, the - Counting — How many people are in this image? Answer with just a number. &gt; 5 - Reading (OCR) — Is there any readable text in this image? If yes, quote it; if no, say ‘none’. &gt; none"
   },
   {
-    "objectID": "modules/06-tracking/results/metrics.html",
-    "href": "modules/06-tracking/results/metrics.html",
+    "objectID": "modules/08-vlm/report.html",
+    "href": "modules/08-vlm/report.html",
+    "title": "08 · Vision-language models",
+    "section": "",
+    "text": "Every earlier module solved one capability with a purpose-built model. A vision-language model (VLM) collapses many of them into a single network you steer with a prompt. Ask it to caption, answer a question, count, read text, or reason about what happens next — no task-specific head, no retraining. This is the frontier of “general” computer vision and the closest thing here to understanding a scene rather than just labelling it."
+  },
+  {
+    "objectID": "modules/08-vlm/report.html#the-task",
+    "href": "modules/08-vlm/report.html#the-task",
+    "title": "08 · Vision-language models",
+    "section": "",
+    "text": "Every earlier module solved one capability with a purpose-built model. A vision-language model (VLM) collapses many of them into a single network you steer with a prompt. Ask it to caption, answer a question, count, read text, or reason about what happens next — no task-specific head, no retraining. This is the frontier of “general” computer vision and the closest thing here to understanding a scene rather than just labelling it."
+  },
+  {
+    "objectID": "modules/08-vlm/report.html#how-it-works",
+    "href": "modules/08-vlm/report.html#how-it-works",
+    "title": "08 · Vision-language models",
+    "section": "How it works",
+    "text": "How it works\nA VLM bolts a vision encoder onto a language model: image patches are projected into the LLM’s token space, so the model “sees” the picture as a sequence of tokens and then generates text conditioned on both the image and your question. Because the output is language, the same model can do tasks that would each need a separate architecture in the classic stack — the prompt selects the behaviour.\n\n\n\n\n\n\nTipA note on the model choice\n\n\n\nThe natural pick here was Microsoft’s Florence-2, a tiny unified model with explicit task tokens (&lt;CAPTION&gt;, &lt;OD&gt;, &lt;OCR&gt;). Its custom modelling code doesn’t load under transformers v5 (a config incompatibility), so we use Qwen2.5-VL 3B — a transformers-native generative VLM — instead. The lesson (one model, many tasks via prompts) is the same; only the interface differs (free-form chat vs task tokens)."
+  },
+  {
+    "objectID": "modules/08-vlm/report.html#results-real-transcripts",
+    "href": "modules/08-vlm/report.html#results-real-transcripts",
+    "title": "08 · Vision-language models",
+    "section": "Results — real transcripts",
+    "text": "Results — real transcripts\nBelow is the model’s actual output on three images, for four different tasks, all from the same weights:"
+  },
+  {
+    "objectID": "modules/08-vlm/report.html#qwen2.5-vl-3b-one-model-many-tasks",
+    "href": "modules/08-vlm/report.html#qwen2.5-vl-3b-one-model-many-tasks",
+    "title": "08 · Vision-language models",
+    "section": "Qwen2.5-VL 3B — one model, many tasks",
+    "text": "Qwen2.5-VL 3B — one model, many tasks\n\n000000002431.jpg\n\nCaption — Describe this image in one sentence. &gt; A plate of bread and a knife on a table next to a glass of wine.\nReasoning — What is happening in this scene, and what might happen next? &gt; In the image, there is a dining table with various items on it, including a plate of bread, a knife, a wine glass, and a cup. A person is present in the background, possibly enjoying a meal or preparing to eat. The scene suggests that someone is about to have a meal, which could involve eating the bread from the plate.\n\nAs for what might happen next, it’s difficult to predict with certainty since the image does not provide enough context. However, one possibility is that the person in the background might take a bite of the bread, drink some wine, and enjoy their meal. Alternatively, they might use the - Counting — How many people are in this image? Answer with just a number. &gt; 0 - Reading (OCR) — Is there any readable text in this image? If yes, quote it; if no, say ‘none’. &gt; none\n\n\n000000003255.jpg\n\nCaption — Describe this image in one sentence. &gt; A group of people are standing on a snowy slope with a large mountain in the background.\nReasoning — What is happening in this scene, and what might happen next? &gt; In the image, a group of people is standing on a snow-covered slope, possibly preparing for skiing or snowboarding. They are surrounded by a beautiful mountain landscape with snow-capped peaks and a clear blue sky. The group appears to be enjoying their time outdoors, taking in the stunning scenery.\n\nAs they stand there, they may decide to start their adventure by skiing or snowboarding down the slope. They could also engage in other winter activities such as building a snowman, having a picnic, or simply taking a leisurely walk through the snow. The group’s experience will likely be filled with excitement, fun, and the opportunity to connect - Counting — How many people are in this image? Answer with just a number. &gt; 4 - Reading (OCR) — Is there any readable text in this image? If yes, quote it; if no, say ‘none’. &gt; none\n\n\n000000009590.jpg\n\nCaption — Describe this image in one sentence. &gt; A group of men are sitting around a table having coffee and food.\nReasoning — What is happening in this scene, and what might happen next? &gt; In the image, a group of people is gathered around a dining table, enjoying a meal together. They are sitting on chairs and appear to be engaged in conversation while eating. The table is set with various dishes, cups, and utensils, indicating that they are having a meal.\n\nGiven the relaxed atmosphere and the presence of multiple people, it’s likely that the group has known each other for some time or is friends. They may continue to enjoy their meal and engage in more conversations as they eat. It’s possible that someone might share a story or joke, or they could discuss their day or plans for the future. Overall, the - Counting — How many people are in this image? Answer with just a number. &gt; 5 - Reading (OCR) — Is there any readable text in this image? If yes, quote it; if no, say ‘none’. &gt; none\n\n\n\n\n\n\nFigure 1: Qwen2.5-VL captions on the same images."
+  },
+  {
+    "objectID": "modules/08-vlm/report.html#vision-language-model",
+    "href": "modules/08-vlm/report.html#vision-language-model",
+    "title": "08 · Vision-language models",
+    "section": "Vision-language model",
+    "text": "Vision-language model\n\n\n\nModel\nLicense\nLatency (ms/answer, 32 tok)\nNote\n\n\n\n\nQwen2.5-VL 3B\nApache-2.0\n3729.64\nfree-form text; qualitative\n\n\n\nOne model answers caption/reason/count/OCR purely from the prompt — no task-specific heads. Latency is per short answer on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8 and scales with the number of generated tokens. See the transcript for real outputs.\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nOne model, four capabilities. Captioning, open-ended reasoning, counting, and OCR all came from a single network — selected entirely by the prompt. That generality is the whole point of a VLM.\nGrounded and mostly correct. Counts (0 / 4 / 5 people) match the scenes; OCR correctly reports “none” when there’s no text; captions are accurate. It reasons about what might happen next — something a classifier or detector simply cannot do.\nGenerality has a price: latency. At ~3.7 s per short answer, this 3B VLM is ~100× slower than the YOLO detector. VLMs are the heavyweight of the curriculum — you reach for them when you need language-level flexibility, not real-time throughput.\nConfident but fallible. Free-form generation can hallucinate details not in the image; outputs should be treated as strong suggestions, not ground truth."
+  },
+  {
+    "objectID": "modules/08-vlm/report.html#where-vlms-fail",
+    "href": "modules/08-vlm/report.html#where-vlms-fail",
+    "title": "08 · Vision-language models",
+    "section": "Where VLMs fail",
+    "text": "Where VLMs fail\n\nHallucination — fluent text can assert objects/attributes that aren’t there.\nPrecise spatial / counting tasks — better than older models, still unreliable in clutter.\nFine OCR & small text — general VLMs trail dedicated OCR systems on dense documents.\nLatency & cost — orders of magnitude heavier than the specialist models in modules 01–07."
+  },
+  {
+    "objectID": "modules/08-vlm/report.html#reproduce",
+    "href": "modules/08-vlm/report.html#reproduce",
+    "title": "08 · Vision-language models",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group dev\nuv run python modules/08-vlm/run.py --images 3"
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html",
+    "href": "modules/07-retrieval/report.html",
+    "title": "07 · Embeddings & retrieval",
+    "section": "",
+    "text": "Most of this curriculum predicts labels. This module predicts a vector: an embedding that places similar images near each other in a high-dimensional space. That single idea underpins reverse image search, deduplication, clustering, recommendation, anomaly detection, and few-shot recognition — none of which need a classifier head. To “classify” you just look at your neighbours.\nThe workflow:\n\nEmbed every gallery image to an L2-normalised vector.\nEmbed a query the same way.\nRank gallery vectors by cosine similarity (a dot product) and return the nearest."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#the-task",
+    "href": "modules/07-retrieval/report.html#the-task",
+    "title": "07 · Embeddings & retrieval",
+    "section": "",
+    "text": "Most of this curriculum predicts labels. This module predicts a vector: an embedding that places similar images near each other in a high-dimensional space. That single idea underpins reverse image search, deduplication, clustering, recommendation, anomaly detection, and few-shot recognition — none of which need a classifier head. To “classify” you just look at your neighbours.\nThe workflow:\n\nEmbed every gallery image to an L2-normalised vector.\nEmbed a query the same way.\nRank gallery vectors by cosine similarity (a dot product) and return the nearest."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#two-kinds-of-embedding",
+    "href": "modules/07-retrieval/report.html#two-kinds-of-embedding",
+    "title": "07 · Embeddings & retrieval",
+    "section": "Two kinds of embedding",
+    "text": "Two kinds of embedding\n\n\n\n\n\n\n\n\nModel\nTrained on\nSignal it captures\n\n\n\n\nDINOv2\nImages only, self-supervised (no labels)\nVisual structure, parts, texture, shape — emerges purely from the data\n\n\nSigLIP 2\nImage–text pairs, contrastive\nSemantics aligned to language — “what you’d call it”\n\n\n\nDINOv2 learns by making different augmented views of the same image agree; it never sees a label, yet produces features so strong that a linear probe rivals supervised training. SigLIP learns from captions, so its space is organised the way language groups things. Both give excellent retrieval — the right choice depends on whether you want visual or semantic similarity."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#results",
+    "href": "modules/07-retrieval/report.html#results",
+    "title": "07 · Embeddings & retrieval",
+    "section": "Results",
+    "text": "Results\nA real metric, not just pictures: we embed a balanced Imagenette gallery and measure how often the nearest neighbours share the query’s class — using no labels at search time."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#image-retrieval-imagenette",
+    "href": "modules/07-retrieval/report.html#image-retrieval-imagenette",
+    "title": "07 · Embeddings & retrieval",
+    "section": "Image retrieval (Imagenette)",
+    "text": "Image retrieval (Imagenette)\n\n\n\n\n\n\n\n\n\n\n\n\nModel\nType\nLicense\nRecall@1 (%)\nPrecision@5 (%)\nLatency (ms)\nFPS\n\n\n\n\nSigLIP 2 Base\nimage-text\nApache-2.0\n99.8\n99.2\n20.51\n48.8\n\n\nDINOv2 Base\nself-supervised\nApache-2.0\n99.3\n98.8\n19.45\n51.4\n\n\n\nRetrieval on 600 Imagenette images (60/class). Recall@1 = nearest neighbour shares the class; Precision@5 = fraction of top-5 that do. No labels used at search time — purely embedding similarity. Latency on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Figure uses DINOv2 Base.\n\n\n\n\n\n\nFigure 1: Each row: a query (black border) and its 5 nearest neighbours. Green = same class, red = different. The model was never trained to classify Imagenette — this is pure embedding similarity.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nSearch beats training, for free. Both embedders retrieve the correct class &gt;99% of the time (Recall@1) with no classifier and no labels at query time — add a new class by just dropping its images into the gallery.\nSelf-supervised is competitive with image-text. DINOv2 (never saw a single label or caption) trails SigLIP 2 by only a few tenths of a point here — a striking result for a model trained purely on images.\nThis is how you’d handle an open, growing catalogue — products, faces, defects — where retraining a classifier per new item is impractical."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#where-retrieval-fails",
+    "href": "modules/07-retrieval/report.html#where-retrieval-fails",
+    "title": "07 · Embeddings & retrieval",
+    "section": "Where retrieval fails",
+    "text": "Where retrieval fails\n\nFine-grained distinctions — near-duplicate categories (specific dog breeds, product variants) can blur in a general embedding; specialised/fine-tuned embeddings help.\nGallery quality & scale — retrieval is only as good as what’s indexed; at millions of items you need an ANN index (FAISS) and recall/speed trade-offs appear.\nDomain gap — embeddings trained on web images underperform on medical, satellite, or industrial imagery without adaptation."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#reproduce",
+    "href": "modules/07-retrieval/report.html#reproduce",
+    "title": "07 · Embeddings & retrieval",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group dev\nuv run python modules/07-retrieval/run.py --per-class 60"
+  },
+  {
+    "objectID": "modules/06-tracking/report.html",
+    "href": "modules/06-tracking/report.html",
+    "title": "06 · Multi-object tracking",
+    "section": "",
+    "text": "A detector answers “what’s here right now” — independently, every frame, with no memory. Tracking adds the missing dimension: identity over time, so the same person keeps the same id as they move. That id is what lets you count, measure dwell time, analyse motion, or have a robot follow a specific person.\nThe dominant recipe is tracking-by-detection:\n\nRun a detector on each frame (here: YOLO26, person class only).\nAssociate this frame’s boxes with the existing tracks — match by predicted position (a Kalman motion model) and box overlap.\nBirths/deaths: unmatched detections start new tracks; tracks unseen for a while are retired.\n\nByteTrack is the associator. Its trick is to use low-confidence detections during association (not just high-confidence ones), which recovers objects through brief occlusion and reduces dropped tracks."
+  },
+  {
+    "objectID": "modules/06-tracking/report.html#the-task",
+    "href": "modules/06-tracking/report.html#the-task",
+    "title": "06 · Multi-object tracking",
+    "section": "",
+    "text": "A detector answers “what’s here right now” — independently, every frame, with no memory. Tracking adds the missing dimension: identity over time, so the same person keeps the same id as they move. That id is what lets you count, measure dwell time, analyse motion, or have a robot follow a specific person.\nThe dominant recipe is tracking-by-detection:\n\nRun a detector on each frame (here: YOLO26, person class only).\nAssociate this frame’s boxes with the existing tracks — match by predicted position (a Kalman motion model) and box overlap.\nBirths/deaths: unmatched detections start new tracks; tracks unseen for a while are retired.\n\nByteTrack is the associator. Its trick is to use low-confidence detections during association (not just high-confidence ones), which recovers objects through brief occlusion and reduces dropped tracks."
+  },
+  {
+    "objectID": "modules/06-tracking/report.html#result",
+    "href": "modules/06-tracking/report.html#result",
+    "title": "06 · Multi-object tracking",
+    "section": "Result",
+    "text": "Result\n\n\n\n\n\n\nFigure 1: Detection + ByteTrack with motion traces. Each box carries a persistent id (#n); the tails show recent trajectory."
+  },
+  {
+    "objectID": "modules/06-tracking/report.html#multi-object-tracking",
+    "href": "modules/06-tracking/report.html#multi-object-tracking",
+    "title": "06 · Multi-object tracking",
+    "section": "Multi-object tracking",
+    "text": "Multi-object tracking\n\n\n\n\n\n\n\nMetric\nValue\n\n\n\n\nUnique tracks (ids)\n62\n\n\nFrames processed\n200\n\n\nProcessing speed\n21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)\n\n\nSource video\n1920x1080 @ 25 fps\n\n\n\nYOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up.\n\n\n\n\n\n\nFigure 2: Three frames across the clip — note how ids persist as people move.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nIdentity is the product, not boxes. The same code as module 01 produces the boxes; the value here is that box #7 in frame 0 is the same person as box #7 in frame 100.\nMore ids than people = fragmentation. This 200-frame clip yielded ~60 ids for far fewer actual pedestrians. When someone is occluded and reappears, the tracker often issues a new id — the classic ID-switch / fragmentation failure that HOTA and IDF1 are designed to penalise.\nTracking is detector-bound. Every missed detection is a gap the associator must bridge; a better detector usually means a better tracker, for free."
+  },
+  {
+    "objectID": "modules/06-tracking/report.html#where-tracking-fails",
+    "href": "modules/06-tracking/report.html#where-tracking-fails",
+    "title": "06 · Multi-object tracking",
+    "section": "Where tracking fails",
+    "text": "Where tracking fails\n\nLong / full occlusion — a person hidden for many frames usually returns with a new id.\nCrowds & similar appearance — ByteTrack uses motion + overlap, not appearance, so it can swap ids between people who cross paths (appearance-based trackers like Deep OC-SORT help).\nFast motion / low frame-rate — the Kalman prediction drifts and association breaks.\nDetector misses — propagate directly into track gaps."
+  },
+  {
+    "objectID": "modules/06-tracking/report.html#reproduce",
+    "href": "modules/06-tracking/report.html#reproduce",
+    "title": "06 · Multi-object tracking",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group detection      # ultralytics + supervision (ByteTrack)\nuv run python modules/06-tracking/run.py\n(The sample clip is downloaded by supervision’s asset helper into data/.)"
+  },
+  {
+    "objectID": "modules/05-pose/report.html",
+    "href": "modules/05-pose/report.html",
+    "title": "05 · Human pose estimation",
+    "section": "",
+    "text": "Pose estimation locates a set of body keypoints per person — for the COCO format, 17 of them (eyes, ears, shoulders, elbows, wrists, hips, knees, ankles) — and connects them into a skeleton. It powers motion capture, sports analytics, gesture interfaces, and human-aware robotics (a robot that must not bump the person reaching past it)."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#the-task",
+    "href": "modules/05-pose/report.html#the-task",
+    "title": "05 · Human pose estimation",
+    "section": "",
+    "text": "Pose estimation locates a set of body keypoints per person — for the COCO format, 17 of them (eyes, ears, shoulders, elbows, wrists, hips, knees, ankles) — and connects them into a skeleton. It powers motion capture, sports analytics, gesture interfaces, and human-aware robotics (a robot that must not bump the person reaching past it)."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#two-paradigms",
+    "href": "modules/05-pose/report.html#two-paradigms",
+    "title": "05 · Human pose estimation",
+    "section": "Two paradigms",
+    "text": "Two paradigms\n\n\n\n\n\n\n\n\nParadigm\nHow\nTrade-off\n\n\n\n\nBottom-up / single-stage (YOLO-pose here)\nOne network predicts people and their keypoints in a single pass\nConstant cost regardless of crowd size; fast\n\n\nTop-down (ViTPose, RTMPose)\nDetect each person, then run a dedicated pose net on each crop\nUsually more accurate, but cost grows with the number of people\n\n\n\nThis module benchmarks two YOLO-pose generations (single-stage). The top-down family is the accuracy-first alternative when you have few people and need precise joints."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#how-it-works",
+    "href": "modules/05-pose/report.html#how-it-works",
+    "title": "05 · Human pose estimation",
+    "section": "How it works",
+    "text": "How it works\nYOLO-pose extends the detector: alongside each person box it regresses the 17 keypoint coordinates (and a per-keypoint visibility). Because keypoints are predicted jointly with detection in one forward pass, throughput stays high even in crowds — you can see this in the figures, where several skeletons are recovered at once."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#results",
+    "href": "modules/05-pose/report.html#results",
+    "title": "05 · Human pose estimation",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "modules/05-pose/report.html#pose-estimation-speed",
+    "href": "modules/05-pose/report.html#pose-estimation-speed",
+    "title": "05 · Human pose estimation",
+    "section": "Pose estimation: speed",
+    "text": "Pose estimation: speed\n\n\n\nModel\nLicense\nLatency (ms)\nFPS\nPeople/img\n\n\n\n\nYOLO26-n-pose\nAGPL-3.0\n21.52\n46.5\n3.2\n\n\nYOLO11-n-pose\nAGPL-3.0\n18.33\n54.5\n2.5\n\n\n\n17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up.\n\n\n\n\n\n\nFigure 1: YOLO26-n-pose — 17-keypoint skeletons.\n\n\n\n\n\n\n\n\n\nFigure 2: YOLO11-n-pose — same images, prior generation.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nCrowd-constant speed. Both models stay at ~50 fps whether the image has one person or several — the single-stage win. A top-down model would slow down as people are added.\nA newer generation recovers more people. YOLO26-pose found more people per image than YOLO11-pose here (better recall on partially-occluded figures), at a slightly lower frame-rate.\nKeypoints carry visibility. Occluded joints are predicted with low confidence; downstream code should use that, not assume every joint is reliable."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#where-pose-estimation-fails",
+    "href": "modules/05-pose/report.html#where-pose-estimation-fails",
+    "title": "05 · Human pose estimation",
+    "section": "Where pose estimation fails",
+    "text": "Where pose estimation fails\n\nOcclusion & truncation — joints hidden behind objects or cropped out of frame.\nCrowding & overlap — skeletons can swap limbs between nearby people.\nUnusual poses — gymnastics, lying down, or atypical viewpoints under-represented in training.\nSmall / distant people — too few pixels to localise joints precisely."
+  },
+  {
+    "objectID": "modules/05-pose/report.html#reproduce",
+    "href": "modules/05-pose/report.html#reproduce",
+    "title": "05 · Human pose estimation",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group detection\nuv run python modules/05-pose/run.py --images 4"
+  },
+  {
+    "objectID": "modules/04-depth/report.html",
+    "href": "modules/04-depth/report.html",
+    "title": "04 · Monocular depth",
+    "section": "",
+    "text": "Monocular depth estimation predicts a distance for every pixel from one ordinary RGB image — no stereo pair, no LiDAR. It’s the perception capability most directly relevant to robotics: turning a flat photo into 3D structure for navigation, grasping, and obstacle avoidance.\nA key distinction:\n\nRelative depth — orders pixels near-to-far without real-world units. Enough for “what’s in front of what”. Depth Anything V2 predicts this.\nMetric depth — actual metres. Needed for measurement/control; harder, and usually fine-tuned per camera (e.g. Depth Anything’s metric heads, Apple Depth Pro)."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#the-task",
+    "href": "modules/04-depth/report.html#the-task",
+    "title": "04 · Monocular depth",
+    "section": "",
+    "text": "Monocular depth estimation predicts a distance for every pixel from one ordinary RGB image — no stereo pair, no LiDAR. It’s the perception capability most directly relevant to robotics: turning a flat photo into 3D structure for navigation, grasping, and obstacle avoidance.\nA key distinction:\n\nRelative depth — orders pixels near-to-far without real-world units. Enough for “what’s in front of what”. Depth Anything V2 predicts this.\nMetric depth — actual metres. Needed for measurement/control; harder, and usually fine-tuned per camera (e.g. Depth Anything’s metric heads, Apple Depth Pro)."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#how-it-works",
+    "href": "modules/04-depth/report.html#how-it-works",
+    "title": "04 · Monocular depth",
+    "section": "How it works",
+    "text": "How it works\nDepth Anything V2 is a DINOv2 vision-transformer encoder plus a lightweight depth head, trained on a huge mix of labelled + pseudo-labelled images. The transformer’s global receptive field lets it use scene-wide cues — perspective, relative size, texture gradients, occlusion — exactly the monocular cues humans use to perceive depth with one eye closed. It outputs inverse depth (larger = nearer)."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#results",
+    "href": "modules/04-depth/report.html#results",
+    "title": "04 · Monocular depth",
+    "section": "Results",
+    "text": "Results\nWe run two sizes on the same images. Larger backbones generally produce sharper boundaries and better thin-structure handling, at a latency cost."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#monocular-depth-speed",
+    "href": "modules/04-depth/report.html#monocular-depth-speed",
+    "title": "04 · Monocular depth",
+    "section": "Monocular depth: speed",
+    "text": "Monocular depth: speed\n\n\n\nModel\nLicense\nLatency (ms)\nFPS\n\n\n\n\nDepth Anything V2 (Small)\nApache-2.0\n38.44\n26.0\n\n\nDepth Anything V2 (Base)\nApache-2.0\n78.19\n12.8\n\n\n\nRelative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up.\n\n\n\n\n\n\nFigure 1: RGB input vs predicted depth (brighter = nearer). Note how both models recover ground-plane gradient, object separation, and rough scene layout from a single photo.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nReal 3D structure from one image. With no stereo or sensor, the model separates foreground from background, recovers the ground plane, and orders objects in depth — the cue set a robot can turn into a rough 3D map.\nSize buys sharpness, not speed. Depth Anything V2 Base (~13 fps) gives crisper edges than Small (~26 fps); the right pick depends on whether you need real-time or best quality.\nRelative, not metric. These maps tell you nearer/farther, not how many metres — for control you’d use a metric variant calibrated to your camera."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#where-monocular-depth-fails",
+    "href": "modules/04-depth/report.html#where-monocular-depth-fails",
+    "title": "04 · Monocular depth",
+    "section": "Where monocular depth fails",
+    "text": "Where monocular depth fails\n\nAbsolute scale ambiguity — a doll-house and a real house look identical to a single camera; relative depth can’t resolve true size.\nReflective / transparent surfaces (mirrors, glass, water) — violate the visual cues the model relies on.\nUntextured walls & sky — few gradients to reason from.\nOut-of-distribution cameras — fisheye, aerial, or endoscopic views differ from the training mix and degrade."
+  },
+  {
+    "objectID": "modules/04-depth/report.html#reproduce",
+    "href": "modules/04-depth/report.html#reproduce",
+    "title": "04 · Monocular depth",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group dev      # transformers provides the Depth Anything V2 pipeline\nuv run python modules/04-depth/run.py --images 4"
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html",
+    "href": "modules/03-segmentation/report.html",
+    "title": "03 · Segmentation",
+    "section": "",
+    "text": "Segmentation assigns labels at the pixel level rather than the box level. Two flavours matter here:\n\nInstance segmentation — a separate mask per object (two people → two masks), each with a class. This is detection + a mask head.\nPromptable segmentation — “segment whatever I point at / box / name”, with no fixed class set. This is the foundation-model approach, embodied by Segment Anything."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#the-task",
+    "href": "modules/03-segmentation/report.html#the-task",
+    "title": "03 · Segmentation",
+    "section": "",
+    "text": "Segmentation assigns labels at the pixel level rather than the box level. Two flavours matter here:\n\nInstance segmentation — a separate mask per object (two people → two masks), each with a class. This is detection + a mask head.\nPromptable segmentation — “segment whatever I point at / box / name”, with no fixed class set. This is the foundation-model approach, embodied by Segment Anything."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#two-paradigms",
+    "href": "modules/03-segmentation/report.html#two-paradigms",
+    "title": "03 · Segmentation",
+    "section": "Two paradigms",
+    "text": "Two paradigms\n\n\n\n\n\n\n\n\n\nModel\nApproach\nLabel set\nTrait\n\n\n\n\nYOLO26-seg / YOLO11-seg\nClosed-set instance segmentation\n80 COCO classes\nFast; every mask comes with a class label\n\n\nSAM 2.1\nPromptable segmentation\nnone — class-agnostic\nSegments anything from a point/box/mask prompt; no labels\n\n\n\nThe natural way they combine is the detect-then-segment pipeline: a detector proposes boxes, and SAM turns each box into a high-quality mask. We use exactly that here — SAM 2.1 is prompted with the YOLO26-seg boxes."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#how-each-works",
+    "href": "modules/03-segmentation/report.html#how-each-works",
+    "title": "03 · Segmentation",
+    "section": "How each works",
+    "text": "How each works\n\nYOLO-seg adds a mask-prototype head to the detector: it predicts a handful of prototype masks per image plus per-object coefficients that linearly combine them — cheap, hence the high frame-rate.\nSAM 2.1 is a promptable transformer with a heavy image encoder and a light mask decoder. Encode the image once, then any prompt (point, box) decodes to a mask in milliseconds. It knows nothing about classes — it only knows “object-ness”, which is why it generalises to things no COCO model has names for."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#how-we-measured",
+    "href": "modules/03-segmentation/report.html#how-we-measured",
+    "title": "03 · Segmentation",
+    "section": "How we measured",
+    "text": "How we measured\nThis module is qualitative + latency (warmed-up single-image forwards on the local RTX 3090 Ti); full mask-mAP on COCO is a deeper follow-up. The point here is to see the difference between a fast labelled instance segmenter and a slower, class-agnostic, promptable one."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#results",
+    "href": "modules/03-segmentation/report.html#results",
+    "title": "03 · Segmentation",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#segmentation-speed-masks",
+    "href": "modules/03-segmentation/report.html#segmentation-speed-masks",
+    "title": "03 · Segmentation",
+    "section": "Segmentation: speed & masks",
+    "text": "Segmentation: speed & masks\n\n\n\nModel\nFamily\nLicense\nLatency (ms)\nFPS\nMasks/img\n\n\n\n\nYOLO26-n-seg\ninstance (YOLO)\nAGPL-3.0\n23.79\n42.0\n7.0\n\n\nYOLO11-n-seg\ninstance (YOLO)\nAGPL-3.0\n22.9\n43.7\n6.5\n\n\nSAM 2.1 (base)\npromptable\nApache-2.0\n93.39\n10.7\nn/a\n\n\n\nLatency = mean over warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. SAM 2.1 is prompted with the YOLO26-seg boxes (detect-then-segment). This module is qualitative + latency; mask-mAP on COCO is a deeper follow-up.\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nLabels vs flexibility. YOLO-seg runs at ~43 fps and hands you a class with every mask — but only for its 80 COCO categories. SAM 2.1 is ~4× slower (~11 fps) and returns no label, yet will segment anything you can point at, including objects no detector was trained on.\nThey compose. The figures show the standard pattern: the detector finds and names objects; SAM refines each box into a crisp mask. Open-vocab detection (module 01) + SAM gives you “segment anything you can describe in words”.\nMask quality differs from box quality. A correct box with a sloppy mask is a common failure; SAM’s masks are typically tighter around object boundaries than a fast instance head’s."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#qualitative-results",
+    "href": "modules/03-segmentation/report.html#qualitative-results",
+    "title": "03 · Segmentation",
+    "section": "Qualitative results",
+    "text": "Qualitative results\n\n\n\n\n\n\n\n\n\nFigure 1: YOLO26-n-seg — instance masks + COCO labels\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: YOLO11-n-seg — instance masks + COCO labels\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: SAM 2.1, prompted with the detector’s boxes — crisp, class-agnostic masks"
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#where-segmentation-fails",
+    "href": "modules/03-segmentation/report.html#where-segmentation-fails",
+    "title": "03 · Segmentation",
+    "section": "Where segmentation fails",
+    "text": "Where segmentation fails\n\nThin / wispy structures (hair, wires, chain-link) — hard for any mask head.\nOverlapping instances — instance segmenters merge or split touching objects.\nAmbiguous prompts — a single SAM point can mean “the shirt” or “the whole person”; SAM resolves ambiguity by returning multiple candidate masks.\nClass limits (instance) — YOLO-seg simply can’t mask a class it never trained on."
+  },
+  {
+    "objectID": "modules/03-segmentation/report.html#reproduce",
+    "href": "modules/03-segmentation/report.html#reproduce",
+    "title": "03 · Segmentation",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group detection      # ultralytics provides YOLO-seg and SAM\nuv run python modules/03-segmentation/run.py --images 4"
+  },
+  {
+    "objectID": "modules/02-classification/report.html",
+    "href": "modules/02-classification/report.html",
+    "title": "02 · Image classification",
+    "section": "",
+    "text": "Image classification assigns a single label to a whole image — the oldest and most foundational CV task, and the one the deep-learning era was launched on (AlexNet on ImageNet, 2012). Here it’s also the cleanest place to see the field’s biggest recent shift, because the same benchmark can be attacked two completely different ways.\nWe evaluate on Imagenette — a 10-class, Apache-licensed subset of ImageNet (tench, English springer, cassette player, chainsaw, church, French horn, garbage truck, gas pump, golf ball, parachute) — reporting top-1 accuracy and latency."
+  },
+  {
+    "objectID": "modules/02-classification/report.html#the-task",
+    "href": "modules/02-classification/report.html#the-task",
+    "title": "02 · Image classification",
+    "section": "",
+    "text": "Image classification assigns a single label to a whole image — the oldest and most foundational CV task, and the one the deep-learning era was launched on (AlexNet on ImageNet, 2012). Here it’s also the cleanest place to see the field’s biggest recent shift, because the same benchmark can be attacked two completely different ways.\nWe evaluate on Imagenette — a 10-class, Apache-licensed subset of ImageNet (tench, English springer, cassette player, chainsaw, church, French horn, garbage truck, gas pump, golf ball, parachute) — reporting top-1 accuracy and latency."
+  },
+  {
+    "objectID": "modules/02-classification/report.html#two-paradigms",
+    "href": "modules/02-classification/report.html#two-paradigms",
+    "title": "02 · Image classification",
+    "section": "Two paradigms",
+    "text": "Two paradigms\n\n\n\n\n\n\n\n\n\nParadigm\nModel here\nHow it decides\nChanging the label set\n\n\n\n\nSupervised\nConvNeXt-Tiny (timm)\nA classification head trained on ImageNet outputs a score per class\nRequires retraining the head\n\n\nZero-shot\nSigLIP 2, OpenCLIP\nEmbed the image and the text \"a photo of a {class}\"; pick the closest text\nJust edit the list of strings\n\n\n\nThis is the classification analogue of closed-set vs open-vocabulary detection from module 01. The supervised model has a fixed output space baked into its weights; the zero-shot models were trained on image–text pairs from the web and have never seen Imagenette’s task — yet they classify it by comparing the image to text descriptions."
+  },
+  {
+    "objectID": "modules/02-classification/report.html#how-each-model-works",
+    "href": "modules/02-classification/report.html#how-each-model-works",
+    "title": "02 · Image classification",
+    "section": "How each model works",
+    "text": "How each model works\n\nSupervised (ConvNeXt-Tiny). A modern convolutional backbone with a 1000-way ImageNet head. To score Imagenette we simply read off the 10 relevant logits — no fine-tuning.\nZero-shot (CLIP / SigLIP 2). Two encoders — one for images, one for text — trained so that matching image/caption pairs land nearby in a shared space. Classification becomes: encode the image, encode each candidate label as a sentence, return the nearest. SigLIP 2 refines CLIP with a sigmoid loss (each pair judged independently) and stronger training, which generally lifts accuracy."
+  },
+  {
+    "objectID": "modules/02-classification/report.html#how-we-measured",
+    "href": "modules/02-classification/report.html#how-we-measured",
+    "title": "02 · Image classification",
+    "section": "How we measured",
+    "text": "How we measured\n\nData: the full Imagenette validation split (3,925 images, 10 classes).\nMetric: top-1 accuracy. For the supervised model, the prediction is the argmax over the 10 ImageNet logits that correspond to Imagenette’s classes; for zero-shot, the argmax over the 10 text-similarity scores.\nLatency: mean of 30 warmed-up single-image forwards on the local RTX 3090 Ti.\nPrompts for zero-shot are the simple template \"a photo of a {class}.\" — prompt wording measurably affects zero-shot accuracy, so we fix it for a fair comparison."
+  },
+  {
+    "objectID": "modules/02-classification/report.html#results",
+    "href": "modules/02-classification/report.html#results",
+    "title": "02 · Image classification",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "modules/02-classification/report.html#imagenette-classification-benchmark",
+    "href": "modules/02-classification/report.html#imagenette-classification-benchmark",
+    "title": "02 · Image classification",
+    "section": "Imagenette classification benchmark",
+    "text": "Imagenette classification benchmark\n\n\n\nModel\nParadigm\nLicense\nTop-1 (%)\nLatency (ms)\nFPS\n\n\n\n\nConvNeXt-Tiny\nSupervised\nApache-2.0\n99.9\n12.31\n81.2\n\n\nSigLIP 2 Base\nZero-shot\nApache-2.0\n99.4\n23.4\n42.7\n\n\nOpenCLIP ViT-B/32\nZero-shot\nMIT\n99.0\n10.09\n99.1\n\n\n\nTop-1 accuracy on 3925 Imagenette val images (10 classes). Latency = mean of 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Zero-shot models were never trained on Imagenette — they classify by image-text similarity.\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nZero-shot is not a toy. SigLIP 2 (99.4%) and OpenCLIP (99.0%) land within a point of the supervised ConvNeXt-Tiny (99.9%) — despite never training on Imagenette. The decades-old assumption that you must train on your classes to classify them no longer holds for coarse, common categories.\nFlexibility isn’t necessarily slower. The fastest model here is the zero-shot, permissively licensed OpenCLIP ViT-B/32 (99 fps, MIT) — and it’s within a point of the supervised model. You can swap its label set by editing a list of strings.\nSigLIP 2’s recipe shows. Its sigmoid-loss training edges OpenCLIP on accuracy (99.4 vs 99.0) at roughly half the throughput — a small, real accuracy/speed trade.\nImagenette is deliberately easy (10 distinct classes), so everything clusters above 99%. The takeaway isn’t the leaderboard order — it’s that the supervised advantage has nearly vanished on a task like this. On fine-grained or rare classes the gap reopens."
+  },
+  {
+    "objectID": "modules/02-classification/report.html#predictions",
+    "href": "modules/02-classification/report.html#predictions",
+    "title": "02 · Image classification",
+    "section": "Predictions",
+    "text": "Predictions\nA handful of validation images with each model’s top-1 call (correct / WRONG):\n\n\n\n\n\n\nFigure 1: Per-model predictions on Imagenette val images."
+  },
+  {
+    "objectID": "modules/02-classification/report.html#where-classifiers-fail",
+    "href": "modules/02-classification/report.html#where-classifiers-fail",
+    "title": "02 · Image classification",
+    "section": "Where classifiers fail",
+    "text": "Where classifiers fail\n\nFine-grained & ambiguous images — an object photographed oddly, or a scene containing several classes at once (classification must commit to one label).\nZero-shot prompt sensitivity — \"a photo of a {class}\" vs the bare class name vs an ensemble of templates can swing accuracy by points; the label wording is now a hyperparameter.\nDistribution shift — accuracy on clean ImageNet-style photos overstates real-world performance on blurry, occluded, or domain-specific imagery."
+  },
+  {
+    "objectID": "modules/02-classification/report.html#reproduce",
+    "href": "modules/02-classification/report.html#reproduce",
+    "title": "02 · Image classification",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group dev\nuv run python modules/02-classification/run.py        # full val (3,925 images)"
+  },
+  {
+    "objectID": "modules/01-object-detection/results/metrics.html",
+    "href": "modules/01-object-detection/results/metrics.html",
     "title": "CV Explorations",
     "section": "",
-    "text": "Metric\nValue\n\n\n\n\nUnique tracks (ids)\n62\n\n\nFrames processed\n200\n\n\nProcessing speed\n21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)\n\n\nSource video\n1920x1080 @ 25 fps\n\n\n\nYOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up."
+    "text": "Model\nFamily\nLicense\nmAP\nmAP@50\nmAP@75\nmAP (small)\nLatency (ms)\nFPS\n\n\n\n\nRF-DETR Medium\nDETR (transformer)\nApache-2.0\n59.4\n78.2\n63.7\n31.6\n36.3\n27.5\n\n\nRF-DETR Nano\nDETR (transformer)\nApache-2.0\n51.3\n69.9\n54.2\n22.4\n36.43\n27.5\n\n\nYOLO26-n\nYOLO (NMS-free)\nAGPL-3.0\n43.0\n58.1\n47.2\n20.1\n18.75\n53.3\n\n\nYOLO11-n\nYOLO (anchor-free)\nAGPL-3.0\n37.6\n52.1\n40.5\n17.9\n18.0\n55.6\n\n\n\nEvaluated on 200 COCO val2017 images; mAP via pycocotools-equivalent torchmetrics at IoU=.50:.95. Latency = mean over 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8."
   },
   {
-    "objectID": "modules/06-tracking/results/metrics.html#multi-object-tracking",
-    "href": "modules/06-tracking/results/metrics.html#multi-object-tracking",
+    "objectID": "modules/01-object-detection/results/metrics.html#coco-detection-benchmark",
+    "href": "modules/01-object-detection/results/metrics.html#coco-detection-benchmark",
     "title": "CV Explorations",
     "section": "",
-    "text": "Metric\nValue\n\n\n\n\nUnique tracks (ids)\n62\n\n\nFrames processed\n200\n\n\nProcessing speed\n21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)\n\n\nSource video\n1920x1080 @ 25 fps\n\n\n\nYOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up."
+    "text": "Model\nFamily\nLicense\nmAP\nmAP@50\nmAP@75\nmAP (small)\nLatency (ms)\nFPS\n\n\n\n\nRF-DETR Medium\nDETR (transformer)\nApache-2.0\n59.4\n78.2\n63.7\n31.6\n36.3\n27.5\n\n\nRF-DETR Nano\nDETR (transformer)\nApache-2.0\n51.3\n69.9\n54.2\n22.4\n36.43\n27.5\n\n\nYOLO26-n\nYOLO (NMS-free)\nAGPL-3.0\n43.0\n58.1\n47.2\n20.1\n18.75\n53.3\n\n\nYOLO11-n\nYOLO (anchor-free)\nAGPL-3.0\n37.6\n52.1\n40.5\n17.9\n18.0\n55.6\n\n\n\nEvaluated on 200 COCO val2017 images; mAP via pycocotools-equivalent torchmetrics at IoU=.50:.95. Latency = mean over 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8."
   },
   {
-    "objectID": "modules/05-pose/results/metrics.html",
-    "href": "modules/05-pose/results/metrics.html",
+    "objectID": "modules/01-object-detection/explore.html",
+    "href": "modules/01-object-detection/explore.html",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "",
+    "text": "A hands-on companion to the report. Every model adapter returns a supervision.Detections, so the same few lines annotate any model’s output.\nRequires the data + detection dependency groups, run from the repo root:\nimport matplotlib.pyplot as plt\nfrom cvkit.devices import get_device, describe_device\nfrom cvkit.io import load_image\nfrom cvkit.viz import annotate_detections\nimport detect\n\ndevice = get_device()\nprint(describe_device(device))"
+  },
+  {
+    "objectID": "modules/01-object-detection/explore.html#grab-a-few-coco-images",
+    "href": "modules/01-object-detection/explore.html#grab-a-few-coco-images",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "Grab a few COCO images",
+    "text": "Grab a few COCO images\nDownloads (and caches) a small COCO val slice via the FiftyOne zoo.\n\nfrom cvkit.data import load_coco_val_subset\n\nds = load_coco_val_subset(max_samples=8)\npaths = [s.filepath for s in ds][:4]\nimg = load_image(paths[0])\nplt.imshow(img); plt.axis('off'); plt.show()"
+  },
+  {
+    "objectID": "modules/01-object-detection/explore.html#run-a-closed-set-detector-yolo26",
+    "href": "modules/01-object-detection/explore.html#run-a-closed-set-detector-yolo26",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "Run a closed-set detector (YOLO26)",
+    "text": "Run a closed-set detector (YOLO26)\nPredicts one of the 80 COCO classes per box. data['class_name'] carries the labels.\n\nmodel = detect.build_detector('yolo26n', device)\ndet = model.predict(img, conf=0.3)\nlabels = [f\"{n} {c:.2f}\" for n, c in zip(det.data.get('class_name', []), det.confidence)]\nplt.figure(figsize=(8, 8))\nplt.imshow(annotate_detections(img, det, labels=labels)); plt.axis('off'); plt.show()\nprint(list(det.data.get('class_name', [])))"
+  },
+  {
+    "objectID": "modules/01-object-detection/explore.html#compare-two-models-on-the-same-image",
+    "href": "modules/01-object-detection/explore.html#compare-two-models-on-the-same-image",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "Compare two models on the same image",
+    "text": "Compare two models on the same image\nSame image, same code path — only the adapter key changes.\n\nfig, axes = plt.subplots(1, 2, figsize=(14, 7))\nfor ax, key in zip(axes, ['yolo26n', 'rfdetr-nano']):\n    m = detect.build_detector(key, device)\n    d = m.predict(img, conf=0.3)\n    lbls = [f\"{n} {c:.2f}\" for n, c in zip(d.data.get('class_name', []), d.confidence)]\n    ax.imshow(annotate_detections(img, d, labels=lbls))\n    ax.set_title(m.meta.display); ax.axis('off')\nplt.show()"
+  },
+  {
+    "objectID": "modules/01-object-detection/explore.html#open-vocabulary-detect-anything-you-can-name",
+    "href": "modules/01-object-detection/explore.html#open-vocabulary-detect-anything-you-can-name",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "Open-vocabulary: detect anything you can name",
+    "text": "Open-vocabulary: detect anything you can name\nGrounding DINO takes free text — try concepts that aren’t in COCO’s 80 classes.\n\ngd = detect.build_open_vocab(device)\ndet = gd.detect(img, ['plate', 'napkin', 'logo', 'hand', 'cup'])\nlbls = [f\"{n} {c:.2f}\" for n, c in zip(det.data.get('class_name', []), det.confidence)]\nplt.figure(figsize=(8, 8))\nplt.imshow(annotate_detections(img, det, labels=lbls)); plt.axis('off'); plt.show()\nprint('out-of-COCO:', sorted({n for n in det.data.get('class_name', []) if n.lower() not in detect.NAME_TO_IDX}))"
+  },
+  {
+    "objectID": "modules/01-object-detection/explore.html#next",
+    "href": "modules/01-object-detection/explore.html#next",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "Next",
+    "text": "Next\nRun the full benchmark with uv run python run.py from this folder, or read the report for the rigorous numbers."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
     "title": "CV Explorations",
     "section": "",
-    "text": "Model\nLicense\nLatency (ms)\nFPS\nPeople/img\n\n\n\n\nYOLO26-n-pose\nAGPL-3.0\n21.52\n46.5\n3.2\n\n\nYOLO11-n-pose\nAGPL-3.0\n18.33\n54.5\n2.5\n\n\n\n17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up."
+    "text": "This is a repo-as-curriculum: each major computer-vision capability is a self-contained module that is both runnable and explained. Every module ships a reusable CLI/engine, an interactive notebook, and a rigorous benchmark report — multiple models per task, real metrics, latency measured on the local GPU, and honest failure cases.\nThe reports you’re reading were rendered from results computed locally on an NVIDIA RTX 3090 Ti (24 GB); heavier or Linux-only work runs on an NVIDIA DGX Spark over Tailscale. Site rendering itself needs no GPU."
   },
   {
-    "objectID": "modules/05-pose/results/metrics.html#pose-estimation-speed",
-    "href": "modules/05-pose/results/metrics.html#pose-estimation-speed",
+    "objectID": "index.html#the-curriculum",
+    "href": "index.html#the-curriculum",
     "title": "CV Explorations",
-    "section": "",
-    "text": "Model\nLicense\nLatency (ms)\nFPS\nPeople/img\n\n\n\n\nYOLO26-n-pose\nAGPL-3.0\n21.52\n46.5\n3.2\n\n\nYOLO11-n-pose\nAGPL-3.0\n18.33\n54.5\n2.5\n\n\n\n17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up."
+    "section": "The curriculum",
+    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nYOLO26 + ByteTrack\n✅ done\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n✅ done\n\n\n08\nVision-language models\nDescribe / answer / ground\nQwen2.5-VL 3B\n✅ done\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
   },
   {
-    "objectID": "modules/04-depth/results/metrics.html",
-    "href": "modules/04-depth/results/metrics.html",
+    "objectID": "index.html#a-useful-mental-model",
+    "href": "index.html#a-useful-mental-model",
     "title": "CV Explorations",
-    "section": "",
-    "text": "Model\nLicense\nLatency (ms)\nFPS\n\n\n\n\nDepth Anything V2 (Small)\nApache-2.0\n38.44\n26.0\n\n\nDepth Anything V2 (Base)\nApache-2.0\n78.19\n12.8\n\n\n\nRelative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up."
+    "section": "A useful mental model",
+    "text": "A useful mental model\nThe biggest shift in modern CV is task-specific models → promptable foundation models:\n\nOld way: train one model per task on a fixed label set.\nNew way: one model you prompt — SAM (“segment whatever I point at”), Grounding DINO (“detect anything I name in text”), CLIP (“classify against any labels”), Florence-2 (“detect, caption, OCR, and ground from one checkpoint”).\n\nEach module shows both, side by side, so the why of the modern approach is visible rather than asserted."
   },
   {
-    "objectID": "modules/04-depth/results/metrics.html#monocular-depth-speed",
-    "href": "modules/04-depth/results/metrics.html#monocular-depth-speed",
+    "objectID": "index.html#how-to-run-it-yourself",
+    "href": "index.html#how-to-run-it-yourself",
     "title": "CV Explorations",
-    "section": "",
-    "text": "Model\nLicense\nLatency (ms)\nFPS\n\n\n\n\nDepth Anything V2 (Small)\nApache-2.0\n38.44\n26.0\n\n\nDepth Anything V2 (Base)\nApache-2.0\n78.19\n12.8\n\n\n\nRelative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up."
-  },
-  {
-    "objectID": "modules/03-segmentation/results/metrics.html",
-    "href": "modules/03-segmentation/results/metrics.html",
-    "title": "CV Explorations",
-    "section": "",
-    "text": "Model\nFamily\nLicense\nLatency (ms)\nFPS\nMasks/img\n\n\n\n\nYOLO26-n-seg\ninstance (YOLO)\nAGPL-3.0\n23.79\n42.0\n7.0\n\n\nYOLO11-n-seg\ninstance (YOLO)\nAGPL-3.0\n22.9\n43.7\n6.5\n\n\nSAM 2.1 (base)\npromptable\nApache-2.0\n93.39\n10.7\nn/a\n\n\n\nLatency = mean over warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. SAM 2.1 is prompted with the YOLO26-seg boxes (detect-then-segment). This module is qualitative + latency; mask-mAP on COCO is a deeper follow-up."
-  },
-  {
-    "objectID": "modules/03-segmentation/results/metrics.html#segmentation-speed-masks",
-    "href": "modules/03-segmentation/results/metrics.html#segmentation-speed-masks",
-    "title": "CV Explorations",
-    "section": "",
-    "text": "Model\nFamily\nLicense\nLatency (ms)\nFPS\nMasks/img\n\n\n\n\nYOLO26-n-seg\ninstance (YOLO)\nAGPL-3.0\n23.79\n42.0\n7.0\n\n\nYOLO11-n-seg\ninstance (YOLO)\nAGPL-3.0\n22.9\n43.7\n6.5\n\n\nSAM 2.1 (base)\npromptable\nApache-2.0\n93.39\n10.7\nn/a\n\n\n\nLatency = mean over warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. SAM 2.1 is prompted with the YOLO26-seg boxes (detect-then-segment). This module is qualitative + latency; mask-mAP on COCO is a deeper follow-up."
-  },
-  {
-    "objectID": "modules/02-classification/results/metrics.html",
-    "href": "modules/02-classification/results/metrics.html",
-    "title": "CV Explorations",
-    "section": "",
-    "text": "Model\nParadigm\nLicense\nTop-1 (%)\nLatency (ms)\nFPS\n\n\n\n\nConvNeXt-Tiny\nSupervised\nApache-2.0\n99.9\n12.31\n81.2\n\n\nSigLIP 2 Base\nZero-shot\nApache-2.0\n99.4\n23.4\n42.7\n\n\nOpenCLIP ViT-B/32\nZero-shot\nMIT\n99.0\n10.09\n99.1\n\n\n\nTop-1 accuracy on 3925 Imagenette val images (10 classes). Latency = mean of 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Zero-shot models were never trained on Imagenette — they classify by image-text similarity."
-  },
-  {
-    "objectID": "modules/02-classification/results/metrics.html#imagenette-classification-benchmark",
-    "href": "modules/02-classification/results/metrics.html#imagenette-classification-benchmark",
-    "title": "CV Explorations",
-    "section": "",
-    "text": "Model\nParadigm\nLicense\nTop-1 (%)\nLatency (ms)\nFPS\n\n\n\n\nConvNeXt-Tiny\nSupervised\nApache-2.0\n99.9\n12.31\n81.2\n\n\nSigLIP 2 Base\nZero-shot\nApache-2.0\n99.4\n23.4\n42.7\n\n\nOpenCLIP ViT-B/32\nZero-shot\nMIT\n99.0\n10.09\n99.1\n\n\n\nTop-1 accuracy on 3925 Imagenette val images (10 classes). Latency = mean of 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Zero-shot models were never trained on Imagenette — they classify by image-text similarity."
-  },
-  {
-    "objectID": "modules/02-classification/explore.html",
-    "href": "modules/02-classification/explore.html",
-    "title": "02 · Classification — interactive walkthrough",
-    "section": "",
-    "text": "Companion to the report: supervised vs zero-shot, then the zero-shot super-power — classifying against arbitrary labels with no retraining.\nimport matplotlib.pyplot as plt\nfrom cvkit.devices import get_device, describe_device\nfrom cvkit.io import load_image\nimport classify\n\ndevice = get_device()\nprint(describe_device(device))"
-  },
-  {
-    "objectID": "modules/02-classification/explore.html#an-imagenette-image",
-    "href": "modules/02-classification/explore.html#an-imagenette-image",
-    "title": "02 · Classification — interactive walkthrough",
-    "section": "An Imagenette image",
-    "text": "An Imagenette image\n\nimport torchvision\nds = torchvision.datasets.Imagenette('data/imagenette', split='val', size='320px', download=True)\npath, label = ds._samples[1500]\nimg = load_image(path)\nplt.imshow(img); plt.axis('off'); plt.title(f'truth: {classify.CLASS_NAMES[label]}'); plt.show()"
-  },
-  {
-    "objectID": "modules/02-classification/explore.html#supervised-vs-zero-shot-on-the-same-image",
-    "href": "modules/02-classification/explore.html#supervised-vs-zero-shot-on-the-same-image",
-    "title": "02 · Classification — interactive walkthrough",
-    "section": "Supervised vs zero-shot on the same image",
-    "text": "Supervised vs zero-shot on the same image\nAll three adapters share a scores(image) -&gt; 10 values interface.\n\nfor key in ['convnext-tiny', 'siglip2-base', 'openclip-vitb32']:\n    m = classify.build_classifier(key, device)\n    pred = classify.CLASS_NAMES[m.predict(img)]\n    print(f'{m.meta.display:20s} [{m.meta.paradigm:10s}] -&gt; {pred}')"
-  },
-  {
-    "objectID": "modules/02-classification/explore.html#the-zero-shot-super-power-classify-against-any-labels",
-    "href": "modules/02-classification/explore.html#the-zero-shot-super-power-classify-against-any-labels",
-    "title": "02 · Classification — interactive walkthrough",
-    "section": "The zero-shot super-power: classify against any labels",
-    "text": "The zero-shot super-power: classify against any labels\nNo retraining — just change the strings. Try labels that aren’t Imagenette classes at all.\n\nimport open_clip, torch\nfrom PIL import Image\nm, _, pre = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k')\nm = m.to(device).eval(); tok = open_clip.get_tokenizer('ViT-B-32')\n\nlabels = ['a fish', 'a dog', 'a musical instrument', 'a vehicle', 'a building', 'sports equipment']\nwith torch.no_grad():\n    tf = m.encode_text(tok([f'a photo of {l}' for l in labels]).to(device)); tf /= tf.norm(dim=-1, keepdim=True)\n    ie = m.encode_image(pre(Image.fromarray(img)).unsqueeze(0).to(device)); ie /= ie.norm(dim=-1, keepdim=True)\n    sims = (ie @ tf.T)[0]\nfor l, s in sorted(zip(labels, sims.tolist()), key=lambda x: -x[1]):\n    print(f'{s:.3f}  {l}')"
+    "section": "How to run it yourself",
+    "text": "How to run it yourself\nuv sync --group dev                # core env (PyTorch + CV stack)\nuv sync --group data --group detection   # extras for the detection module\nuv run python modules/01-object-detection/run.py --help\nSee the repository README for the full setup and hardware notes."
   },
   {
     "objectID": "modules/01-object-detection/report.html",
@@ -189,423 +567,129 @@
     "text": "Reproduce\nuv sync --group data --group detection\nuv run python scripts/fetch_data.py coco --max-samples 200\nuv run python modules/01-object-detection/run.py \\\n    --models yolo26n,yolo11n,rfdetr-nano,rfdetr-medium\nThe engine writes results/metrics.md, results/metrics.json, and the annotated figures embedded above; this page simply includes them."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
+    "objectID": "modules/02-classification/explore.html",
+    "href": "modules/02-classification/explore.html",
+    "title": "02 · Classification — interactive walkthrough",
+    "section": "",
+    "text": "Companion to the report: supervised vs zero-shot, then the zero-shot super-power — classifying against arbitrary labels with no retraining.\nimport matplotlib.pyplot as plt\nfrom cvkit.devices import get_device, describe_device\nfrom cvkit.io import load_image\nimport classify\n\ndevice = get_device()\nprint(describe_device(device))"
+  },
+  {
+    "objectID": "modules/02-classification/explore.html#an-imagenette-image",
+    "href": "modules/02-classification/explore.html#an-imagenette-image",
+    "title": "02 · Classification — interactive walkthrough",
+    "section": "An Imagenette image",
+    "text": "An Imagenette image\n\nimport torchvision\nds = torchvision.datasets.Imagenette('data/imagenette', split='val', size='320px', download=True)\npath, label = ds._samples[1500]\nimg = load_image(path)\nplt.imshow(img); plt.axis('off'); plt.title(f'truth: {classify.CLASS_NAMES[label]}'); plt.show()"
+  },
+  {
+    "objectID": "modules/02-classification/explore.html#supervised-vs-zero-shot-on-the-same-image",
+    "href": "modules/02-classification/explore.html#supervised-vs-zero-shot-on-the-same-image",
+    "title": "02 · Classification — interactive walkthrough",
+    "section": "Supervised vs zero-shot on the same image",
+    "text": "Supervised vs zero-shot on the same image\nAll three adapters share a scores(image) -&gt; 10 values interface.\n\nfor key in ['convnext-tiny', 'siglip2-base', 'openclip-vitb32']:\n    m = classify.build_classifier(key, device)\n    pred = classify.CLASS_NAMES[m.predict(img)]\n    print(f'{m.meta.display:20s} [{m.meta.paradigm:10s}] -&gt; {pred}')"
+  },
+  {
+    "objectID": "modules/02-classification/explore.html#the-zero-shot-super-power-classify-against-any-labels",
+    "href": "modules/02-classification/explore.html#the-zero-shot-super-power-classify-against-any-labels",
+    "title": "02 · Classification — interactive walkthrough",
+    "section": "The zero-shot super-power: classify against any labels",
+    "text": "The zero-shot super-power: classify against any labels\nNo retraining — just change the strings. Try labels that aren’t Imagenette classes at all.\n\nimport open_clip, torch\nfrom PIL import Image\nm, _, pre = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k')\nm = m.to(device).eval(); tok = open_clip.get_tokenizer('ViT-B-32')\n\nlabels = ['a fish', 'a dog', 'a musical instrument', 'a vehicle', 'a building', 'sports equipment']\nwith torch.no_grad():\n    tf = m.encode_text(tok([f'a photo of {l}' for l in labels]).to(device)); tf /= tf.norm(dim=-1, keepdim=True)\n    ie = m.encode_image(pre(Image.fromarray(img)).unsqueeze(0).to(device)); ie /= ie.norm(dim=-1, keepdim=True)\n    sims = (ie @ tf.T)[0]\nfor l, s in sorted(zip(labels, sims.tolist()), key=lambda x: -x[1]):\n    print(f'{s:.3f}  {l}')"
+  },
+  {
+    "objectID": "modules/02-classification/results/metrics.html",
+    "href": "modules/02-classification/results/metrics.html",
     "title": "CV Explorations",
     "section": "",
-    "text": "This is a repo-as-curriculum: each major computer-vision capability is a self-contained module that is both runnable and explained. Every module ships a reusable CLI/engine, an interactive notebook, and a rigorous benchmark report — multiple models per task, real metrics, latency measured on the local GPU, and honest failure cases.\nThe reports you’re reading were rendered from results computed locally on an NVIDIA RTX 3090 Ti (24 GB); heavier or Linux-only work runs on an NVIDIA DGX Spark over Tailscale. Site rendering itself needs no GPU."
+    "text": "Model\nParadigm\nLicense\nTop-1 (%)\nLatency (ms)\nFPS\n\n\n\n\nConvNeXt-Tiny\nSupervised\nApache-2.0\n99.9\n12.31\n81.2\n\n\nSigLIP 2 Base\nZero-shot\nApache-2.0\n99.4\n23.4\n42.7\n\n\nOpenCLIP ViT-B/32\nZero-shot\nMIT\n99.0\n10.09\n99.1\n\n\n\nTop-1 accuracy on 3925 Imagenette val images (10 classes). Latency = mean of 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Zero-shot models were never trained on Imagenette — they classify by image-text similarity."
   },
   {
-    "objectID": "index.html#the-curriculum",
-    "href": "index.html#the-curriculum",
-    "title": "CV Explorations",
-    "section": "The curriculum",
-    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nYOLO26 + ByteTrack\n✅ done\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n✅ done\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
-  },
-  {
-    "objectID": "index.html#a-useful-mental-model",
-    "href": "index.html#a-useful-mental-model",
-    "title": "CV Explorations",
-    "section": "A useful mental model",
-    "text": "A useful mental model\nThe biggest shift in modern CV is task-specific models → promptable foundation models:\n\nOld way: train one model per task on a fixed label set.\nNew way: one model you prompt — SAM (“segment whatever I point at”), Grounding DINO (“detect anything I name in text”), CLIP (“classify against any labels”), Florence-2 (“detect, caption, OCR, and ground from one checkpoint”).\n\nEach module shows both, side by side, so the why of the modern approach is visible rather than asserted."
-  },
-  {
-    "objectID": "index.html#how-to-run-it-yourself",
-    "href": "index.html#how-to-run-it-yourself",
-    "title": "CV Explorations",
-    "section": "How to run it yourself",
-    "text": "How to run it yourself\nuv sync --group dev                # core env (PyTorch + CV stack)\nuv sync --group data --group detection   # extras for the detection module\nuv run python modules/01-object-detection/run.py --help\nSee the repository README for the full setup and hardware notes."
-  },
-  {
-    "objectID": "modules/01-object-detection/explore.html",
-    "href": "modules/01-object-detection/explore.html",
-    "title": "01 · Object detection — interactive walkthrough",
-    "section": "",
-    "text": "A hands-on companion to the report. Every model adapter returns a supervision.Detections, so the same few lines annotate any model’s output.\nRequires the data + detection dependency groups, run from the repo root:\nimport matplotlib.pyplot as plt\nfrom cvkit.devices import get_device, describe_device\nfrom cvkit.io import load_image\nfrom cvkit.viz import annotate_detections\nimport detect\n\ndevice = get_device()\nprint(describe_device(device))"
-  },
-  {
-    "objectID": "modules/01-object-detection/explore.html#grab-a-few-coco-images",
-    "href": "modules/01-object-detection/explore.html#grab-a-few-coco-images",
-    "title": "01 · Object detection — interactive walkthrough",
-    "section": "Grab a few COCO images",
-    "text": "Grab a few COCO images\nDownloads (and caches) a small COCO val slice via the FiftyOne zoo.\n\nfrom cvkit.data import load_coco_val_subset\n\nds = load_coco_val_subset(max_samples=8)\npaths = [s.filepath for s in ds][:4]\nimg = load_image(paths[0])\nplt.imshow(img); plt.axis('off'); plt.show()"
-  },
-  {
-    "objectID": "modules/01-object-detection/explore.html#run-a-closed-set-detector-yolo26",
-    "href": "modules/01-object-detection/explore.html#run-a-closed-set-detector-yolo26",
-    "title": "01 · Object detection — interactive walkthrough",
-    "section": "Run a closed-set detector (YOLO26)",
-    "text": "Run a closed-set detector (YOLO26)\nPredicts one of the 80 COCO classes per box. data['class_name'] carries the labels.\n\nmodel = detect.build_detector('yolo26n', device)\ndet = model.predict(img, conf=0.3)\nlabels = [f\"{n} {c:.2f}\" for n, c in zip(det.data.get('class_name', []), det.confidence)]\nplt.figure(figsize=(8, 8))\nplt.imshow(annotate_detections(img, det, labels=labels)); plt.axis('off'); plt.show()\nprint(list(det.data.get('class_name', [])))"
-  },
-  {
-    "objectID": "modules/01-object-detection/explore.html#compare-two-models-on-the-same-image",
-    "href": "modules/01-object-detection/explore.html#compare-two-models-on-the-same-image",
-    "title": "01 · Object detection — interactive walkthrough",
-    "section": "Compare two models on the same image",
-    "text": "Compare two models on the same image\nSame image, same code path — only the adapter key changes.\n\nfig, axes = plt.subplots(1, 2, figsize=(14, 7))\nfor ax, key in zip(axes, ['yolo26n', 'rfdetr-nano']):\n    m = detect.build_detector(key, device)\n    d = m.predict(img, conf=0.3)\n    lbls = [f\"{n} {c:.2f}\" for n, c in zip(d.data.get('class_name', []), d.confidence)]\n    ax.imshow(annotate_detections(img, d, labels=lbls))\n    ax.set_title(m.meta.display); ax.axis('off')\nplt.show()"
-  },
-  {
-    "objectID": "modules/01-object-detection/explore.html#open-vocabulary-detect-anything-you-can-name",
-    "href": "modules/01-object-detection/explore.html#open-vocabulary-detect-anything-you-can-name",
-    "title": "01 · Object detection — interactive walkthrough",
-    "section": "Open-vocabulary: detect anything you can name",
-    "text": "Open-vocabulary: detect anything you can name\nGrounding DINO takes free text — try concepts that aren’t in COCO’s 80 classes.\n\ngd = detect.build_open_vocab(device)\ndet = gd.detect(img, ['plate', 'napkin', 'logo', 'hand', 'cup'])\nlbls = [f\"{n} {c:.2f}\" for n, c in zip(det.data.get('class_name', []), det.confidence)]\nplt.figure(figsize=(8, 8))\nplt.imshow(annotate_detections(img, det, labels=lbls)); plt.axis('off'); plt.show()\nprint('out-of-COCO:', sorted({n for n in det.data.get('class_name', []) if n.lower() not in detect.NAME_TO_IDX}))"
-  },
-  {
-    "objectID": "modules/01-object-detection/explore.html#next",
-    "href": "modules/01-object-detection/explore.html#next",
-    "title": "01 · Object detection — interactive walkthrough",
-    "section": "Next",
-    "text": "Next\nRun the full benchmark with uv run python run.py from this folder, or read the report for the rigorous numbers."
-  },
-  {
-    "objectID": "modules/01-object-detection/results/metrics.html",
-    "href": "modules/01-object-detection/results/metrics.html",
+    "objectID": "modules/02-classification/results/metrics.html#imagenette-classification-benchmark",
+    "href": "modules/02-classification/results/metrics.html#imagenette-classification-benchmark",
     "title": "CV Explorations",
     "section": "",
-    "text": "Model\nFamily\nLicense\nmAP\nmAP@50\nmAP@75\nmAP (small)\nLatency (ms)\nFPS\n\n\n\n\nRF-DETR Medium\nDETR (transformer)\nApache-2.0\n59.4\n78.2\n63.7\n31.6\n36.3\n27.5\n\n\nRF-DETR Nano\nDETR (transformer)\nApache-2.0\n51.3\n69.9\n54.2\n22.4\n36.43\n27.5\n\n\nYOLO26-n\nYOLO (NMS-free)\nAGPL-3.0\n43.0\n58.1\n47.2\n20.1\n18.75\n53.3\n\n\nYOLO11-n\nYOLO (anchor-free)\nAGPL-3.0\n37.6\n52.1\n40.5\n17.9\n18.0\n55.6\n\n\n\nEvaluated on 200 COCO val2017 images; mAP via pycocotools-equivalent torchmetrics at IoU=.50:.95. Latency = mean over 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8."
+    "text": "Model\nParadigm\nLicense\nTop-1 (%)\nLatency (ms)\nFPS\n\n\n\n\nConvNeXt-Tiny\nSupervised\nApache-2.0\n99.9\n12.31\n81.2\n\n\nSigLIP 2 Base\nZero-shot\nApache-2.0\n99.4\n23.4\n42.7\n\n\nOpenCLIP ViT-B/32\nZero-shot\nMIT\n99.0\n10.09\n99.1\n\n\n\nTop-1 accuracy on 3925 Imagenette val images (10 classes). Latency = mean of 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Zero-shot models were never trained on Imagenette — they classify by image-text similarity."
   },
   {
-    "objectID": "modules/01-object-detection/results/metrics.html#coco-detection-benchmark",
-    "href": "modules/01-object-detection/results/metrics.html#coco-detection-benchmark",
+    "objectID": "modules/03-segmentation/results/metrics.html",
+    "href": "modules/03-segmentation/results/metrics.html",
     "title": "CV Explorations",
     "section": "",
-    "text": "Model\nFamily\nLicense\nmAP\nmAP@50\nmAP@75\nmAP (small)\nLatency (ms)\nFPS\n\n\n\n\nRF-DETR Medium\nDETR (transformer)\nApache-2.0\n59.4\n78.2\n63.7\n31.6\n36.3\n27.5\n\n\nRF-DETR Nano\nDETR (transformer)\nApache-2.0\n51.3\n69.9\n54.2\n22.4\n36.43\n27.5\n\n\nYOLO26-n\nYOLO (NMS-free)\nAGPL-3.0\n43.0\n58.1\n47.2\n20.1\n18.75\n53.3\n\n\nYOLO11-n\nYOLO (anchor-free)\nAGPL-3.0\n37.6\n52.1\n40.5\n17.9\n18.0\n55.6\n\n\n\nEvaluated on 200 COCO val2017 images; mAP via pycocotools-equivalent torchmetrics at IoU=.50:.95. Latency = mean over 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8."
+    "text": "Model\nFamily\nLicense\nLatency (ms)\nFPS\nMasks/img\n\n\n\n\nYOLO26-n-seg\ninstance (YOLO)\nAGPL-3.0\n23.79\n42.0\n7.0\n\n\nYOLO11-n-seg\ninstance (YOLO)\nAGPL-3.0\n22.9\n43.7\n6.5\n\n\nSAM 2.1 (base)\npromptable\nApache-2.0\n93.39\n10.7\nn/a\n\n\n\nLatency = mean over warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. SAM 2.1 is prompted with the YOLO26-seg boxes (detect-then-segment). This module is qualitative + latency; mask-mAP on COCO is a deeper follow-up."
   },
   {
-    "objectID": "modules/02-classification/report.html",
-    "href": "modules/02-classification/report.html",
-    "title": "02 · Image classification",
+    "objectID": "modules/03-segmentation/results/metrics.html#segmentation-speed-masks",
+    "href": "modules/03-segmentation/results/metrics.html#segmentation-speed-masks",
+    "title": "CV Explorations",
     "section": "",
-    "text": "Image classification assigns a single label to a whole image — the oldest and most foundational CV task, and the one the deep-learning era was launched on (AlexNet on ImageNet, 2012). Here it’s also the cleanest place to see the field’s biggest recent shift, because the same benchmark can be attacked two completely different ways.\nWe evaluate on Imagenette — a 10-class, Apache-licensed subset of ImageNet (tench, English springer, cassette player, chainsaw, church, French horn, garbage truck, gas pump, golf ball, parachute) — reporting top-1 accuracy and latency."
+    "text": "Model\nFamily\nLicense\nLatency (ms)\nFPS\nMasks/img\n\n\n\n\nYOLO26-n-seg\ninstance (YOLO)\nAGPL-3.0\n23.79\n42.0\n7.0\n\n\nYOLO11-n-seg\ninstance (YOLO)\nAGPL-3.0\n22.9\n43.7\n6.5\n\n\nSAM 2.1 (base)\npromptable\nApache-2.0\n93.39\n10.7\nn/a\n\n\n\nLatency = mean over warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. SAM 2.1 is prompted with the YOLO26-seg boxes (detect-then-segment). This module is qualitative + latency; mask-mAP on COCO is a deeper follow-up."
   },
   {
-    "objectID": "modules/02-classification/report.html#the-task",
-    "href": "modules/02-classification/report.html#the-task",
-    "title": "02 · Image classification",
+    "objectID": "modules/04-depth/results/metrics.html",
+    "href": "modules/04-depth/results/metrics.html",
+    "title": "CV Explorations",
     "section": "",
-    "text": "Image classification assigns a single label to a whole image — the oldest and most foundational CV task, and the one the deep-learning era was launched on (AlexNet on ImageNet, 2012). Here it’s also the cleanest place to see the field’s biggest recent shift, because the same benchmark can be attacked two completely different ways.\nWe evaluate on Imagenette — a 10-class, Apache-licensed subset of ImageNet (tench, English springer, cassette player, chainsaw, church, French horn, garbage truck, gas pump, golf ball, parachute) — reporting top-1 accuracy and latency."
+    "text": "Model\nLicense\nLatency (ms)\nFPS\n\n\n\n\nDepth Anything V2 (Small)\nApache-2.0\n38.44\n26.0\n\n\nDepth Anything V2 (Base)\nApache-2.0\n78.19\n12.8\n\n\n\nRelative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up."
   },
   {
-    "objectID": "modules/02-classification/report.html#two-paradigms",
-    "href": "modules/02-classification/report.html#two-paradigms",
-    "title": "02 · Image classification",
-    "section": "Two paradigms",
-    "text": "Two paradigms\n\n\n\n\n\n\n\n\n\nParadigm\nModel here\nHow it decides\nChanging the label set\n\n\n\n\nSupervised\nConvNeXt-Tiny (timm)\nA classification head trained on ImageNet outputs a score per class\nRequires retraining the head\n\n\nZero-shot\nSigLIP 2, OpenCLIP\nEmbed the image and the text \"a photo of a {class}\"; pick the closest text\nJust edit the list of strings\n\n\n\nThis is the classification analogue of closed-set vs open-vocabulary detection from module 01. The supervised model has a fixed output space baked into its weights; the zero-shot models were trained on image–text pairs from the web and have never seen Imagenette’s task — yet they classify it by comparing the image to text descriptions."
-  },
-  {
-    "objectID": "modules/02-classification/report.html#how-each-model-works",
-    "href": "modules/02-classification/report.html#how-each-model-works",
-    "title": "02 · Image classification",
-    "section": "How each model works",
-    "text": "How each model works\n\nSupervised (ConvNeXt-Tiny). A modern convolutional backbone with a 1000-way ImageNet head. To score Imagenette we simply read off the 10 relevant logits — no fine-tuning.\nZero-shot (CLIP / SigLIP 2). Two encoders — one for images, one for text — trained so that matching image/caption pairs land nearby in a shared space. Classification becomes: encode the image, encode each candidate label as a sentence, return the nearest. SigLIP 2 refines CLIP with a sigmoid loss (each pair judged independently) and stronger training, which generally lifts accuracy."
-  },
-  {
-    "objectID": "modules/02-classification/report.html#how-we-measured",
-    "href": "modules/02-classification/report.html#how-we-measured",
-    "title": "02 · Image classification",
-    "section": "How we measured",
-    "text": "How we measured\n\nData: the full Imagenette validation split (3,925 images, 10 classes).\nMetric: top-1 accuracy. For the supervised model, the prediction is the argmax over the 10 ImageNet logits that correspond to Imagenette’s classes; for zero-shot, the argmax over the 10 text-similarity scores.\nLatency: mean of 30 warmed-up single-image forwards on the local RTX 3090 Ti.\nPrompts for zero-shot are the simple template \"a photo of a {class}.\" — prompt wording measurably affects zero-shot accuracy, so we fix it for a fair comparison."
-  },
-  {
-    "objectID": "modules/02-classification/report.html#results",
-    "href": "modules/02-classification/report.html#results",
-    "title": "02 · Image classification",
-    "section": "Results",
-    "text": "Results"
-  },
-  {
-    "objectID": "modules/02-classification/report.html#imagenette-classification-benchmark",
-    "href": "modules/02-classification/report.html#imagenette-classification-benchmark",
-    "title": "02 · Image classification",
-    "section": "Imagenette classification benchmark",
-    "text": "Imagenette classification benchmark\n\n\n\nModel\nParadigm\nLicense\nTop-1 (%)\nLatency (ms)\nFPS\n\n\n\n\nConvNeXt-Tiny\nSupervised\nApache-2.0\n99.9\n12.31\n81.2\n\n\nSigLIP 2 Base\nZero-shot\nApache-2.0\n99.4\n23.4\n42.7\n\n\nOpenCLIP ViT-B/32\nZero-shot\nMIT\n99.0\n10.09\n99.1\n\n\n\nTop-1 accuracy on 3925 Imagenette val images (10 classes). Latency = mean of 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Zero-shot models were never trained on Imagenette — they classify by image-text similarity.\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nZero-shot is not a toy. SigLIP 2 (99.4%) and OpenCLIP (99.0%) land within a point of the supervised ConvNeXt-Tiny (99.9%) — despite never training on Imagenette. The decades-old assumption that you must train on your classes to classify them no longer holds for coarse, common categories.\nFlexibility isn’t necessarily slower. The fastest model here is the zero-shot, permissively licensed OpenCLIP ViT-B/32 (99 fps, MIT) — and it’s within a point of the supervised model. You can swap its label set by editing a list of strings.\nSigLIP 2’s recipe shows. Its sigmoid-loss training edges OpenCLIP on accuracy (99.4 vs 99.0) at roughly half the throughput — a small, real accuracy/speed trade.\nImagenette is deliberately easy (10 distinct classes), so everything clusters above 99%. The takeaway isn’t the leaderboard order — it’s that the supervised advantage has nearly vanished on a task like this. On fine-grained or rare classes the gap reopens."
-  },
-  {
-    "objectID": "modules/02-classification/report.html#predictions",
-    "href": "modules/02-classification/report.html#predictions",
-    "title": "02 · Image classification",
-    "section": "Predictions",
-    "text": "Predictions\nA handful of validation images with each model’s top-1 call (correct / WRONG):\n\n\n\n\n\n\nFigure 1: Per-model predictions on Imagenette val images."
-  },
-  {
-    "objectID": "modules/02-classification/report.html#where-classifiers-fail",
-    "href": "modules/02-classification/report.html#where-classifiers-fail",
-    "title": "02 · Image classification",
-    "section": "Where classifiers fail",
-    "text": "Where classifiers fail\n\nFine-grained & ambiguous images — an object photographed oddly, or a scene containing several classes at once (classification must commit to one label).\nZero-shot prompt sensitivity — \"a photo of a {class}\" vs the bare class name vs an ensemble of templates can swing accuracy by points; the label wording is now a hyperparameter.\nDistribution shift — accuracy on clean ImageNet-style photos overstates real-world performance on blurry, occluded, or domain-specific imagery."
-  },
-  {
-    "objectID": "modules/02-classification/report.html#reproduce",
-    "href": "modules/02-classification/report.html#reproduce",
-    "title": "02 · Image classification",
-    "section": "Reproduce",
-    "text": "Reproduce\nuv sync --group dev\nuv run python modules/02-classification/run.py        # full val (3,925 images)"
-  },
-  {
-    "objectID": "modules/03-segmentation/report.html",
-    "href": "modules/03-segmentation/report.html",
-    "title": "03 · Segmentation",
+    "objectID": "modules/04-depth/results/metrics.html#monocular-depth-speed",
+    "href": "modules/04-depth/results/metrics.html#monocular-depth-speed",
+    "title": "CV Explorations",
     "section": "",
-    "text": "Segmentation assigns labels at the pixel level rather than the box level. Two flavours matter here:\n\nInstance segmentation — a separate mask per object (two people → two masks), each with a class. This is detection + a mask head.\nPromptable segmentation — “segment whatever I point at / box / name”, with no fixed class set. This is the foundation-model approach, embodied by Segment Anything."
+    "text": "Model\nLicense\nLatency (ms)\nFPS\n\n\n\n\nDepth Anything V2 (Small)\nApache-2.0\n38.44\n26.0\n\n\nDepth Anything V2 (Base)\nApache-2.0\n78.19\n12.8\n\n\n\nRelative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up."
   },
   {
-    "objectID": "modules/03-segmentation/report.html#the-task",
-    "href": "modules/03-segmentation/report.html#the-task",
-    "title": "03 · Segmentation",
+    "objectID": "modules/05-pose/results/metrics.html",
+    "href": "modules/05-pose/results/metrics.html",
+    "title": "CV Explorations",
     "section": "",
-    "text": "Segmentation assigns labels at the pixel level rather than the box level. Two flavours matter here:\n\nInstance segmentation — a separate mask per object (two people → two masks), each with a class. This is detection + a mask head.\nPromptable segmentation — “segment whatever I point at / box / name”, with no fixed class set. This is the foundation-model approach, embodied by Segment Anything."
+    "text": "Model\nLicense\nLatency (ms)\nFPS\nPeople/img\n\n\n\n\nYOLO26-n-pose\nAGPL-3.0\n21.52\n46.5\n3.2\n\n\nYOLO11-n-pose\nAGPL-3.0\n18.33\n54.5\n2.5\n\n\n\n17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up."
   },
   {
-    "objectID": "modules/03-segmentation/report.html#two-paradigms",
-    "href": "modules/03-segmentation/report.html#two-paradigms",
-    "title": "03 · Segmentation",
-    "section": "Two paradigms",
-    "text": "Two paradigms\n\n\n\n\n\n\n\n\n\nModel\nApproach\nLabel set\nTrait\n\n\n\n\nYOLO26-seg / YOLO11-seg\nClosed-set instance segmentation\n80 COCO classes\nFast; every mask comes with a class label\n\n\nSAM 2.1\nPromptable segmentation\nnone — class-agnostic\nSegments anything from a point/box/mask prompt; no labels\n\n\n\nThe natural way they combine is the detect-then-segment pipeline: a detector proposes boxes, and SAM turns each box into a high-quality mask. We use exactly that here — SAM 2.1 is prompted with the YOLO26-seg boxes."
-  },
-  {
-    "objectID": "modules/03-segmentation/report.html#how-each-works",
-    "href": "modules/03-segmentation/report.html#how-each-works",
-    "title": "03 · Segmentation",
-    "section": "How each works",
-    "text": "How each works\n\nYOLO-seg adds a mask-prototype head to the detector: it predicts a handful of prototype masks per image plus per-object coefficients that linearly combine them — cheap, hence the high frame-rate.\nSAM 2.1 is a promptable transformer with a heavy image encoder and a light mask decoder. Encode the image once, then any prompt (point, box) decodes to a mask in milliseconds. It knows nothing about classes — it only knows “object-ness”, which is why it generalises to things no COCO model has names for."
-  },
-  {
-    "objectID": "modules/03-segmentation/report.html#how-we-measured",
-    "href": "modules/03-segmentation/report.html#how-we-measured",
-    "title": "03 · Segmentation",
-    "section": "How we measured",
-    "text": "How we measured\nThis module is qualitative + latency (warmed-up single-image forwards on the local RTX 3090 Ti); full mask-mAP on COCO is a deeper follow-up. The point here is to see the difference between a fast labelled instance segmenter and a slower, class-agnostic, promptable one."
-  },
-  {
-    "objectID": "modules/03-segmentation/report.html#results",
-    "href": "modules/03-segmentation/report.html#results",
-    "title": "03 · Segmentation",
-    "section": "Results",
-    "text": "Results"
-  },
-  {
-    "objectID": "modules/03-segmentation/report.html#segmentation-speed-masks",
-    "href": "modules/03-segmentation/report.html#segmentation-speed-masks",
-    "title": "03 · Segmentation",
-    "section": "Segmentation: speed & masks",
-    "text": "Segmentation: speed & masks\n\n\n\nModel\nFamily\nLicense\nLatency (ms)\nFPS\nMasks/img\n\n\n\n\nYOLO26-n-seg\ninstance (YOLO)\nAGPL-3.0\n23.79\n42.0\n7.0\n\n\nYOLO11-n-seg\ninstance (YOLO)\nAGPL-3.0\n22.9\n43.7\n6.5\n\n\nSAM 2.1 (base)\npromptable\nApache-2.0\n93.39\n10.7\nn/a\n\n\n\nLatency = mean over warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. SAM 2.1 is prompted with the YOLO26-seg boxes (detect-then-segment). This module is qualitative + latency; mask-mAP on COCO is a deeper follow-up.\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nLabels vs flexibility. YOLO-seg runs at ~43 fps and hands you a class with every mask — but only for its 80 COCO categories. SAM 2.1 is ~4× slower (~11 fps) and returns no label, yet will segment anything you can point at, including objects no detector was trained on.\nThey compose. The figures show the standard pattern: the detector finds and names objects; SAM refines each box into a crisp mask. Open-vocab detection (module 01) + SAM gives you “segment anything you can describe in words”.\nMask quality differs from box quality. A correct box with a sloppy mask is a common failure; SAM’s masks are typically tighter around object boundaries than a fast instance head’s."
-  },
-  {
-    "objectID": "modules/03-segmentation/report.html#qualitative-results",
-    "href": "modules/03-segmentation/report.html#qualitative-results",
-    "title": "03 · Segmentation",
-    "section": "Qualitative results",
-    "text": "Qualitative results\n\n\n\n\n\n\n\n\n\nFigure 1: YOLO26-n-seg — instance masks + COCO labels\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: YOLO11-n-seg — instance masks + COCO labels\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: SAM 2.1, prompted with the detector’s boxes — crisp, class-agnostic masks"
-  },
-  {
-    "objectID": "modules/03-segmentation/report.html#where-segmentation-fails",
-    "href": "modules/03-segmentation/report.html#where-segmentation-fails",
-    "title": "03 · Segmentation",
-    "section": "Where segmentation fails",
-    "text": "Where segmentation fails\n\nThin / wispy structures (hair, wires, chain-link) — hard for any mask head.\nOverlapping instances — instance segmenters merge or split touching objects.\nAmbiguous prompts — a single SAM point can mean “the shirt” or “the whole person”; SAM resolves ambiguity by returning multiple candidate masks.\nClass limits (instance) — YOLO-seg simply can’t mask a class it never trained on."
-  },
-  {
-    "objectID": "modules/03-segmentation/report.html#reproduce",
-    "href": "modules/03-segmentation/report.html#reproduce",
-    "title": "03 · Segmentation",
-    "section": "Reproduce",
-    "text": "Reproduce\nuv sync --group detection      # ultralytics provides YOLO-seg and SAM\nuv run python modules/03-segmentation/run.py --images 4"
-  },
-  {
-    "objectID": "modules/04-depth/report.html",
-    "href": "modules/04-depth/report.html",
-    "title": "04 · Monocular depth",
+    "objectID": "modules/05-pose/results/metrics.html#pose-estimation-speed",
+    "href": "modules/05-pose/results/metrics.html#pose-estimation-speed",
+    "title": "CV Explorations",
     "section": "",
-    "text": "Monocular depth estimation predicts a distance for every pixel from one ordinary RGB image — no stereo pair, no LiDAR. It’s the perception capability most directly relevant to robotics: turning a flat photo into 3D structure for navigation, grasping, and obstacle avoidance.\nA key distinction:\n\nRelative depth — orders pixels near-to-far without real-world units. Enough for “what’s in front of what”. Depth Anything V2 predicts this.\nMetric depth — actual metres. Needed for measurement/control; harder, and usually fine-tuned per camera (e.g. Depth Anything’s metric heads, Apple Depth Pro)."
+    "text": "Model\nLicense\nLatency (ms)\nFPS\nPeople/img\n\n\n\n\nYOLO26-n-pose\nAGPL-3.0\n21.52\n46.5\n3.2\n\n\nYOLO11-n-pose\nAGPL-3.0\n18.33\n54.5\n2.5\n\n\n\n17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up."
   },
   {
-    "objectID": "modules/04-depth/report.html#the-task",
-    "href": "modules/04-depth/report.html#the-task",
-    "title": "04 · Monocular depth",
+    "objectID": "modules/06-tracking/results/metrics.html",
+    "href": "modules/06-tracking/results/metrics.html",
+    "title": "CV Explorations",
     "section": "",
-    "text": "Monocular depth estimation predicts a distance for every pixel from one ordinary RGB image — no stereo pair, no LiDAR. It’s the perception capability most directly relevant to robotics: turning a flat photo into 3D structure for navigation, grasping, and obstacle avoidance.\nA key distinction:\n\nRelative depth — orders pixels near-to-far without real-world units. Enough for “what’s in front of what”. Depth Anything V2 predicts this.\nMetric depth — actual metres. Needed for measurement/control; harder, and usually fine-tuned per camera (e.g. Depth Anything’s metric heads, Apple Depth Pro)."
+    "text": "Metric\nValue\n\n\n\n\nUnique tracks (ids)\n62\n\n\nFrames processed\n200\n\n\nProcessing speed\n21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)\n\n\nSource video\n1920x1080 @ 25 fps\n\n\n\nYOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up."
   },
   {
-    "objectID": "modules/04-depth/report.html#how-it-works",
-    "href": "modules/04-depth/report.html#how-it-works",
-    "title": "04 · Monocular depth",
-    "section": "How it works",
-    "text": "How it works\nDepth Anything V2 is a DINOv2 vision-transformer encoder plus a lightweight depth head, trained on a huge mix of labelled + pseudo-labelled images. The transformer’s global receptive field lets it use scene-wide cues — perspective, relative size, texture gradients, occlusion — exactly the monocular cues humans use to perceive depth with one eye closed. It outputs inverse depth (larger = nearer)."
-  },
-  {
-    "objectID": "modules/04-depth/report.html#results",
-    "href": "modules/04-depth/report.html#results",
-    "title": "04 · Monocular depth",
-    "section": "Results",
-    "text": "Results\nWe run two sizes on the same images. Larger backbones generally produce sharper boundaries and better thin-structure handling, at a latency cost."
-  },
-  {
-    "objectID": "modules/04-depth/report.html#monocular-depth-speed",
-    "href": "modules/04-depth/report.html#monocular-depth-speed",
-    "title": "04 · Monocular depth",
-    "section": "Monocular depth: speed",
-    "text": "Monocular depth: speed\n\n\n\nModel\nLicense\nLatency (ms)\nFPS\n\n\n\n\nDepth Anything V2 (Small)\nApache-2.0\n38.44\n26.0\n\n\nDepth Anything V2 (Base)\nApache-2.0\n78.19\n12.8\n\n\n\nRelative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up.\n\n\n\n\n\n\nFigure 1: RGB input vs predicted depth (brighter = nearer). Note how both models recover ground-plane gradient, object separation, and rough scene layout from a single photo.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nReal 3D structure from one image. With no stereo or sensor, the model separates foreground from background, recovers the ground plane, and orders objects in depth — the cue set a robot can turn into a rough 3D map.\nSize buys sharpness, not speed. Depth Anything V2 Base (~13 fps) gives crisper edges than Small (~26 fps); the right pick depends on whether you need real-time or best quality.\nRelative, not metric. These maps tell you nearer/farther, not how many metres — for control you’d use a metric variant calibrated to your camera."
-  },
-  {
-    "objectID": "modules/04-depth/report.html#where-monocular-depth-fails",
-    "href": "modules/04-depth/report.html#where-monocular-depth-fails",
-    "title": "04 · Monocular depth",
-    "section": "Where monocular depth fails",
-    "text": "Where monocular depth fails\n\nAbsolute scale ambiguity — a doll-house and a real house look identical to a single camera; relative depth can’t resolve true size.\nReflective / transparent surfaces (mirrors, glass, water) — violate the visual cues the model relies on.\nUntextured walls & sky — few gradients to reason from.\nOut-of-distribution cameras — fisheye, aerial, or endoscopic views differ from the training mix and degrade."
-  },
-  {
-    "objectID": "modules/04-depth/report.html#reproduce",
-    "href": "modules/04-depth/report.html#reproduce",
-    "title": "04 · Monocular depth",
-    "section": "Reproduce",
-    "text": "Reproduce\nuv sync --group dev      # transformers provides the Depth Anything V2 pipeline\nuv run python modules/04-depth/run.py --images 4"
-  },
-  {
-    "objectID": "modules/05-pose/report.html",
-    "href": "modules/05-pose/report.html",
-    "title": "05 · Human pose estimation",
+    "objectID": "modules/06-tracking/results/metrics.html#multi-object-tracking",
+    "href": "modules/06-tracking/results/metrics.html#multi-object-tracking",
+    "title": "CV Explorations",
     "section": "",
-    "text": "Pose estimation locates a set of body keypoints per person — for the COCO format, 17 of them (eyes, ears, shoulders, elbows, wrists, hips, knees, ankles) — and connects them into a skeleton. It powers motion capture, sports analytics, gesture interfaces, and human-aware robotics (a robot that must not bump the person reaching past it)."
+    "text": "Metric\nValue\n\n\n\n\nUnique tracks (ids)\n62\n\n\nFrames processed\n200\n\n\nProcessing speed\n21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)\n\n\nSource video\n1920x1080 @ 25 fps\n\n\n\nYOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up."
   },
   {
-    "objectID": "modules/05-pose/report.html#the-task",
-    "href": "modules/05-pose/report.html#the-task",
-    "title": "05 · Human pose estimation",
+    "objectID": "modules/07-retrieval/results/metrics.html",
+    "href": "modules/07-retrieval/results/metrics.html",
+    "title": "CV Explorations",
     "section": "",
-    "text": "Pose estimation locates a set of body keypoints per person — for the COCO format, 17 of them (eyes, ears, shoulders, elbows, wrists, hips, knees, ankles) — and connects them into a skeleton. It powers motion capture, sports analytics, gesture interfaces, and human-aware robotics (a robot that must not bump the person reaching past it)."
+    "text": "Model\nType\nLicense\nRecall@1 (%)\nPrecision@5 (%)\nLatency (ms)\nFPS\n\n\n\n\nSigLIP 2 Base\nimage-text\nApache-2.0\n99.8\n99.2\n20.51\n48.8\n\n\nDINOv2 Base\nself-supervised\nApache-2.0\n99.3\n98.8\n19.45\n51.4\n\n\n\nRetrieval on 600 Imagenette images (60/class). Recall@1 = nearest neighbour shares the class; Precision@5 = fraction of top-5 that do. No labels used at search time — purely embedding similarity. Latency on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Figure uses DINOv2 Base."
   },
   {
-    "objectID": "modules/05-pose/report.html#two-paradigms",
-    "href": "modules/05-pose/report.html#two-paradigms",
-    "title": "05 · Human pose estimation",
-    "section": "Two paradigms",
-    "text": "Two paradigms\n\n\n\n\n\n\n\n\nParadigm\nHow\nTrade-off\n\n\n\n\nBottom-up / single-stage (YOLO-pose here)\nOne network predicts people and their keypoints in a single pass\nConstant cost regardless of crowd size; fast\n\n\nTop-down (ViTPose, RTMPose)\nDetect each person, then run a dedicated pose net on each crop\nUsually more accurate, but cost grows with the number of people\n\n\n\nThis module benchmarks two YOLO-pose generations (single-stage). The top-down family is the accuracy-first alternative when you have few people and need precise joints."
-  },
-  {
-    "objectID": "modules/05-pose/report.html#how-it-works",
-    "href": "modules/05-pose/report.html#how-it-works",
-    "title": "05 · Human pose estimation",
-    "section": "How it works",
-    "text": "How it works\nYOLO-pose extends the detector: alongside each person box it regresses the 17 keypoint coordinates (and a per-keypoint visibility). Because keypoints are predicted jointly with detection in one forward pass, throughput stays high even in crowds — you can see this in the figures, where several skeletons are recovered at once."
-  },
-  {
-    "objectID": "modules/05-pose/report.html#results",
-    "href": "modules/05-pose/report.html#results",
-    "title": "05 · Human pose estimation",
-    "section": "Results",
-    "text": "Results"
-  },
-  {
-    "objectID": "modules/05-pose/report.html#pose-estimation-speed",
-    "href": "modules/05-pose/report.html#pose-estimation-speed",
-    "title": "05 · Human pose estimation",
-    "section": "Pose estimation: speed",
-    "text": "Pose estimation: speed\n\n\n\nModel\nLicense\nLatency (ms)\nFPS\nPeople/img\n\n\n\n\nYOLO26-n-pose\nAGPL-3.0\n21.52\n46.5\n3.2\n\n\nYOLO11-n-pose\nAGPL-3.0\n18.33\n54.5\n2.5\n\n\n\n17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up.\n\n\n\n\n\n\nFigure 1: YOLO26-n-pose — 17-keypoint skeletons.\n\n\n\n\n\n\n\n\n\nFigure 2: YOLO11-n-pose — same images, prior generation.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nCrowd-constant speed. Both models stay at ~50 fps whether the image has one person or several — the single-stage win. A top-down model would slow down as people are added.\nA newer generation recovers more people. YOLO26-pose found more people per image than YOLO11-pose here (better recall on partially-occluded figures), at a slightly lower frame-rate.\nKeypoints carry visibility. Occluded joints are predicted with low confidence; downstream code should use that, not assume every joint is reliable."
-  },
-  {
-    "objectID": "modules/05-pose/report.html#where-pose-estimation-fails",
-    "href": "modules/05-pose/report.html#where-pose-estimation-fails",
-    "title": "05 · Human pose estimation",
-    "section": "Where pose estimation fails",
-    "text": "Where pose estimation fails\n\nOcclusion & truncation — joints hidden behind objects or cropped out of frame.\nCrowding & overlap — skeletons can swap limbs between nearby people.\nUnusual poses — gymnastics, lying down, or atypical viewpoints under-represented in training.\nSmall / distant people — too few pixels to localise joints precisely."
-  },
-  {
-    "objectID": "modules/05-pose/report.html#reproduce",
-    "href": "modules/05-pose/report.html#reproduce",
-    "title": "05 · Human pose estimation",
-    "section": "Reproduce",
-    "text": "Reproduce\nuv sync --group detection\nuv run python modules/05-pose/run.py --images 4"
-  },
-  {
-    "objectID": "modules/06-tracking/report.html",
-    "href": "modules/06-tracking/report.html",
-    "title": "06 · Multi-object tracking",
+    "objectID": "modules/07-retrieval/results/metrics.html#image-retrieval-imagenette",
+    "href": "modules/07-retrieval/results/metrics.html#image-retrieval-imagenette",
+    "title": "CV Explorations",
     "section": "",
-    "text": "A detector answers “what’s here right now” — independently, every frame, with no memory. Tracking adds the missing dimension: identity over time, so the same person keeps the same id as they move. That id is what lets you count, measure dwell time, analyse motion, or have a robot follow a specific person.\nThe dominant recipe is tracking-by-detection:\n\nRun a detector on each frame (here: YOLO26, person class only).\nAssociate this frame’s boxes with the existing tracks — match by predicted position (a Kalman motion model) and box overlap.\nBirths/deaths: unmatched detections start new tracks; tracks unseen for a while are retired.\n\nByteTrack is the associator. Its trick is to use low-confidence detections during association (not just high-confidence ones), which recovers objects through brief occlusion and reduces dropped tracks."
+    "text": "Model\nType\nLicense\nRecall@1 (%)\nPrecision@5 (%)\nLatency (ms)\nFPS\n\n\n\n\nSigLIP 2 Base\nimage-text\nApache-2.0\n99.8\n99.2\n20.51\n48.8\n\n\nDINOv2 Base\nself-supervised\nApache-2.0\n99.3\n98.8\n19.45\n51.4\n\n\n\nRetrieval on 600 Imagenette images (60/class). Recall@1 = nearest neighbour shares the class; Precision@5 = fraction of top-5 that do. No labels used at search time — purely embedding similarity. Latency on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Figure uses DINOv2 Base."
   },
   {
-    "objectID": "modules/06-tracking/report.html#the-task",
-    "href": "modules/06-tracking/report.html#the-task",
-    "title": "06 · Multi-object tracking",
+    "objectID": "modules/08-vlm/results/metrics.html",
+    "href": "modules/08-vlm/results/metrics.html",
+    "title": "CV Explorations",
     "section": "",
-    "text": "A detector answers “what’s here right now” — independently, every frame, with no memory. Tracking adds the missing dimension: identity over time, so the same person keeps the same id as they move. That id is what lets you count, measure dwell time, analyse motion, or have a robot follow a specific person.\nThe dominant recipe is tracking-by-detection:\n\nRun a detector on each frame (here: YOLO26, person class only).\nAssociate this frame’s boxes with the existing tracks — match by predicted position (a Kalman motion model) and box overlap.\nBirths/deaths: unmatched detections start new tracks; tracks unseen for a while are retired.\n\nByteTrack is the associator. Its trick is to use low-confidence detections during association (not just high-confidence ones), which recovers objects through brief occlusion and reduces dropped tracks."
+    "text": "Model\nLicense\nLatency (ms/answer, 32 tok)\nNote\n\n\n\n\nQwen2.5-VL 3B\nApache-2.0\n3729.64\nfree-form text; qualitative\n\n\n\nOne model answers caption/reason/count/OCR purely from the prompt — no task-specific heads. Latency is per short answer on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8 and scales with the number of generated tokens. See the transcript for real outputs."
   },
   {
-    "objectID": "modules/06-tracking/report.html#result",
-    "href": "modules/06-tracking/report.html#result",
-    "title": "06 · Multi-object tracking",
-    "section": "Result",
-    "text": "Result\n\n\n\n\n\n\nFigure 1: Detection + ByteTrack with motion traces. Each box carries a persistent id (#n); the tails show recent trajectory."
-  },
-  {
-    "objectID": "modules/06-tracking/report.html#multi-object-tracking",
-    "href": "modules/06-tracking/report.html#multi-object-tracking",
-    "title": "06 · Multi-object tracking",
-    "section": "Multi-object tracking",
-    "text": "Multi-object tracking\n\n\n\n\n\n\n\nMetric\nValue\n\n\n\n\nUnique tracks (ids)\n62\n\n\nFrames processed\n200\n\n\nProcessing speed\n21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)\n\n\nSource video\n1920x1080 @ 25 fps\n\n\n\nYOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up.\n\n\n\n\n\n\nFigure 2: Three frames across the clip — note how ids persist as people move.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nIdentity is the product, not boxes. The same code as module 01 produces the boxes; the value here is that box #7 in frame 0 is the same person as box #7 in frame 100.\nMore ids than people = fragmentation. This 200-frame clip yielded ~60 ids for far fewer actual pedestrians. When someone is occluded and reappears, the tracker often issues a new id — the classic ID-switch / fragmentation failure that HOTA and IDF1 are designed to penalise.\nTracking is detector-bound. Every missed detection is a gap the associator must bridge; a better detector usually means a better tracker, for free."
-  },
-  {
-    "objectID": "modules/06-tracking/report.html#where-tracking-fails",
-    "href": "modules/06-tracking/report.html#where-tracking-fails",
-    "title": "06 · Multi-object tracking",
-    "section": "Where tracking fails",
-    "text": "Where tracking fails\n\nLong / full occlusion — a person hidden for many frames usually returns with a new id.\nCrowds & similar appearance — ByteTrack uses motion + overlap, not appearance, so it can swap ids between people who cross paths (appearance-based trackers like Deep OC-SORT help).\nFast motion / low frame-rate — the Kalman prediction drifts and association breaks.\nDetector misses — propagate directly into track gaps."
-  },
-  {
-    "objectID": "modules/06-tracking/report.html#reproduce",
-    "href": "modules/06-tracking/report.html#reproduce",
-    "title": "06 · Multi-object tracking",
-    "section": "Reproduce",
-    "text": "Reproduce\nuv sync --group detection      # ultralytics + supervision (ByteTrack)\nuv run python modules/06-tracking/run.py\n(The sample clip is downloaded by supervision’s asset helper into data/.)"
-  },
-  {
-    "objectID": "modules/07-retrieval/report.html",
-    "href": "modules/07-retrieval/report.html",
-    "title": "07 · Embeddings & retrieval",
+    "objectID": "modules/08-vlm/results/metrics.html#vision-language-model",
+    "href": "modules/08-vlm/results/metrics.html#vision-language-model",
+    "title": "CV Explorations",
     "section": "",
-    "text": "Most of this curriculum predicts labels. This module predicts a vector: an embedding that places similar images near each other in a high-dimensional space. That single idea underpins reverse image search, deduplication, clustering, recommendation, anomaly detection, and few-shot recognition — none of which need a classifier head. To “classify” you just look at your neighbours.\nThe workflow:\n\nEmbed every gallery image to an L2-normalised vector.\nEmbed a query the same way.\nRank gallery vectors by cosine similarity (a dot product) and return the nearest."
-  },
-  {
-    "objectID": "modules/07-retrieval/report.html#the-task",
-    "href": "modules/07-retrieval/report.html#the-task",
-    "title": "07 · Embeddings & retrieval",
-    "section": "",
-    "text": "Most of this curriculum predicts labels. This module predicts a vector: an embedding that places similar images near each other in a high-dimensional space. That single idea underpins reverse image search, deduplication, clustering, recommendation, anomaly detection, and few-shot recognition — none of which need a classifier head. To “classify” you just look at your neighbours.\nThe workflow:\n\nEmbed every gallery image to an L2-normalised vector.\nEmbed a query the same way.\nRank gallery vectors by cosine similarity (a dot product) and return the nearest."
-  },
-  {
-    "objectID": "modules/07-retrieval/report.html#two-kinds-of-embedding",
-    "href": "modules/07-retrieval/report.html#two-kinds-of-embedding",
-    "title": "07 · Embeddings & retrieval",
-    "section": "Two kinds of embedding",
-    "text": "Two kinds of embedding\n\n\n\n\n\n\n\n\nModel\nTrained on\nSignal it captures\n\n\n\n\nDINOv2\nImages only, self-supervised (no labels)\nVisual structure, parts, texture, shape — emerges purely from the data\n\n\nSigLIP 2\nImage–text pairs, contrastive\nSemantics aligned to language — “what you’d call it”\n\n\n\nDINOv2 learns by making different augmented views of the same image agree; it never sees a label, yet produces features so strong that a linear probe rivals supervised training. SigLIP learns from captions, so its space is organised the way language groups things. Both give excellent retrieval — the right choice depends on whether you want visual or semantic similarity."
-  },
-  {
-    "objectID": "modules/07-retrieval/report.html#results",
-    "href": "modules/07-retrieval/report.html#results",
-    "title": "07 · Embeddings & retrieval",
-    "section": "Results",
-    "text": "Results\nA real metric, not just pictures: we embed a balanced Imagenette gallery and measure how often the nearest neighbours share the query’s class — using no labels at search time."
-  },
-  {
-    "objectID": "modules/07-retrieval/report.html#image-retrieval-imagenette",
-    "href": "modules/07-retrieval/report.html#image-retrieval-imagenette",
-    "title": "07 · Embeddings & retrieval",
-    "section": "Image retrieval (Imagenette)",
-    "text": "Image retrieval (Imagenette)\n\n\n\n\n\n\n\n\n\n\n\n\nModel\nType\nLicense\nRecall@1 (%)\nPrecision@5 (%)\nLatency (ms)\nFPS\n\n\n\n\nSigLIP 2 Base\nimage-text\nApache-2.0\n99.8\n99.2\n20.51\n48.8\n\n\nDINOv2 Base\nself-supervised\nApache-2.0\n99.3\n98.8\n19.45\n51.4\n\n\n\nRetrieval on 600 Imagenette images (60/class). Recall@1 = nearest neighbour shares the class; Precision@5 = fraction of top-5 that do. No labels used at search time — purely embedding similarity. Latency on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Figure uses DINOv2 Base.\n\n\n\n\n\n\nFigure 1: Each row: a query (black border) and its 5 nearest neighbours. Green = same class, red = different. The model was never trained to classify Imagenette — this is pure embedding similarity.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nSearch beats training, for free. Both embedders retrieve the correct class &gt;99% of the time (Recall@1) with no classifier and no labels at query time — add a new class by just dropping its images into the gallery.\nSelf-supervised is competitive with image-text. DINOv2 (never saw a single label or caption) trails SigLIP 2 by only a few tenths of a point here — a striking result for a model trained purely on images.\nThis is how you’d handle an open, growing catalogue — products, faces, defects — where retraining a classifier per new item is impractical."
-  },
-  {
-    "objectID": "modules/07-retrieval/report.html#where-retrieval-fails",
-    "href": "modules/07-retrieval/report.html#where-retrieval-fails",
-    "title": "07 · Embeddings & retrieval",
-    "section": "Where retrieval fails",
-    "text": "Where retrieval fails\n\nFine-grained distinctions — near-duplicate categories (specific dog breeds, product variants) can blur in a general embedding; specialised/fine-tuned embeddings help.\nGallery quality & scale — retrieval is only as good as what’s indexed; at millions of items you need an ANN index (FAISS) and recall/speed trade-offs appear.\nDomain gap — embeddings trained on web images underperform on medical, satellite, or industrial imagery without adaptation."
-  },
-  {
-    "objectID": "modules/07-retrieval/report.html#reproduce",
-    "href": "modules/07-retrieval/report.html#reproduce",
-    "title": "07 · Embeddings & retrieval",
-    "section": "Reproduce",
-    "text": "Reproduce\nuv sync --group dev\nuv run python modules/07-retrieval/run.py --per-class 60"
+    "text": "Model\nLicense\nLatency (ms/answer, 32 tok)\nNote\n\n\n\n\nQwen2.5-VL 3B\nApache-2.0\n3729.64\nfree-form text; qualitative\n\n\n\nOne model answers caption/reason/count/OCR purely from the prompt — no task-specific heads. Latency is per short answer on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8 and scales with the number of generated tokens. See the transcript for real outputs."
   }
 ]

@@ -157,9 +157,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#multi-object-tracking" id="toc-multi-object-tracking" class="nav-link active" data-scroll-target="#multi-object-tracking">Multi-object tracking</a></li>
+  <li><a href="#vision-language-model" id="toc-vision-language-model" class="nav-link active" data-scroll-target="#vision-language-model">Vision-language model</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/06-tracking/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/08-vlm/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
@@ -167,39 +167,27 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="multi-object-tracking" class="level2">
-<h2 class="anchored" data-anchor-id="multi-object-tracking">Multi-object tracking</h2>
+<section id="vision-language-model" class="level2">
+<h2 class="anchored" data-anchor-id="vision-language-model">Vision-language model</h2>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Metric</th>
-<th>Value</th>
+<th>Model</th>
+<th>License</th>
+<th>Latency (ms/answer, 32 tok)</th>
+<th>Note</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Unique tracks (ids)</td>
-<td>62</td>
-</tr>
-<tr class="even">
-<td>Frames processed</td>
-<td>200</td>
-</tr>
-<tr class="odd">
-<td>Processing speed</td>
-<td>21.4 fps (detect+track, NVIDIA GeForce RTX 3090 Ti)</td>
-</tr>
-<tr class="even">
-<td>Source video</td>
-<td>1920x1080 @ 25 fps</td>
+<td>Qwen2.5-VL 3B</td>
+<td>Apache-2.0</td>
+<td>3729.64</td>
+<td>free-form text; qualitative</td>
 </tr>
 </tbody>
 </table>
-<p><em>YOLO26 (person class) + ByteTrack association, with motion traces. Qualitative + throughput; MOT metrics (HOTA/MOTA/IDF1 via TrackEval) on a labelled benchmark are a deeper follow-up.</em></p>
+<p><em>One model answers caption/reason/count/OCR purely from the prompt — no task-specific heads. Latency is per short answer on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code> and scales with the number of generated tokens. See the transcript for real outputs.</em></p>
 
 
 </section>
@@ -613,7 +601,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/06-tracking/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/08-vlm/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
