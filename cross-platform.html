@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>metrics – CV Explorations</title>
+<title>Cross-platform validation (DGX Spark) – CV Explorations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">CV Explorations</span>
     </a>
   </div>
@@ -92,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -101,45 +101,45 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
         <li>
-    <a class="dropdown-item" href="../../../modules/01-object-detection/report.html">
+    <a class="dropdown-item" href="./modules/01-object-detection/report.html">
  <span class="dropdown-text">01 · Object detection</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/02-classification/report.html">
+    <a class="dropdown-item" href="./modules/02-classification/report.html">
  <span class="dropdown-text">02 · Image classification</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/03-segmentation/report.html">
+    <a class="dropdown-item" href="./modules/03-segmentation/report.html">
  <span class="dropdown-text">03 · Segmentation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/04-depth/report.html">
+    <a class="dropdown-item" href="./modules/04-depth/report.html">
  <span class="dropdown-text">04 · Monocular depth</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/05-pose/report.html">
+    <a class="dropdown-item" href="./modules/05-pose/report.html">
  <span class="dropdown-text">05 · Human pose</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/06-tracking/report.html">
+    <a class="dropdown-item" href="./modules/06-tracking/report.html">
  <span class="dropdown-text">06 · Tracking</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/07-retrieval/report.html">
+    <a class="dropdown-item" href="./modules/07-retrieval/report.html">
  <span class="dropdown-text">07 · Embeddings &amp; retrieval</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/08-vlm/report.html">
+    <a class="dropdown-item" href="./modules/08-vlm/report.html">
  <span class="dropdown-text">08 · Vision-language models</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/09-classical/report.html">
+    <a class="dropdown-item" href="./modules/09-classical/report.html">
  <span class="dropdown-text">09 · Classical CV</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../../cross-platform.html"> 
+    <a class="nav-link active" href="./cross-platform.html" aria-current="page"> 
 <span class="menu-text">Cross-platform</span></a>
   </li>  
 </ul>
@@ -165,57 +165,65 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#imagenette-classification-benchmark" id="toc-imagenette-classification-benchmark" class="nav-link active" data-scroll-target="#imagenette-classification-benchmark">Imagenette classification benchmark</a></li>
+  <li><a href="#the-one-thing-that-changes-the-pytorch-build" id="toc-the-one-thing-that-changes-the-pytorch-build" class="nav-link active" data-scroll-target="#the-one-thing-that-changes-the-pytorch-build">The one thing that changes: the PyTorch build</a></li>
+  <li><a href="#what-was-validated-on-the-gb10" id="toc-what-was-validated-on-the-gb10" class="nav-link" data-scroll-target="#what-was-validated-on-the-gb10">What was validated on the GB10</a></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">Takeaways</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/02-classification/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/cross-platform.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Cross-platform validation (DGX Spark)</h1>
+<p class="subtitle lead">The same code on x86 + RTX 3090 Ti and ARM64 + GB10 Grace-Blackwell</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="imagenette-classification-benchmark" class="level2">
-<h2 class="anchored" data-anchor-id="imagenette-classification-benchmark">Imagenette classification benchmark</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Model</th>
-<th>Paradigm</th>
-<th>License</th>
-<th>Top-1 (%)</th>
-<th>Latency (ms)</th>
-<th>FPS</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ConvNeXt-Tiny</td>
-<td>Supervised</td>
-<td>Apache-2.0</td>
-<td>99.9</td>
-<td>12.31</td>
-<td>81.2</td>
-</tr>
-<tr class="even">
-<td>SigLIP 2 Base</td>
-<td>Zero-shot</td>
-<td>Apache-2.0</td>
-<td>99.4</td>
-<td>23.4</td>
-<td>42.7</td>
-</tr>
-<tr class="odd">
-<td>OpenCLIP ViT-B/32</td>
-<td>Zero-shot</td>
-<td>MIT</td>
-<td>99.0</td>
-<td>10.09</td>
-<td>99.1</td>
-</tr>
-</tbody>
-</table>
-<p><em>Top-1 accuracy on 3925 Imagenette val images (10 classes). Latency = mean of 30 warmed-up single-image forwards on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>. Zero-shot models were never trained on Imagenette — they classify by image-text similarity.</em></p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A goal of this repo is that the code is <strong>portable</strong>, not tied to one machine. The modules are developed on an <strong>x86-64 workstation with an RTX 3090 Ti</strong> (Ampere, CUDA 12.8). To prove they aren’t accidentally x86-only, the same code was validated on a very different machine — an <strong>NVIDIA DGX Spark</strong>: <strong>ARM64 (aarch64)</strong>, <strong>GB10 Grace-Blackwell</strong> GPU, <strong>sm_121</strong>, <strong>CUDA 13</strong>, unified memory. (The Spark also does robotics duty, which is why depth / pose / tracking / segmentation matter here — they’re robot-perception primitives.)</p>
+<section id="the-one-thing-that-changes-the-pytorch-build" class="level2">
+<h2 class="anchored" data-anchor-id="the-one-thing-that-changes-the-pytorch-build">The one thing that changes: the PyTorch build</h2>
+<p>Everything in this repo is pure-Python or ships ARM64 wheels (<code>ultralytics</code>, <code>supervision</code>, <code>transformers</code>, <code>timm</code>, <code>opencv</code>…). The single platform-specific dependency is <strong>PyTorch + CUDA</strong>:</p>
+<ul>
+<li>On the <strong>x86 workstation</strong>, <code>pyproject.toml</code> pins the <strong>CUDA 12.8</strong> wheels (Ampere-friendly).</li>
+<li>On the <strong>ARM64 Spark</strong>, that pin is wrong — <code>sm_121</code> needs <strong>CUDA 13</strong>. The clean fix is to run inside NVIDIA’s <strong>NGC PyTorch container</strong> (<code>nvcr.io/nvidia/pytorch</code>), which ships a Blackwell-ready torch for aarch64, and create a venv with <code>--system-site-packages</code> so the repo’s extra deps install <em>on top of</em> that torch rather than dragging in an incompatible build.</li>
+</ul>
+<p>That’s the whole portability story: <strong>swap the torch build, keep the code.</strong></p>
+</section>
+<section id="what-was-validated-on-the-gb10" class="level2">
+<h2 class="anchored" data-anchor-id="what-was-validated-on-the-gb10">What was validated on the GB10</h2>
+<p>Cloning this public repo into the NGC container and running it produced:</p>
+<pre><code>device: NVIDIA GB10 | 121.7 GB | sm_121 | torch 2.11.0a0 (nv) / CUDA 13.2
+
+cvkit unit tests ......... 6 passed
+yolo26n via modules/01 detect.py:
+  detections: 5  -&gt;  ['bus', 'person', 'person', 'person', 'person']</code></pre>
+<ul>
+<li><strong><code>cvkit</code> is platform-agnostic</strong> — its device/IO/timing/metrics helpers pass unchanged on ARM64, and <code>describe_device</code> correctly reports the GB10 at <code>sm_121</code> / CUDA 13.2.</li>
+<li><strong>The module adapters run as-is</strong> — the exact <code>detect.py</code> used on the 3090 Ti loads YOLO26 and produces correct detections on Blackwell, no code edits.</li>
+</ul>
+</section>
+<section id="takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="takeaways">Takeaways</h2>
+<ul>
+<li>A repo like this is portable <strong>if you isolate the torch build</strong> and keep everything else pure Python / wheel-installable. The <code>cvkit</code> abstraction (one device/dtype path, no hard-coded CUDA assumptions) is what makes that cheap.</li>
+<li>The NGC container is the path of least resistance on bleeding-edge hardware (new <code>sm_</code>, new CUDA), versus assembling pip wheels by hand.</li>
+<li>Heavier or Linux-only tooling (mmdet/detectron2/flash-attention) would also live on the Spark rather than the Windows workstation — the natural division of labour for this project.</li>
+</ul>
 
 
 </section>
@@ -629,7 +637,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/02-classification/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/cross-platform.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
