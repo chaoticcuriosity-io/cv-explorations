@@ -19,7 +19,7 @@ DGX Spark** over Tailscale. Site rendering itself needs no GPU.
 |---|--------|-----------------|--------------------|--------|
 | 01 | [**Object detection**](modules/01-object-detection/report.qmd) | *What & where (boxes)?* | RF-DETR · YOLO26 · YOLO11 · Grounding DINO | ✅ done |
 | 02 | [Classification + zero-shot](modules/02-classification/report.qmd) | *What is this image?* | ConvNeXt · SigLIP 2 · OpenCLIP | ✅ done |
-| 03 | Segmentation | *Which pixels (masks)?* | SAM 2.1 · SAM 3 · Mask2Former | ⏳ planned |
+| 03 | [Segmentation](modules/03-segmentation/report.qmd) | *Which pixels (masks)?* | YOLO-seg · SAM 2.1 | ✅ done |
 | 04 | Monocular depth | *How far is each pixel?* | Depth Anything V2/3 · Depth Pro | ⏳ planned |
 | 05 | Pose / keypoints | *Where are the joints?* | RTMPose · ViTPose++ · MediaPipe | ⏳ planned |
 | 06 | Tracking | *Same object across frames?* | ByteTrack · BoT-SORT | ⏳ planned |

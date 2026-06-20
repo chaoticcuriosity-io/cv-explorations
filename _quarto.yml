@@ -18,6 +18,8 @@ website:
             text: "01 · Object detection"
           - href: modules/02-classification/report.qmd
             text: "02 · Image classification"
+          - href: modules/03-segmentation/report.qmd
+            text: "03 · Segmentation"
     right:
       - icon: github
         href: https://github.com/chaoticcuriosity-io/cv-explorations
