@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "modules/09-classical/results/metrics.html",
+    "href": "modules/09-classical/results/metrics.html",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Operation\nLatency (ms)\n\n\n\n\nCanny edges\n0.76\n\n\nORB detect+match\n8.23\n\n\nFarneback optical flow\n96.94\n\n\n\nAll on CPU, no GPU, no training, no model download. Compare these millisecond timings to the deep models in modules 01–08 — classical CV is essentially free, which is why it still underpins calibration, SLAM front-ends, and stabilisation."
+  },
+  {
+    "objectID": "modules/09-classical/results/metrics.html#classical-cv-operation-timings-cpu",
+    "href": "modules/09-classical/results/metrics.html#classical-cv-operation-timings-cpu",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Operation\nLatency (ms)\n\n\n\n\nCanny edges\n0.76\n\n\nORB detect+match\n8.23\n\n\nFarneback optical flow\n96.94\n\n\n\nAll on CPU, no GPU, no training, no model download. Compare these millisecond timings to the deep models in modules 01–08 — classical CV is essentially free, which is why it still underpins calibration, SLAM front-ends, and stabilisation."
+  },
+  {
     "objectID": "modules/08-vlm/results/transcript.html",
     "href": "modules/08-vlm/results/transcript.html",
     "title": "CV Explorations",
@@ -473,7 +487,7 @@
     "href": "index.html#the-curriculum",
     "title": "CV Explorations",
     "section": "The curriculum",
-    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nYOLO26 + ByteTrack\n✅ done\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n✅ done\n\n\n08\nVision-language models\nDescribe / answer / ground\nQwen2.5-VL 3B\n✅ done\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
+    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nYOLO26 + ByteTrack\n✅ done\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n✅ done\n\n\n08\nVision-language models\nDescribe / answer / ground\nQwen2.5-VL 3B\n✅ done\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB\n✅ done"
   },
   {
     "objectID": "index.html#a-useful-mental-model",
@@ -691,5 +705,54 @@
     "title": "CV Explorations",
     "section": "",
     "text": "Model\nLicense\nLatency (ms/answer, 32 tok)\nNote\n\n\n\n\nQwen2.5-VL 3B\nApache-2.0\n3729.64\nfree-form text; qualitative\n\n\n\nOne model answers caption/reason/count/OCR purely from the prompt — no task-specific heads. Latency is per short answer on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8 and scales with the number of generated tokens. See the transcript for real outputs."
+  },
+  {
+    "objectID": "modules/09-classical/report.html",
+    "href": "modules/09-classical/report.html",
+    "title": "09 · Classical computer vision",
+    "section": "",
+    "text": "Modules 01–08 are all neural networks. This one deliberately goes back to the pre-deep-learning toolkit: hand-designed algorithms from OpenCV that are fast, transparent, deterministic, and need no training data or GPU. They aren’t a historical curiosity — they still run inside camera calibration, visual SLAM front-ends, image stabilisation, panorama stitching, and as cheap preprocessing for the deep models. Seeing them makes the rest of the curriculum legible: you can read every line of what these do, which is rarely true of a learned model."
+  },
+  {
+    "objectID": "modules/09-classical/report.html#why-this-module-exists",
+    "href": "modules/09-classical/report.html#why-this-module-exists",
+    "title": "09 · Classical computer vision",
+    "section": "",
+    "text": "Modules 01–08 are all neural networks. This one deliberately goes back to the pre-deep-learning toolkit: hand-designed algorithms from OpenCV that are fast, transparent, deterministic, and need no training data or GPU. They aren’t a historical curiosity — they still run inside camera calibration, visual SLAM front-ends, image stabilisation, panorama stitching, and as cheap preprocessing for the deep models. Seeing them makes the rest of the curriculum legible: you can read every line of what these do, which is rarely true of a learned model."
+  },
+  {
+    "objectID": "modules/09-classical/report.html#four-classics",
+    "href": "modules/09-classical/report.html#four-classics",
+    "title": "09 · Classical computer vision",
+    "section": "Four classics",
+    "text": "Four classics\n\nEdge detection & contours\nThe Canny edge detector finds intensity discontinuities (gradients), then thins and links them into clean edges. Contours chain those edges into closed boundaries you can measure (area, perimeter, shape). For decades this was “object detection”.\n\n\n\n\n\n\nFigure 1: Canny edges and extracted contours — pure gradient math, no learning.\n\n\n\n\n\nFeature detection & matching (ORB)\nORB finds repeatable keypoints (corners) and encodes each as a binary descriptor, so the same physical point can be matched across two images. Matching keypoints between views is the engine behind panorama stitching, structure-from-motion, and the front-end of visual SLAM — the hand-built ancestor of the learned embeddings in module 07.\n\n\n\n\n\n\nFigure 2: ORB keypoints matched between two video frames.\n\n\n\n\n\nOptical flow\nFarneback dense optical flow estimates a motion vector for every pixel between two frames — direction as hue, speed as brightness. It’s geometry, not recognition: no idea what is moving, only how. Flow feeds stabilisation, motion segmentation, and action recognition.\n\n\n\n\n\n\nFigure 3: Dense optical flow between two frames."
+  },
+  {
+    "objectID": "modules/09-classical/report.html#results",
+    "href": "modules/09-classical/report.html#results",
+    "title": "09 · Classical computer vision",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "modules/09-classical/report.html#classical-cv-operation-timings-cpu",
+    "href": "modules/09-classical/report.html#classical-cv-operation-timings-cpu",
+    "title": "09 · Classical computer vision",
+    "section": "Classical CV: operation timings (CPU)",
+    "text": "Classical CV: operation timings (CPU)\n\n\n\nOperation\nLatency (ms)\n\n\n\n\nCanny edges\n0.76\n\n\nORB detect+match\n8.23\n\n\nFarneback optical flow\n96.94\n\n\n\nAll on CPU, no GPU, no training, no model download. Compare these millisecond timings to the deep models in modules 01–08 — classical CV is essentially free, which is why it still underpins calibration, SLAM front-ends, and stabilisation.\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nEssentially free. Canny runs in well under a millisecond; even dense optical flow is ~100 ms on a CPU with no model to load. Compare that to the VLM’s ~3.7 s per answer on a 24 GB GPU.\nTransparent and deterministic. Every output follows from explicit math — no weights, no training set, same result every run. When you need to certify behaviour, that matters.\nThey still underpin modern systems. SLAM, calibration, and stitching lean on features and flow; deep models often sit on top of a classical geometric backbone, not instead of it.\nThe throughline. ORB→learned embeddings, Canny/contours→learned segmentation, optical flow→learned trackers: each deep module in this repo has a classical ancestor solving the same problem with hand-designed instead of learned features."
+  },
+  {
+    "objectID": "modules/09-classical/report.html#where-classical-cv-fails",
+    "href": "modules/09-classical/report.html#where-classical-cv-fails",
+    "title": "09 · Classical computer vision",
+    "section": "Where classical CV fails",
+    "text": "Where classical CV fails\n\nSemantics — it finds edges and corners, never “cat” or “pedestrian”. No notion of meaning.\nRobustness — sensitive to lighting, blur, texture, and parameter tuning (those Canny thresholds are hand-set).\nHigh-level tasks — captioning, VQA, open-vocabulary anything are out of reach; that’s exactly the gap deep learning filled."
+  },
+  {
+    "objectID": "modules/09-classical/report.html#reproduce",
+    "href": "modules/09-classical/report.html#reproduce",
+    "title": "09 · Classical computer vision",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group dev      # opencv-python only; no model downloads\nuv run python modules/09-classical/run.py"
   }
 ]

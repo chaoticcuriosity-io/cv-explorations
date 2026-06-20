@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>04 · Monocular depth – CV Explorations</title>
+<title>09 · Classical computer vision – CV Explorations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -196,22 +196,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task">The task</a></li>
-  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">How it works</a></li>
+  <li><a href="#why-this-module-exists" id="toc-why-this-module-exists" class="nav-link active" data-scroll-target="#why-this-module-exists">Why this module exists</a></li>
+  <li><a href="#four-classics" id="toc-four-classics" class="nav-link" data-scroll-target="#four-classics">Four classics</a>
+  <ul class="collapse">
+  <li><a href="#edge-detection-contours" id="toc-edge-detection-contours" class="nav-link" data-scroll-target="#edge-detection-contours">Edge detection &amp; contours</a></li>
+  <li><a href="#feature-detection-matching-orb" id="toc-feature-detection-matching-orb" class="nav-link" data-scroll-target="#feature-detection-matching-orb">Feature detection &amp; matching (ORB)</a></li>
+  <li><a href="#optical-flow" id="toc-optical-flow" class="nav-link" data-scroll-target="#optical-flow">Optical flow</a></li>
+  </ul></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#monocular-depth-speed" id="toc-monocular-depth-speed" class="nav-link" data-scroll-target="#monocular-depth-speed">Monocular depth: speed</a></li>
-  <li><a href="#where-monocular-depth-fails" id="toc-where-monocular-depth-fails" class="nav-link" data-scroll-target="#where-monocular-depth-fails">Where monocular depth fails</a></li>
+  <li><a href="#classical-cv-operation-timings-cpu" id="toc-classical-cv-operation-timings-cpu" class="nav-link" data-scroll-target="#classical-cv-operation-timings-cpu">Classical CV: operation timings (CPU)</a></li>
+  <li><a href="#where-classical-cv-fails" id="toc-where-classical-cv-fails" class="nav-link" data-scroll-target="#where-classical-cv-fails">Where classical CV fails</a></li>
   <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproduce</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/04-depth/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/09-classical/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">04 · Monocular depth</h1>
-<p class="subtitle lead">How far is each pixel, from a single image? — Depth Anything V2</p>
+<h1 class="title">09 · Classical computer vision</h1>
+<p class="subtitle lead">How it worked before deep learning — edges, contours, features, and flow</p>
 </div>
 
 
@@ -228,60 +233,83 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="the-task" class="level2">
-<h2 class="anchored" data-anchor-id="the-task">The task</h2>
-<p><strong>Monocular depth estimation</strong> predicts a distance for every pixel from one ordinary RGB image — no stereo pair, no LiDAR. It’s the perception capability most directly relevant to <strong>robotics</strong>: turning a flat photo into 3D structure for navigation, grasping, and obstacle avoidance.</p>
-<p>A key distinction:</p>
-<ul>
-<li><strong>Relative depth</strong> — orders pixels near-to-far without real-world units. Enough for “what’s in front of what”. Depth Anything V2 predicts this.</li>
-<li><strong>Metric depth</strong> — actual metres. Needed for measurement/control; harder, and usually fine-tuned per camera (e.g.&nbsp;Depth Anything’s metric heads, Apple Depth Pro).</li>
-</ul>
+<section id="why-this-module-exists" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-module-exists">Why this module exists</h2>
+<p>Modules 01–08 are all neural networks. This one deliberately goes back to the <strong>pre-deep-learning</strong> toolkit: hand-designed algorithms from OpenCV that are <strong>fast, transparent, deterministic, and need no training data or GPU</strong>. They aren’t a historical curiosity — they still run inside camera calibration, visual SLAM front-ends, image stabilisation, panorama stitching, and as cheap preprocessing for the deep models. Seeing them makes the rest of the curriculum legible: you can <em>read every line</em> of what these do, which is rarely true of a learned model.</p>
 </section>
-<section id="how-it-works" class="level2">
-<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
-<p>Depth Anything V2 is a <strong>DINOv2 vision-transformer encoder</strong> plus a lightweight depth head, trained on a huge mix of labelled + pseudo-labelled images. The transformer’s global receptive field lets it use scene-wide cues — perspective, relative size, texture gradients, occlusion — exactly the monocular cues humans use to perceive depth with one eye closed. It outputs <em>inverse</em> depth (larger = nearer).</p>
+<section id="four-classics" class="level2">
+<h2 class="anchored" data-anchor-id="four-classics">Four classics</h2>
+<section id="edge-detection-contours" class="level3">
+<h3 class="anchored" data-anchor-id="edge-detection-contours">Edge detection &amp; contours</h3>
+<p>The <strong>Canny</strong> edge detector finds intensity discontinuities (gradients), then thins and links them into clean edges. <strong>Contours</strong> chain those edges into closed boundaries you can measure (area, perimeter, shape). For decades this <em>was</em> “object detection”.</p>
+<div id="fig-edges" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-edges-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/edges_contours.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-edges-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Canny edges and extracted contours — pure gradient math, no learning.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="feature-detection-matching-orb" class="level3">
+<h3 class="anchored" data-anchor-id="feature-detection-matching-orb">Feature detection &amp; matching (ORB)</h3>
+<p><strong>ORB</strong> finds repeatable keypoints (corners) and encodes each as a binary descriptor, so the <em>same</em> physical point can be matched across two images. Matching keypoints between views is the engine behind panorama stitching, structure-from-motion, and the front-end of visual SLAM — the hand-built ancestor of the learned embeddings in <a href="../../modules/07-retrieval/report.html">module 07</a>.</p>
+<div id="fig-orb" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-orb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/features.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-orb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: ORB keypoints matched between two video frames.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="optical-flow" class="level3">
+<h3 class="anchored" data-anchor-id="optical-flow">Optical flow</h3>
+<p><strong>Farneback</strong> dense optical flow estimates a motion vector for <em>every</em> pixel between two frames — direction as hue, speed as brightness. It’s geometry, not recognition: no idea <em>what</em> is moving, only <em>how</em>. Flow feeds stabilisation, motion segmentation, and action recognition.</p>
+<div id="fig-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/optical_flow.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Dense optical flow between two frames.
+</figcaption>
+</figure>
+</div>
+</section>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>We run two sizes on the same images. Larger backbones generally produce sharper boundaries and better thin-structure handling, at a latency cost.</p>
 </section>
-<section id="monocular-depth-speed" class="level2">
-<h2 class="anchored" data-anchor-id="monocular-depth-speed">Monocular depth: speed</h2>
+<section id="classical-cv-operation-timings-cpu" class="level2">
+<h2 class="anchored" data-anchor-id="classical-cv-operation-timings-cpu">Classical CV: operation timings (CPU)</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Model</th>
-<th>License</th>
+<th>Operation</th>
 <th>Latency (ms)</th>
-<th>FPS</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Depth Anything V2 (Small)</td>
-<td>Apache-2.0</td>
-<td>38.44</td>
-<td>26.0</td>
+<td>Canny edges</td>
+<td>0.76</td>
 </tr>
 <tr class="even">
-<td>Depth Anything V2 (Base)</td>
-<td>Apache-2.0</td>
-<td>78.19</td>
-<td>12.8</td>
+<td>ORB detect+match</td>
+<td>8.23</td>
+</tr>
+<tr class="odd">
+<td>Farneback optical flow</td>
+<td>96.94</td>
 </tr>
 </tbody>
 </table>
-<p><em>Relative (inverse) monocular depth; in the figure brighter = nearer. Latency = mean warmed-up single-image forward on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>. Qualitative + latency; metric-depth eval (AbsRel/RMSE on NYU/KITTI) is a deeper follow-up.</em></p>
-<div id="fig-depth" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-depth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="results/depth_maps.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-depth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: RGB input vs predicted depth (brighter = nearer). Note how both models recover ground-plane gradient, object separation, and rough scene layout from a single photo.
-</figcaption>
-</figure>
-</div>
+<p><em>All on CPU, no GPU, no training, no model download. Compare these millisecond timings to the deep models in modules 01–08 — classical CV is essentially free, which is why it still underpins calibration, SLAM front-ends, and stabilisation.</em></p>
 <div class="callout callout-style-default callout-note callout-titled" title="What to notice">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -293,26 +321,26 @@ Figure&nbsp;1: RGB input vs predicted depth (brighter = nearer). Note how both m
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><strong>Real 3D structure from one image.</strong> With no stereo or sensor, the model separates foreground from background, recovers the ground plane, and orders objects in depth — the cue set a robot can turn into a rough 3D map.</li>
-<li><strong>Size buys sharpness, not speed.</strong> Depth Anything V2 Base (~13 fps) gives crisper edges than Small (~26 fps); the right pick depends on whether you need real-time or best quality.</li>
-<li><strong>Relative, not metric.</strong> These maps tell you <em>nearer/farther</em>, not <em>how many metres</em> — for control you’d use a metric variant calibrated to your camera.</li>
+<li><strong>Essentially free.</strong> Canny runs in well under a millisecond; even dense optical flow is ~100 ms on a CPU with no model to load. Compare that to the VLM’s ~3.7 s <em>per answer</em> on a 24 GB GPU.</li>
+<li><strong>Transparent and deterministic.</strong> Every output follows from explicit math — no weights, no training set, same result every run. When you need to <em>certify</em> behaviour, that matters.</li>
+<li><strong>They still underpin modern systems.</strong> SLAM, calibration, and stitching lean on features and flow; deep models often sit <em>on top of</em> a classical geometric backbone, not instead of it.</li>
+<li><strong>The throughline.</strong> ORB→learned embeddings, Canny/contours→learned segmentation, optical flow→learned trackers: each deep module in this repo has a classical ancestor solving the same problem with hand-designed instead of learned features.</li>
 </ul>
 </div>
 </div>
 </section>
-<section id="where-monocular-depth-fails" class="level2">
-<h2 class="anchored" data-anchor-id="where-monocular-depth-fails">Where monocular depth fails</h2>
+<section id="where-classical-cv-fails" class="level2">
+<h2 class="anchored" data-anchor-id="where-classical-cv-fails">Where classical CV fails</h2>
 <ul>
-<li><strong>Absolute scale ambiguity</strong> — a doll-house and a real house look identical to a single camera; relative depth can’t resolve true size.</li>
-<li><strong>Reflective / transparent surfaces</strong> (mirrors, glass, water) — violate the visual cues the model relies on.</li>
-<li><strong>Untextured walls &amp; sky</strong> — few gradients to reason from.</li>
-<li><strong>Out-of-distribution cameras</strong> — fisheye, aerial, or endoscopic views differ from the training mix and degrade.</li>
+<li><strong>Semantics</strong> — it finds edges and corners, never “cat” or “pedestrian”. No notion of meaning.</li>
+<li><strong>Robustness</strong> — sensitive to lighting, blur, texture, and parameter tuning (those Canny thresholds are hand-set).</li>
+<li><strong>High-level tasks</strong> — captioning, VQA, open-vocabulary anything are out of reach; that’s exactly the gap deep learning filled.</li>
 </ul>
 </section>
 <section id="reproduce" class="level2">
 <h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> dev      <span class="co"># transformers provides the Depth Anything V2 pipeline</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/04-depth/run.py <span class="at">--images</span> 4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> dev      <span class="co"># opencv-python only; no model downloads</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/09-classical/run.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -726,7 +754,7 @@ Figure&nbsp;1: RGB input vs predicted depth (brighter = nearer). Note how both m
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/04-depth/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/09-classical/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
