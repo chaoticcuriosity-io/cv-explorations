@@ -1,0 +1,60 @@
+---
+title: "05 · Human pose estimation"
+subtitle: "Where are the joints? — 17-keypoint skeletons with YOLO-pose"
+---
+
+## The task
+
+**Pose estimation** locates a set of body keypoints per person — for the COCO format, 17 of
+them (eyes, ears, shoulders, elbows, wrists, hips, knees, ankles) — and connects them into a
+skeleton. It powers motion capture, sports analytics, gesture interfaces, and
+**human-aware robotics** (a robot that must not bump the person reaching past it).
+
+## Two paradigms
+
+| Paradigm | How | Trade-off |
+|---|---|---|
+| **Bottom-up / single-stage** (YOLO-pose here) | One network predicts people *and* their keypoints in a single pass | Constant cost regardless of crowd size; fast |
+| **Top-down** (ViTPose, RTMPose) | Detect each person, then run a dedicated pose net on each crop | Usually more accurate, but cost grows with the number of people |
+
+This module benchmarks two YOLO-pose generations (single-stage). The top-down family is the
+accuracy-first alternative when you have few people and need precise joints.
+
+## How it works
+
+YOLO-pose extends the detector: alongside each person box it regresses the 17 keypoint
+coordinates (and a per-keypoint visibility). Because keypoints are predicted jointly with
+detection in one forward pass, throughput stays high even in crowds — you can see this in the
+figures, where several skeletons are recovered at once.
+
+## Results
+
+{{< include results/metrics.md >}}
+
+![YOLO26-n-pose — 17-keypoint skeletons.](results/samples_yolo26-pose.png){#fig-y26pose}
+
+![YOLO11-n-pose — same images, prior generation.](results/samples_yolo11-pose.png){#fig-y11pose}
+
+::: {.callout-note title="What to notice"}
+- **Crowd-constant speed.** Both models stay at ~50 fps whether the image has one person or
+  several — the single-stage win. A top-down model would slow down as people are added.
+- **A newer generation recovers more people.** YOLO26-pose found more people per image than
+  YOLO11-pose here (better recall on partially-occluded figures), at a slightly lower frame-rate.
+- **Keypoints carry visibility.** Occluded joints are predicted with low confidence; downstream
+  code should use that, not assume every joint is reliable.
+:::
+
+## Where pose estimation fails
+
+- **Occlusion & truncation** — joints hidden behind objects or cropped out of frame.
+- **Crowding & overlap** — skeletons can swap limbs between nearby people.
+- **Unusual poses** — gymnastics, lying down, or atypical viewpoints under-represented in
+  training.
+- **Small / distant people** — too few pixels to localise joints precisely.
+
+## Reproduce
+
+```bash
+uv sync --group detection
+uv run python modules/05-pose/run.py --images 4
+```

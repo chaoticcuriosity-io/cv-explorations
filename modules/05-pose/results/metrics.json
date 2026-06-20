@@ -1,0 +1,16 @@
+[
+  {
+    "display": "YOLO26-n-pose",
+    "license": "AGPL-3.0",
+    "latency_ms": 21.52,
+    "fps": 46.5,
+    "avg_people": 3.2
+  },
+  {
+    "display": "YOLO11-n-pose",
+    "license": "AGPL-3.0",
+    "latency_ms": 18.33,
+    "fps": 54.5,
+    "avg_people": 2.5
+  }
+]
