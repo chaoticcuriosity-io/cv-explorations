@@ -29,7 +29,9 @@ The most important idea to carry across this whole curriculum is the split betwe
   no retraining. More flexible, generally slower and lower-AP on the fixed COCO set.
 
 This report benchmarks the closed-set models head-to-head (they share the COCO label
-space, so mAP is a fair comparison). The open-vocabulary contrast is added next.
+space, so mAP is a fair comparison), then demonstrates the open-vocabulary alternative
+qualitatively below — it isn't restricted to the 80 COCO names, so a like-for-like mAP
+wouldn't be meaningful.
 
 ## The architectures benchmarked
 
@@ -94,6 +96,26 @@ threshold for legibility):
 ![RF-DETR Nano](results/samples_rfdetr-nano.png){#fig-rfnano}
 
 ![RF-DETR Medium](results/samples_rfdetr-medium.png){#fig-rfmed}
+:::
+
+## Open-vocabulary in action
+
+The four models above can *only ever* emit one of the 80 COCO names. **Grounding DINO**
+removes that ceiling: you hand it a sentence of phrases at inference time and it localises
+whatever it can find — no retraining, no fixed label set.
+
+Run on the same kind of images with the prompt
+`person. bottle. cup. plate. napkin. logo. shoe. hand.`, it returns not just the COCO
+classes but **`plate`, `napkin`, `logo`, `shoe`, `hand`** — concepts that don't exist in
+COCO's vocabulary at all:
+
+![Grounding DINO — open-vocabulary detection. The prompt mixes COCO and non-COCO concepts; the out-of-COCO hits are what a closed-set model can never produce.](results/openvocab_grounding-dino.png){#fig-openvocab}
+
+::: {.callout-tip title="The trade-off"}
+Open-vocabulary buys flexibility at a price: Grounding DINO is slower than the YOLO/RF-DETR
+detectors, and you can't quote a single COCO mAP for it (its label space is unbounded). The
+practical pattern is to use an open-vocab model to *find or auto-label* novel classes, then
+distil a fast closed-set detector for deployment — a thread later modules pick up.
 :::
 
 ## Where detectors fail

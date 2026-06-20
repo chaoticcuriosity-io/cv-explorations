@@ -141,6 +141,62 @@ def _rfdetr(cls_name: str, display: str, device: torch.device) -> RFDETRDetector
     return RFDETRDetector(ctor, DetectorMeta(key, display, "DETR (transformer)", "Apache-2.0"), device)
 
 
+class OpenVocabDetector:
+    """Grounding DINO — *open-vocabulary* detection from a text prompt. Apache-2.0.
+
+    Different interface from the closed-set ``Detector``: ``detect`` takes a list of
+    free-text phrases instead of a fixed label set, and can localise concepts that
+    are not among COCO's 80 classes.
+    """
+
+    def __init__(self, device: torch.device, model_id: str = "IDEA-Research/grounding-dino-tiny"):
+        from transformers import AutoModelForZeroShotObjectDetection, AutoProcessor
+
+        self.proc = AutoProcessor.from_pretrained(model_id)
+        self.model = AutoModelForZeroShotObjectDetection.from_pretrained(model_id).to(device).eval()
+        self.device = device
+        self.meta = DetectorMeta(
+            "grounding-dino", "Grounding DINO (tiny)", "open-vocabulary DETR", "Apache-2.0"
+        )
+
+    def detect(
+        self,
+        image_rgb: np.ndarray,
+        prompts: list[str],
+        box_threshold: float = 0.30,
+        text_threshold: float = 0.25,
+    ) -> sv.Detections:
+        from PIL import Image
+
+        im = Image.fromarray(image_rgb)
+        # Grounding DINO expects lowercase phrases separated by ". ".
+        text = ". ".join(p.strip().rstrip(".").lower() for p in prompts) + "."
+        inp = self.proc(images=im, text=text, return_tensors="pt").to(self.device)
+        with torch.no_grad():
+            out = self.model(**inp)
+        res = self.proc.post_process_grounded_object_detection(
+            out,
+            inp["input_ids"],
+            threshold=box_threshold,
+            text_threshold=text_threshold,
+            target_sizes=[im.size[::-1]],
+        )[0]
+        boxes = res["boxes"].cpu().numpy()
+        if len(boxes) == 0:
+            return sv.Detections.empty()
+        det = sv.Detections(
+            xyxy=boxes,
+            confidence=res["scores"].cpu().numpy(),
+            class_id=np.arange(len(boxes)),
+        )
+        det.data["class_name"] = np.array([str(n) for n in res["text_labels"]])
+        return det
+
+
+def build_open_vocab(device: torch.device) -> OpenVocabDetector:
+    return OpenVocabDetector(device)
+
+
 def available() -> list[str]:
     return list(_REGISTRY)
 
