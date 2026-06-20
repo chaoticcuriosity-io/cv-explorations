@@ -1,0 +1,14 @@
+[
+  {
+    "display": "Depth Anything V2 (Small)",
+    "license": "Apache-2.0",
+    "latency_ms": 38.44,
+    "fps": 26.0
+  },
+  {
+    "display": "Depth Anything V2 (Base)",
+    "license": "Apache-2.0",
+    "latency_ms": 78.19,
+    "fps": 12.8
+  }
+]
