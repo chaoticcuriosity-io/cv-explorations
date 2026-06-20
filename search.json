@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "modules/07-retrieval/results/metrics.html",
+    "href": "modules/07-retrieval/results/metrics.html",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nType\nLicense\nRecall@1 (%)\nPrecision@5 (%)\nLatency (ms)\nFPS\n\n\n\n\nSigLIP 2 Base\nimage-text\nApache-2.0\n99.8\n99.2\n20.51\n48.8\n\n\nDINOv2 Base\nself-supervised\nApache-2.0\n99.3\n98.8\n19.45\n51.4\n\n\n\nRetrieval on 600 Imagenette images (60/class). Recall@1 = nearest neighbour shares the class; Precision@5 = fraction of top-5 that do. No labels used at search time — purely embedding similarity. Latency on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Figure uses DINOv2 Base."
+  },
+  {
+    "objectID": "modules/07-retrieval/results/metrics.html#image-retrieval-imagenette",
+    "href": "modules/07-retrieval/results/metrics.html#image-retrieval-imagenette",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nType\nLicense\nRecall@1 (%)\nPrecision@5 (%)\nLatency (ms)\nFPS\n\n\n\n\nSigLIP 2 Base\nimage-text\nApache-2.0\n99.8\n99.2\n20.51\n48.8\n\n\nDINOv2 Base\nself-supervised\nApache-2.0\n99.3\n98.8\n19.45\n51.4\n\n\n\nRetrieval on 600 Imagenette images (60/class). Recall@1 = nearest neighbour shares the class; Precision@5 = fraction of top-5 that do. No labels used at search time — purely embedding similarity. Latency on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Figure uses DINOv2 Base."
+  },
+  {
     "objectID": "modules/06-tracking/results/metrics.html",
     "href": "modules/06-tracking/results/metrics.html",
     "title": "CV Explorations",
@@ -186,7 +200,7 @@
     "href": "index.html#the-curriculum",
     "title": "CV Explorations",
     "section": "The curriculum",
-    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nYOLO26 + ByteTrack\n✅ done\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
+    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\nConvNeXt · SigLIP 2 · OpenCLIP\n✅ done\n\n\n03\nSegmentation\nWhich pixels (masks)?\nYOLO-seg · SAM 2.1\n✅ done\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2 (S/B)\n✅ done\n\n\n05\nPose / keypoints\nWhere are the joints?\nYOLO26-pose · YOLO11-pose\n✅ done\n\n\n06\nTracking\nSame object across frames?\nYOLO26 + ByteTrack\n✅ done\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n✅ done\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
   },
   {
     "objectID": "index.html#a-useful-mental-model",
@@ -544,5 +558,54 @@
     "title": "06 · Multi-object tracking",
     "section": "Reproduce",
     "text": "Reproduce\nuv sync --group detection      # ultralytics + supervision (ByteTrack)\nuv run python modules/06-tracking/run.py\n(The sample clip is downloaded by supervision’s asset helper into data/.)"
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html",
+    "href": "modules/07-retrieval/report.html",
+    "title": "07 · Embeddings & retrieval",
+    "section": "",
+    "text": "Most of this curriculum predicts labels. This module predicts a vector: an embedding that places similar images near each other in a high-dimensional space. That single idea underpins reverse image search, deduplication, clustering, recommendation, anomaly detection, and few-shot recognition — none of which need a classifier head. To “classify” you just look at your neighbours.\nThe workflow:\n\nEmbed every gallery image to an L2-normalised vector.\nEmbed a query the same way.\nRank gallery vectors by cosine similarity (a dot product) and return the nearest."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#the-task",
+    "href": "modules/07-retrieval/report.html#the-task",
+    "title": "07 · Embeddings & retrieval",
+    "section": "",
+    "text": "Most of this curriculum predicts labels. This module predicts a vector: an embedding that places similar images near each other in a high-dimensional space. That single idea underpins reverse image search, deduplication, clustering, recommendation, anomaly detection, and few-shot recognition — none of which need a classifier head. To “classify” you just look at your neighbours.\nThe workflow:\n\nEmbed every gallery image to an L2-normalised vector.\nEmbed a query the same way.\nRank gallery vectors by cosine similarity (a dot product) and return the nearest."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#two-kinds-of-embedding",
+    "href": "modules/07-retrieval/report.html#two-kinds-of-embedding",
+    "title": "07 · Embeddings & retrieval",
+    "section": "Two kinds of embedding",
+    "text": "Two kinds of embedding\n\n\n\n\n\n\n\n\nModel\nTrained on\nSignal it captures\n\n\n\n\nDINOv2\nImages only, self-supervised (no labels)\nVisual structure, parts, texture, shape — emerges purely from the data\n\n\nSigLIP 2\nImage–text pairs, contrastive\nSemantics aligned to language — “what you’d call it”\n\n\n\nDINOv2 learns by making different augmented views of the same image agree; it never sees a label, yet produces features so strong that a linear probe rivals supervised training. SigLIP learns from captions, so its space is organised the way language groups things. Both give excellent retrieval — the right choice depends on whether you want visual or semantic similarity."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#results",
+    "href": "modules/07-retrieval/report.html#results",
+    "title": "07 · Embeddings & retrieval",
+    "section": "Results",
+    "text": "Results\nA real metric, not just pictures: we embed a balanced Imagenette gallery and measure how often the nearest neighbours share the query’s class — using no labels at search time."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#image-retrieval-imagenette",
+    "href": "modules/07-retrieval/report.html#image-retrieval-imagenette",
+    "title": "07 · Embeddings & retrieval",
+    "section": "Image retrieval (Imagenette)",
+    "text": "Image retrieval (Imagenette)\n\n\n\n\n\n\n\n\n\n\n\n\nModel\nType\nLicense\nRecall@1 (%)\nPrecision@5 (%)\nLatency (ms)\nFPS\n\n\n\n\nSigLIP 2 Base\nimage-text\nApache-2.0\n99.8\n99.2\n20.51\n48.8\n\n\nDINOv2 Base\nself-supervised\nApache-2.0\n99.3\n98.8\n19.45\n51.4\n\n\n\nRetrieval on 600 Imagenette images (60/class). Recall@1 = nearest neighbour shares the class; Precision@5 = fraction of top-5 that do. No labels used at search time — purely embedding similarity. Latency on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8. Figure uses DINOv2 Base.\n\n\n\n\n\n\nFigure 1: Each row: a query (black border) and its 5 nearest neighbours. Green = same class, red = different. The model was never trained to classify Imagenette — this is pure embedding similarity.\n\n\n\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nSearch beats training, for free. Both embedders retrieve the correct class &gt;99% of the time (Recall@1) with no classifier and no labels at query time — add a new class by just dropping its images into the gallery.\nSelf-supervised is competitive with image-text. DINOv2 (never saw a single label or caption) trails SigLIP 2 by only a few tenths of a point here — a striking result for a model trained purely on images.\nThis is how you’d handle an open, growing catalogue — products, faces, defects — where retraining a classifier per new item is impractical."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#where-retrieval-fails",
+    "href": "modules/07-retrieval/report.html#where-retrieval-fails",
+    "title": "07 · Embeddings & retrieval",
+    "section": "Where retrieval fails",
+    "text": "Where retrieval fails\n\nFine-grained distinctions — near-duplicate categories (specific dog breeds, product variants) can blur in a general embedding; specialised/fine-tuned embeddings help.\nGallery quality & scale — retrieval is only as good as what’s indexed; at millions of items you need an ANN index (FAISS) and recall/speed trade-offs appear.\nDomain gap — embeddings trained on web images underperform on medical, satellite, or industrial imagery without adaptation."
+  },
+  {
+    "objectID": "modules/07-retrieval/report.html#reproduce",
+    "href": "modules/07-retrieval/report.html#reproduce",
+    "title": "07 · Embeddings & retrieval",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group dev\nuv run python modules/07-retrieval/run.py --per-class 60"
   }
 ]
