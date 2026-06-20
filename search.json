@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "modules/01-object-detection/results/metrics.html",
+    "href": "modules/01-object-detection/results/metrics.html",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nFamily\nLicense\nmAP\nmAP@50\nmAP@75\nmAP (small)\nLatency (ms)\nFPS\n\n\n\n\nRF-DETR Medium\nDETR (transformer)\nApache-2.0\n59.4\n78.2\n63.7\n31.6\n36.3\n27.5\n\n\nRF-DETR Nano\nDETR (transformer)\nApache-2.0\n51.3\n69.9\n54.2\n22.4\n36.43\n27.5\n\n\nYOLO26-n\nYOLO (NMS-free)\nAGPL-3.0\n43.0\n58.1\n47.2\n20.1\n18.75\n53.3\n\n\nYOLO11-n\nYOLO (anchor-free)\nAGPL-3.0\n37.6\n52.1\n40.5\n17.9\n18.0\n55.6\n\n\n\nEvaluated on 200 COCO val2017 images; mAP via pycocotools-equivalent torchmetrics at IoU=.50:.95. Latency = mean over 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8."
+  },
+  {
+    "objectID": "modules/01-object-detection/results/metrics.html#coco-detection-benchmark",
+    "href": "modules/01-object-detection/results/metrics.html#coco-detection-benchmark",
+    "title": "CV Explorations",
+    "section": "",
+    "text": "Model\nFamily\nLicense\nmAP\nmAP@50\nmAP@75\nmAP (small)\nLatency (ms)\nFPS\n\n\n\n\nRF-DETR Medium\nDETR (transformer)\nApache-2.0\n59.4\n78.2\n63.7\n31.6\n36.3\n27.5\n\n\nRF-DETR Nano\nDETR (transformer)\nApache-2.0\n51.3\n69.9\n54.2\n22.4\n36.43\n27.5\n\n\nYOLO26-n\nYOLO (NMS-free)\nAGPL-3.0\n43.0\n58.1\n47.2\n20.1\n18.75\n53.3\n\n\nYOLO11-n\nYOLO (anchor-free)\nAGPL-3.0\n37.6\n52.1\n40.5\n17.9\n18.0\n55.6\n\n\n\nEvaluated on 200 COCO val2017 images; mAP via pycocotools-equivalent torchmetrics at IoU=.50:.95. Latency = mean over 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "CV Explorations",
@@ -11,7 +25,7 @@
     "href": "index.html#the-curriculum",
     "title": "CV Explorations",
     "section": "The curriculum",
-    "text": "The curriculum\n\n\n\n\n\n\n\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · RT-DETRv2 · YOLO26 · Grounding DINO\n🔨 in progress\n\n\n02\nClassification + zero-shot\nWhat is this image?\ntimm backbone · SigLIP 2 / OpenCLIP\n⏳ planned\n\n\n03\nSegmentation\nWhich pixels (masks)?\nSAM 2.1 · SAM 3 · Mask2Former\n⏳ planned\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2/3 · Depth Pro\n⏳ planned\n\n\n05\nPose / keypoints\nWhere are the joints?\nRTMPose · ViTPose++ · MediaPipe\n⏳ planned\n\n\n06\nTracking\nSame object across frames?\nByteTrack · BoT-SORT\n⏳ planned\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
+    "text": "The curriculum\n\n\n\n#\nModule\nWhat it answers\nModels benchmarked\nStatus\n\n\n\n\n01\nObject detection\nWhat & where (boxes)?\nRF-DETR · YOLO26 · YOLO11 · Grounding DINO\n✅ done\n\n\n02\nClassification + zero-shot\nWhat is this image?\ntimm backbone · SigLIP 2 / OpenCLIP\n⏳ planned\n\n\n03\nSegmentation\nWhich pixels (masks)?\nSAM 2.1 · SAM 3 · Mask2Former\n⏳ planned\n\n\n04\nMonocular depth\nHow far is each pixel?\nDepth Anything V2/3 · Depth Pro\n⏳ planned\n\n\n05\nPose / keypoints\nWhere are the joints?\nRTMPose · ViTPose++ · MediaPipe\n⏳ planned\n\n\n06\nTracking\nSame object across frames?\nByteTrack · BoT-SORT\n⏳ planned\n\n\n07\nEmbeddings / retrieval\nHow similar are two images?\nDINOv2 · SigLIP 2\n⏳ planned\n\n\n08\nVision-language models\nDescribe / answer / ground\nFlorence-2 · Qwen3-VL · Moondream 3\n⏳ planned\n\n\n09\nClassical CV\n(pre-deep-learning)\nOpenCV: edges, flow, ORB/SIFT\n⏳ planned"
   },
   {
     "objectID": "index.html#a-useful-mental-model",
@@ -26,5 +40,75 @@
     "title": "CV Explorations",
     "section": "How to run it yourself",
     "text": "How to run it yourself\nuv sync --group dev                # core env (PyTorch + CV stack)\nuv sync --group data --group detection   # extras for the detection module\nuv run python modules/01-object-detection/run.py --help\nSee the repository README for the full setup and hardware notes."
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html",
+    "href": "modules/01-object-detection/report.html",
+    "title": "01 · Object detection",
+    "section": "",
+    "text": "Object detection answers two questions at once: what objects are present and where they are, as axis-aligned bounding boxes with class labels and confidence scores. It sits between classification (one label for the whole image) and segmentation (a label for every pixel), and it underpins most real-world perception — including the robotics work this repo’s hardware also serves.\nThe headline metric is mean Average Precision (mAP): for each class you sweep a confidence threshold to trace a precision–recall curve, take the area under it (Average Precision), and average across classes. COCO reports mAP averaged over ten IoU thresholds from 0.50 to 0.95 (written mAP@[.50:.95]), which rewards tight boxes, not just roughly-right ones."
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html#the-task",
+    "href": "modules/01-object-detection/report.html#the-task",
+    "title": "01 · Object detection",
+    "section": "",
+    "text": "Object detection answers two questions at once: what objects are present and where they are, as axis-aligned bounding boxes with class labels and confidence scores. It sits between classification (one label for the whole image) and segmentation (a label for every pixel), and it underpins most real-world perception — including the robotics work this repo’s hardware also serves.\nThe headline metric is mean Average Precision (mAP): for each class you sweep a confidence threshold to trace a precision–recall curve, take the area under it (Average Precision), and average across classes. COCO reports mAP averaged over ten IoU thresholds from 0.50 to 0.95 (written mAP@[.50:.95]), which rewards tight boxes, not just roughly-right ones."
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html#two-paradigms",
+    "href": "modules/01-object-detection/report.html#two-paradigms",
+    "title": "01 · Object detection",
+    "section": "Two paradigms",
+    "text": "Two paradigms\nThe most important idea to carry across this whole curriculum is the split between closed-set and open-vocabulary detection:\n\nClosed-set models (YOLO, RF-DETR here) predict from a fixed label set — the 80 COCO classes. Fast, accurate, benchmarkable, but blind to anything off-list.\nOpen-vocabulary models (Grounding DINO, YOLO-World) take text at inference time and detect whatever you name — “a forklift”, “a person wearing hi-vis” — with no retraining. More flexible, generally slower and lower-AP on the fixed COCO set.\n\nThis report benchmarks the closed-set models head-to-head (they share the COCO label space, so mAP is a fair comparison). The open-vocabulary contrast is added next."
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html#the-architectures-benchmarked",
+    "href": "modules/01-object-detection/report.html#the-architectures-benchmarked",
+    "title": "01 · Object detection",
+    "section": "The architectures benchmarked",
+    "text": "The architectures benchmarked\n\n\n\n\n\n\n\n\n\nFamily\nMember(s)\nHow it localises\nNotable trait\n\n\n\n\nYOLO\nYOLO26-n, YOLO11-n\nDense grid of predictions over a CNN/feature pyramid\nYOLO26 is NMS-free — it learns to emit one box per object, removing the non-maximum-suppression post-step that older YOLOs need\n\n\nRF-DETR\nNano, Medium\nA transformer decoder with a fixed set of learned “object queries”, each attending to the image\nDETR-style; no anchors, no NMS by design; built on a DINOv2 backbone\n\n\n\nThe interesting contrast: YOLO descends from dense, anchor-based CNN detectors that were engineered to suppress duplicates; DETR-family models reframe detection as set prediction and learn to avoid duplicates end-to-end. YOLO26 narrows that gap by going NMS-free too."
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html#how-we-measured",
+    "href": "modules/01-object-detection/report.html#how-we-measured",
+    "title": "01 · Object detection",
+    "section": "How we measured",
+    "text": "How we measured\nRigour notes, so the numbers mean something:\n\nData: a fixed 200-image slice of COCO val2017 (downloaded via the FiftyOne zoo). Ground-truth iscrowd regions are excluded, matching COCO’s ignore policy.\nmAP: computed with torchmetrics (pycocotools-equivalent) at IoU=.50:.95. Inference is run at a near-zero confidence threshold (~0.001) so the full precision–recall curve is captured — thresholding higher silently understates mAP.\nClass identity is matched by name across models, because YOLO uses COCO ids 0–79 while RF-DETR uses the original 1–90 ids; comparing raw ids would be wrong.\nLatency: mean of 30 warmed-up, single-image predict() calls on the local RTX 3090 Ti — end-to-end (pre-process → forward → post-process), i.e. the latency you’d actually feel, not just the GPU kernel time."
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html#results",
+    "href": "modules/01-object-detection/report.html#results",
+    "title": "01 · Object detection",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html#coco-detection-benchmark",
+    "href": "modules/01-object-detection/report.html#coco-detection-benchmark",
+    "title": "01 · Object detection",
+    "section": "COCO detection benchmark",
+    "text": "COCO detection benchmark\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel\nFamily\nLicense\nmAP\nmAP@50\nmAP@75\nmAP (small)\nLatency (ms)\nFPS\n\n\n\n\nRF-DETR Medium\nDETR (transformer)\nApache-2.0\n59.4\n78.2\n63.7\n31.6\n36.3\n27.5\n\n\nRF-DETR Nano\nDETR (transformer)\nApache-2.0\n51.3\n69.9\n54.2\n22.4\n36.43\n27.5\n\n\nYOLO26-n\nYOLO (NMS-free)\nAGPL-3.0\n43.0\n58.1\n47.2\n20.1\n18.75\n53.3\n\n\nYOLO11-n\nYOLO (anchor-free)\nAGPL-3.0\n37.6\n52.1\n40.5\n17.9\n18.0\n55.6\n\n\n\nEvaluated on 200 COCO val2017 images; mAP via pycocotools-equivalent torchmetrics at IoU=.50:.95. Latency = mean over 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8.\n\n\n\n\n\n\nNoteWhat to notice\n\n\n\n\nAccuracy vs speed is a Pareto frontier, not a ranking. RF-DETR Medium tops accuracy (59.4 mAP) at ~27 fps; YOLO26-n gives up ~16 points of mAP (43.0) to nearly double the throughput (53 fps). Neither is “best” — they sit at different points on the curve.\nA new generation earns its number. YOLO26-n beats prior-gen YOLO11-n by +5.4 mAP (43.0 vs 37.6) at essentially the same speed — and does it NMS-free.\nAt batch = 1, big models can be latency-free. RF-DETR Medium and Nano measured ~36 ms either way: single-image inference is dominated by fixed pre/post-process overhead, so Medium buys +8.1 mAP for ~no extra latency. (This flips with batching, where the heavier backbone’s compute dominates.)\nmAP (small) is everyone’s weak spot, and the relative gap is widest there: 31.6 vs 17.9 between best and worst — a ~1.8× spread, larger than the overall-mAP spread.\nLicense is a real axis. The most accurate model here (RF-DETR, Apache-2.0) is also the permissive one; the fastest (YOLO, AGPL-3.0) carries copyleft terms that matter the moment this leaves a learning context."
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html#qualitative-results",
+    "href": "modules/01-object-detection/report.html#qualitative-results",
+    "title": "01 · Object detection",
+    "section": "Qualitative results",
+    "text": "Qualitative results\nThe same COCO images, as each model sees them (boxes shown above a 0.30 confidence threshold for legibility):\n\n\n\n\n\n\n\n\n\nFigure 1: YOLO26-n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: YOLO11-n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: RF-DETR Nano\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: RF-DETR Medium"
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html#where-detectors-fail",
+    "href": "modules/01-object-detection/report.html#where-detectors-fail",
+    "title": "01 · Object detection",
+    "section": "Where detectors fail",
+    "text": "Where detectors fail\nWorth looking for in the figures above and your own images:\n\nSmall & crowded objects — distant people, stacked items; the mAP (small) column quantifies this.\nDomain shift — COCO is everyday photos; performance drops on aerial, medical, industrial, or robot-camera imagery the models never trained on.\nClass confusion — semantically close categories (couch vs chair, truck vs car).\nConfidence calibration — a high score is not a guarantee; thresholds must be tuned per deployment."
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html#reproduce",
+    "href": "modules/01-object-detection/report.html#reproduce",
+    "title": "01 · Object detection",
+    "section": "Reproduce",
+    "text": "Reproduce\nuv sync --group data --group detection\nuv run python scripts/fetch_data.py coco --max-samples 200\nuv run python modules/01-object-detection/run.py \\\n    --models yolo26n,yolo11n,rfdetr-nano,rfdetr-medium\nThe engine writes results/metrics.md, results/metrics.json, and the annotated figures embedded above; this page simply includes them."
   }
 ]
