@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>metrics – CV Explorations</title>
+<title>07 · Embeddings &amp; retrieval – CV Explorations</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,26 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e9072c35d400738dd8f5400c9614cb45.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -81,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">CV Explorations</span>
     </a>
   </div>
@@ -92,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -101,31 +136,31 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
         <li>
-    <a class="dropdown-item" href="../../../modules/01-object-detection/report.html">
+    <a class="dropdown-item" href="../../modules/01-object-detection/report.html">
  <span class="dropdown-text">01 · Object detection</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/02-classification/report.html">
+    <a class="dropdown-item" href="../../modules/02-classification/report.html">
  <span class="dropdown-text">02 · Image classification</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/03-segmentation/report.html">
+    <a class="dropdown-item" href="../../modules/03-segmentation/report.html">
  <span class="dropdown-text">03 · Segmentation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/04-depth/report.html">
+    <a class="dropdown-item" href="../../modules/04-depth/report.html">
  <span class="dropdown-text">04 · Monocular depth</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/05-pose/report.html">
+    <a class="dropdown-item" href="../../modules/05-pose/report.html">
  <span class="dropdown-text">05 · Human pose</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/06-tracking/report.html">
+    <a class="dropdown-item" href="../../modules/06-tracking/report.html">
  <span class="dropdown-text">06 · Tracking</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../modules/07-retrieval/report.html">
+    <a class="dropdown-item" href="../../modules/07-retrieval/report.html">
  <span class="dropdown-text">07 · Embeddings &amp; retrieval</span></a>
   </li>  
     </ul>
@@ -153,46 +188,167 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#pose-estimation-speed" id="toc-pose-estimation-speed" class="nav-link active" data-scroll-target="#pose-estimation-speed">Pose estimation: speed</a></li>
+  <li><a href="#the-task" id="toc-the-task" class="nav-link active" data-scroll-target="#the-task">The task</a></li>
+  <li><a href="#two-kinds-of-embedding" id="toc-two-kinds-of-embedding" class="nav-link" data-scroll-target="#two-kinds-of-embedding">Two kinds of embedding</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#image-retrieval-imagenette" id="toc-image-retrieval-imagenette" class="nav-link" data-scroll-target="#image-retrieval-imagenette">Image retrieval (Imagenette)</a></li>
+  <li><a href="#where-retrieval-fails" id="toc-where-retrieval-fails" class="nav-link" data-scroll-target="#where-retrieval-fails">Where retrieval fails</a></li>
+  <li><a href="#reproduce" id="toc-reproduce" class="nav-link" data-scroll-target="#reproduce">Reproduce</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/05-pose/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/07-retrieval/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">07 · Embeddings &amp; retrieval</h1>
+<p class="subtitle lead">How similar are two images? — DINOv2 vs SigLIP nearest-neighbour search</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="pose-estimation-speed" class="level2">
-<h2 class="anchored" data-anchor-id="pose-estimation-speed">Pose estimation: speed</h2>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-task" class="level2">
+<h2 class="anchored" data-anchor-id="the-task">The task</h2>
+<p>Most of this curriculum predicts <em>labels</em>. This module predicts a <strong>vector</strong>: an embedding that places similar images near each other in a high-dimensional space. That single idea underpins <strong>reverse image search, deduplication, clustering, recommendation, anomaly detection, and few-shot recognition</strong> — none of which need a classifier head. To “classify” you just look at your neighbours.</p>
+<p>The workflow:</p>
+<ol type="1">
+<li>Embed every gallery image to an L2-normalised vector.</li>
+<li>Embed a query the same way.</li>
+<li>Rank gallery vectors by cosine similarity (a dot product) and return the nearest.</li>
+</ol>
+</section>
+<section id="two-kinds-of-embedding" class="level2">
+<h2 class="anchored" data-anchor-id="two-kinds-of-embedding">Two kinds of embedding</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Model</th>
-<th>License</th>
-<th>Latency (ms)</th>
-<th>FPS</th>
-<th>People/img</th>
+<th>Trained on</th>
+<th>Signal it captures</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>YOLO26-n-pose</td>
-<td>AGPL-3.0</td>
-<td>21.52</td>
-<td>46.5</td>
-<td>3.2</td>
+<td><strong>DINOv2</strong></td>
+<td>Images only, <strong>self-supervised</strong> (no labels)</td>
+<td>Visual structure, parts, texture, shape — emerges purely from the data</td>
 </tr>
 <tr class="even">
-<td>YOLO11-n-pose</td>
-<td>AGPL-3.0</td>
-<td>18.33</td>
-<td>54.5</td>
-<td>2.5</td>
+<td><strong>SigLIP 2</strong></td>
+<td>Image–<strong>text</strong> pairs, contrastive</td>
+<td>Semantics aligned to language — “what you’d call it”</td>
 </tr>
 </tbody>
 </table>
-<p><em>17 COCO keypoints per person, single-stage (bottom-up). Latency = mean warmed-up single-image forward on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>. Qualitative + latency; COCO keypoint OKS-AP is a deeper follow-up.</em></p>
+<p>DINOv2 learns by making different augmented views of the same image agree; it never sees a label, yet produces features so strong that a <em>linear probe</em> rivals supervised training. SigLIP learns from captions, so its space is organised the way <em>language</em> groups things. Both give excellent retrieval — the right choice depends on whether you want visual or semantic similarity.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>A real metric, not just pictures: we embed a balanced Imagenette gallery and measure how often the nearest neighbours share the query’s class — <strong>using no labels at search time</strong>.</p>
+</section>
+<section id="image-retrieval-imagenette" class="level2">
+<h2 class="anchored" data-anchor-id="image-retrieval-imagenette">Image retrieval (Imagenette)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Type</th>
+<th>License</th>
+<th>Recall@1 (%)</th>
+<th>Precision@5 (%)</th>
+<th>Latency (ms)</th>
+<th>FPS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SigLIP 2 Base</td>
+<td>image-text</td>
+<td>Apache-2.0</td>
+<td>99.8</td>
+<td>99.2</td>
+<td>20.51</td>
+<td>48.8</td>
+</tr>
+<tr class="even">
+<td>DINOv2 Base</td>
+<td>self-supervised</td>
+<td>Apache-2.0</td>
+<td>99.3</td>
+<td>98.8</td>
+<td>19.45</td>
+<td>51.4</td>
+</tr>
+</tbody>
+</table>
+<p><em>Retrieval on 600 Imagenette images (60/class). Recall@1 = nearest neighbour shares the class; Precision@5 = fraction of top-5 that do. No labels used at search time — purely embedding similarity. Latency on <code>NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8</code>. Figure uses DINOv2 Base.</em></p>
+<div id="fig-retrieval" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-retrieval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/retrieval.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-retrieval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Each row: a query (black border) and its 5 nearest neighbours. Green = same class, red = different. The model was never trained to classify Imagenette — this is pure embedding similarity.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="What to notice">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What to notice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Search beats training, for free.</strong> Both embedders retrieve the correct class <strong>&gt;99%</strong> of the time (Recall@1) with <em>no</em> classifier and <em>no</em> labels at query time — add a new class by just dropping its images into the gallery.</li>
+<li><strong>Self-supervised is competitive with image-text.</strong> DINOv2 (never saw a single label or caption) trails SigLIP 2 by only a few tenths of a point here — a striking result for a model trained purely on images.</li>
+<li><strong>This is how you’d handle an open, growing catalogue</strong> — products, faces, defects — where retraining a classifier per new item is impractical.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="where-retrieval-fails" class="level2">
+<h2 class="anchored" data-anchor-id="where-retrieval-fails">Where retrieval fails</h2>
+<ul>
+<li><strong>Fine-grained distinctions</strong> — near-duplicate categories (specific dog breeds, product variants) can blur in a general embedding; specialised/fine-tuned embeddings help.</li>
+<li><strong>Gallery quality &amp; scale</strong> — retrieval is only as good as what’s indexed; at millions of items you need an ANN index (FAISS) and recall/speed trade-offs appear.</li>
+<li><strong>Domain gap</strong> — embeddings trained on web images underperform on medical, satellite, or industrial imagery without adaptation.</li>
+</ul>
+</section>
+<section id="reproduce" class="level2">
+<h2 class="anchored" data-anchor-id="reproduce">Reproduce</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> dev</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python modules/07-retrieval/run.py <span class="at">--per-class</span> 60</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -606,7 +762,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>Built with Quarto · experiments run locally on an RTX 3090 Ti</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/05-pose/results/metrics.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/blob/main/modules/07-retrieval/report.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/chaoticcuriosity-io/cv-explorations/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
