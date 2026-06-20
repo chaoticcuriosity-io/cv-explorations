@@ -14,6 +14,48 @@
     "text": "Model\nFamily\nLicense\nmAP\nmAP@50\nmAP@75\nmAP (small)\nLatency (ms)\nFPS\n\n\n\n\nRF-DETR Medium\nDETR (transformer)\nApache-2.0\n59.4\n78.2\n63.7\n31.6\n36.3\n27.5\n\n\nRF-DETR Nano\nDETR (transformer)\nApache-2.0\n51.3\n69.9\n54.2\n22.4\n36.43\n27.5\n\n\nYOLO26-n\nYOLO (NMS-free)\nAGPL-3.0\n43.0\n58.1\n47.2\n20.1\n18.75\n53.3\n\n\nYOLO11-n\nYOLO (anchor-free)\nAGPL-3.0\n37.6\n52.1\n40.5\n17.9\n18.0\n55.6\n\n\n\nEvaluated on 200 COCO val2017 images; mAP via pycocotools-equivalent torchmetrics at IoU=.50:.95. Latency = mean over 30 warmed-up single-image forwards on NVIDIA GeForce RTX 3090 Ti | 24.0 GB | sm_86 | torch 2.11.0+cu128 / CUDA 12.8."
   },
   {
+    "objectID": "modules/01-object-detection/explore.html",
+    "href": "modules/01-object-detection/explore.html",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "",
+    "text": "A hands-on companion to the report. Every model adapter returns a supervision.Detections, so the same few lines annotate any model’s output.\nRequires the data + detection dependency groups, run from the repo root:\nimport matplotlib.pyplot as plt\nfrom cvkit.devices import get_device, describe_device\nfrom cvkit.io import load_image\nfrom cvkit.viz import annotate_detections\nimport detect\n\ndevice = get_device()\nprint(describe_device(device))"
+  },
+  {
+    "objectID": "modules/01-object-detection/explore.html#grab-a-few-coco-images",
+    "href": "modules/01-object-detection/explore.html#grab-a-few-coco-images",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "Grab a few COCO images",
+    "text": "Grab a few COCO images\nDownloads (and caches) a small COCO val slice via the FiftyOne zoo.\n\nfrom cvkit.data import load_coco_val_subset\n\nds = load_coco_val_subset(max_samples=8)\npaths = [s.filepath for s in ds][:4]\nimg = load_image(paths[0])\nplt.imshow(img); plt.axis('off'); plt.show()"
+  },
+  {
+    "objectID": "modules/01-object-detection/explore.html#run-a-closed-set-detector-yolo26",
+    "href": "modules/01-object-detection/explore.html#run-a-closed-set-detector-yolo26",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "Run a closed-set detector (YOLO26)",
+    "text": "Run a closed-set detector (YOLO26)\nPredicts one of the 80 COCO classes per box. data['class_name'] carries the labels.\n\nmodel = detect.build_detector('yolo26n', device)\ndet = model.predict(img, conf=0.3)\nlabels = [f\"{n} {c:.2f}\" for n, c in zip(det.data.get('class_name', []), det.confidence)]\nplt.figure(figsize=(8, 8))\nplt.imshow(annotate_detections(img, det, labels=labels)); plt.axis('off'); plt.show()\nprint(list(det.data.get('class_name', [])))"
+  },
+  {
+    "objectID": "modules/01-object-detection/explore.html#compare-two-models-on-the-same-image",
+    "href": "modules/01-object-detection/explore.html#compare-two-models-on-the-same-image",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "Compare two models on the same image",
+    "text": "Compare two models on the same image\nSame image, same code path — only the adapter key changes.\n\nfig, axes = plt.subplots(1, 2, figsize=(14, 7))\nfor ax, key in zip(axes, ['yolo26n', 'rfdetr-nano']):\n    m = detect.build_detector(key, device)\n    d = m.predict(img, conf=0.3)\n    lbls = [f\"{n} {c:.2f}\" for n, c in zip(d.data.get('class_name', []), d.confidence)]\n    ax.imshow(annotate_detections(img, d, labels=lbls))\n    ax.set_title(m.meta.display); ax.axis('off')\nplt.show()"
+  },
+  {
+    "objectID": "modules/01-object-detection/explore.html#open-vocabulary-detect-anything-you-can-name",
+    "href": "modules/01-object-detection/explore.html#open-vocabulary-detect-anything-you-can-name",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "Open-vocabulary: detect anything you can name",
+    "text": "Open-vocabulary: detect anything you can name\nGrounding DINO takes free text — try concepts that aren’t in COCO’s 80 classes.\n\ngd = detect.build_open_vocab(device)\ndet = gd.detect(img, ['plate', 'napkin', 'logo', 'hand', 'cup'])\nlbls = [f\"{n} {c:.2f}\" for n, c in zip(det.data.get('class_name', []), det.confidence)]\nplt.figure(figsize=(8, 8))\nplt.imshow(annotate_detections(img, det, labels=lbls)); plt.axis('off'); plt.show()\nprint('out-of-COCO:', sorted({n for n in det.data.get('class_name', []) if n.lower() not in detect.NAME_TO_IDX}))"
+  },
+  {
+    "objectID": "modules/01-object-detection/explore.html#next",
+    "href": "modules/01-object-detection/explore.html#next",
+    "title": "01 · Object detection — interactive walkthrough",
+    "section": "Next",
+    "text": "Next\nRun the full benchmark with uv run python run.py from this folder, or read the report for the rigorous numbers."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "CV Explorations",
@@ -60,7 +102,7 @@
     "href": "modules/01-object-detection/report.html#two-paradigms",
     "title": "01 · Object detection",
     "section": "Two paradigms",
-    "text": "Two paradigms\nThe most important idea to carry across this whole curriculum is the split between closed-set and open-vocabulary detection:\n\nClosed-set models (YOLO, RF-DETR here) predict from a fixed label set — the 80 COCO classes. Fast, accurate, benchmarkable, but blind to anything off-list.\nOpen-vocabulary models (Grounding DINO, YOLO-World) take text at inference time and detect whatever you name — “a forklift”, “a person wearing hi-vis” — with no retraining. More flexible, generally slower and lower-AP on the fixed COCO set.\n\nThis report benchmarks the closed-set models head-to-head (they share the COCO label space, so mAP is a fair comparison). The open-vocabulary contrast is added next."
+    "text": "Two paradigms\nThe most important idea to carry across this whole curriculum is the split between closed-set and open-vocabulary detection:\n\nClosed-set models (YOLO, RF-DETR here) predict from a fixed label set — the 80 COCO classes. Fast, accurate, benchmarkable, but blind to anything off-list.\nOpen-vocabulary models (Grounding DINO, YOLO-World) take text at inference time and detect whatever you name — “a forklift”, “a person wearing hi-vis” — with no retraining. More flexible, generally slower and lower-AP on the fixed COCO set.\n\nThis report benchmarks the closed-set models head-to-head (they share the COCO label space, so mAP is a fair comparison), then demonstrates the open-vocabulary alternative qualitatively below — it isn’t restricted to the 80 COCO names, so a like-for-like mAP wouldn’t be meaningful."
   },
   {
     "objectID": "modules/01-object-detection/report.html#the-architectures-benchmarked",
@@ -96,6 +138,13 @@
     "title": "01 · Object detection",
     "section": "Qualitative results",
     "text": "Qualitative results\nThe same COCO images, as each model sees them (boxes shown above a 0.30 confidence threshold for legibility):\n\n\n\n\n\n\n\n\n\nFigure 1: YOLO26-n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: YOLO11-n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: RF-DETR Nano\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: RF-DETR Medium"
+  },
+  {
+    "objectID": "modules/01-object-detection/report.html#open-vocabulary-in-action",
+    "href": "modules/01-object-detection/report.html#open-vocabulary-in-action",
+    "title": "01 · Object detection",
+    "section": "Open-vocabulary in action",
+    "text": "Open-vocabulary in action\nThe four models above can only ever emit one of the 80 COCO names. Grounding DINO removes that ceiling: you hand it a sentence of phrases at inference time and it localises whatever it can find — no retraining, no fixed label set.\nRun on the same kind of images with the prompt person. bottle. cup. plate. napkin. logo. shoe. hand., it returns not just the COCO classes but plate, napkin, logo, shoe, hand — concepts that don’t exist in COCO’s vocabulary at all:\n\n\n\n\n\n\nFigure 5: Grounding DINO — open-vocabulary detection. The prompt mixes COCO and non-COCO concepts; the out-of-COCO hits are what a closed-set model can never produce.\n\n\n\n\n\n\n\n\n\nTipThe trade-off\n\n\n\nOpen-vocabulary buys flexibility at a price: Grounding DINO is slower than the YOLO/RF-DETR detectors, and you can’t quote a single COCO mAP for it (its label space is unbounded). The practical pattern is to use an open-vocab model to find or auto-label novel classes, then distil a fast closed-set detector for deployment — a thread later modules pick up."
   },
   {
     "objectID": "modules/01-object-detection/report.html#where-detectors-fail",
