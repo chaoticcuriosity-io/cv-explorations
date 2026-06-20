@@ -11,7 +11,9 @@ honest failure cases.
 
 The reports you're reading were rendered from results computed locally on an
 **NVIDIA RTX 3090 Ti (24 GB)**; heavier or Linux-only work runs on an **NVIDIA
-DGX Spark** over Tailscale. Site rendering itself needs no GPU.
+DGX Spark** (ARM64 / GB10 Grace-Blackwell). Site rendering itself needs no GPU.
+The same code is validated on both x86 and ARM64 — see
+[Cross-platform validation](cross-platform.qmd).
 
 ## The curriculum
 

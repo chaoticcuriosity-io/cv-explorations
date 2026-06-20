@@ -32,6 +32,8 @@ website:
             text: "08 · Vision-language models"
           - href: modules/09-classical/report.qmd
             text: "09 · Classical CV"
+      - href: cross-platform.qmd
+        text: "Cross-platform"
     right:
       - icon: github
         href: https://github.com/chaoticcuriosity-io/cv-explorations
