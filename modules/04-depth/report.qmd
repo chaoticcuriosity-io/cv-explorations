@@ -3,32 +3,51 @@ title: "04 · Monocular depth"
 subtitle: "How far is each pixel, from a single image? — Depth Anything V2"
 ---
 
+::: {.callout-note title="New here? Read this first" collapse="true"}
+No prior knowledge needed — but this report is easier if you've skimmed
+**[Foundations](../../foundations.qmd)** (how a computer sees an image, what a model is, how we
+measure success). Stuck on a word? See the **[Glossary](../../glossary.qmd)**. Stuck on a model
+name? See **[Model families](../../models.qmd)**. Key terms are explained inline the first time they
+appear.
+:::
+
 ## The task
 
 **Monocular depth estimation** predicts a distance for every pixel from one ordinary RGB
-image — no stereo pair, no LiDAR. It's the perception capability most directly relevant to
-**robotics**: turning a flat photo into 3D structure for navigation, grasping, and obstacle
-avoidance.
+image — no stereo pair, no LiDAR. (*Monocular depth* just means estimating how far away each
+pixel is from a **single** image — no two-camera stereo pair and no laser/LiDAR sensor.) It's
+the perception capability most directly relevant to **robotics**: turning a flat photo into 3D
+structure for navigation, grasping, and obstacle avoidance.
 
-A key distinction:
+A key distinction (*relative vs metric depth*: relative orders pixels near-to-far without real
+units, while metric gives actual metres):
 
 - **Relative depth** — orders pixels near-to-far without real-world units. Enough for "what's
   in front of what". Depth Anything V2 predicts this.
 - **Metric depth** — actual metres. Needed for measurement/control; harder, and usually
-  fine-tuned per camera (e.g. Depth Anything's metric heads, Apple Depth Pro).
+  fine-tuned per camera (e.g. Depth Anything's metric heads, Apple Depth Pro). Depth Anything V2
+  is a popular open model for predicting depth from a single image; *Depth Pro* (from Apple) is
+  a model aimed at metric depth. (See **[Model families](../../models.qmd)** for how these fit
+  among other vision models.)
 
 ## How it works
 
 Depth Anything V2 is a **DINOv2 vision-transformer encoder** plus a lightweight depth head,
-trained on a huge mix of labelled + pseudo-labelled images. The transformer's global
-receptive field lets it use scene-wide cues — perspective, relative size, texture gradients,
-occlusion — exactly the monocular cues humans use to perceive depth with one eye closed. It
-outputs *inverse* depth (larger = nearer).
+trained on a huge mix of labelled + pseudo-labelled images. (A *transformer* is a network
+architecture that relates all parts of an image to each other through "attention"; a *Vision
+Transformer (ViT)* applies this by splitting the image into small patches. The encoder here
+acts as the *backbone* — the main body of the network that turns an image into useful
+features.) The transformer's global receptive field lets it use scene-wide cues — perspective,
+relative size, texture gradients, occlusion — exactly the *monocular cues* (depth hints in a
+single image, like perspective, relative size, and occlusion) humans use to perceive depth with
+one eye closed. It outputs *inverse* depth — a representation where larger values mean nearer.
 
 ## Results
 
 We run two sizes on the same images. Larger backbones generally produce sharper boundaries
-and better thin-structure handling, at a latency cost.
+and better thin-structure handling, at a latency cost. (*Latency* is the time to process one
+image, usually in milliseconds; *FPS* — frames per second — is how many images it handles per
+second, where roughly 30 FPS counts as real-time.)
 
 {{< include results/metrics.md >}}
 

@@ -12,6 +12,14 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - text: Start here
+        menu:
+          - href: foundations.qmd
+            text: "Foundations (read first)"
+          - href: glossary.qmd
+            text: "Glossary"
+          - href: models.qmd
+            text: "Model families"
       - text: Modules
         menu:
           - href: modules/01-object-detection/report.qmd

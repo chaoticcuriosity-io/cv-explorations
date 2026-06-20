@@ -1,0 +1,184 @@
+---
+title: "Glossary"
+subtitle: "Every term used on this site, in one plain-language line"
+---
+
+New here? The [Foundations](foundations.qmd) page explains these in context and in order. This page
+is for quick lookups. Terms are grouped, then alphabetical within a group.
+
+## Core concepts
+
+**Annotation** — a label drawn onto data (a box, mask, or class) marking the correct answer; also
+the act of drawing it.
+
+**Backbone** — the main body of a network that turns an image into a rich numerical summary
+(features); a small "head" on top produces the task-specific answer.
+
+**Channel** — one colour layer of an image. Colour images have three (Red, Green, Blue).
+
+**Checkpoint** — a saved file of a model's trained weights (e.g. `yolo26n.pt`). Load it to skip
+training and run the model.
+
+**CNN (Convolutional Neural Network)** — the classic image architecture; slides small pattern
+filters across the image, building edges → textures → parts → objects.
+
+**Deep learning** — machine learning with neural networks that have many layers.
+
+**Embedding (vector)** — a list of numbers summarising an image/patch/word such that similar things
+get similar lists. Comparing things becomes comparing vectors.
+
+**Epoch** — one full pass of training over the entire training dataset.
+
+**Feature** — a piece of information a model has extracted from the input (e.g. "there's an edge
+here," or, deeper, "this looks like fur").
+
+**Fine-tuning** — continuing to train a pretrained model on your own smaller dataset to specialise
+it. Much cheaper than training from scratch.
+
+**Ground truth** — the known-correct answer for an example, used to train or score a model.
+
+**GPU / VRAM** — the graphics processor that runs these models fast by doing massive parallel math;
+VRAM is its memory, which limits how big a model fits (here, 24 GB).
+
+**Head** — the small final part of a network that converts backbone features into the task output
+(a class, boxes, a depth map…).
+
+**Inference** — running a trained model to get answers on new inputs. (The "use" phase, vs.
+training.)
+
+**Label** — the correct answer attached to a training example (e.g. "cat").
+
+**Latency** — time to process one input, usually in milliseconds (ms). Lower is faster.
+
+**Layer** — one stage of a neural network; data flows through many in sequence.
+
+**Loss** — a number measuring how wrong the model's prediction is; training works to make it small.
+
+**Model** — a mathematical function with many adjustable numbers (weights) that maps an input to an
+output.
+
+**Neural network** — a model built from many simple units in layers, loosely inspired by neurons.
+
+**Parameter / weight** — one of the millions of adjustable numbers inside a model; training sets
+their values.
+
+**Pretrained** — a model whose weights were already trained (often by a big lab on huge data),
+ready to download and use.
+
+**Tensor** — a multi-dimensional grid of numbers; an image is a height × width × 3 tensor.
+
+**Training** — the learning phase: adjusting weights from labelled examples so the model gets less
+wrong over time.
+
+**Transformer** — an architecture built on "attention," where every part of the input can directly
+relate to every other part; now dominant in vision and language.
+
+**Attention** — the transformer's core operation: letting each element decide which other elements
+are relevant to it.
+
+**ViT (Vision Transformer)** — a transformer applied to images by splitting the picture into patches
+and letting them attend to each other.
+
+## Tasks
+
+**Classification** — assign one label to a whole image.
+
+**Object detection** — find objects and draw a labelled box around each.
+
+**Segmentation** — label every pixel; **instance** segmentation separates individual objects,
+**semantic** segmentation labels by category.
+
+**Depth estimation** — predict how far each pixel is from the camera. **Monocular** = from a single
+image.
+
+**Pose estimation / keypoints** — locate body joints and connect them into a skeleton.
+
+**Tracking (MOT, Multi-Object Tracking)** — follow the same objects across video frames, giving each
+a persistent ID.
+
+**Retrieval** — find the images most similar to a query, using embeddings.
+
+**VLM (Vision-Language Model)** — a model that takes an image (and text) and produces text:
+captions, answers, reasoning.
+
+## Detection & evaluation terms
+
+**Anchor** — a pre-defined template box older detectors adjust to fit objects; "anchor-free" models
+skip them.
+
+**Bounding box (box)** — a rectangle around an object, given as four numbers (left, top, right,
+bottom).
+
+**Confidence** — the model's own 0–1 certainty in a prediction; you threshold it to decide what to
+keep.
+
+**COCO** — a large standard dataset of everyday photos (80 object classes) used to train and compare
+detectors. "COCO mAP" is the standard detection score.
+
+**False positive / false negative** — a wrong detection (saw something that wasn't there) / a miss
+(failed to see something that was).
+
+**FPS (frames per second) / throughput** — how many images a model processes per second; ~30 FPS is
+real-time.
+
+**IoU (Intersection over Union)** — overlap between a predicted and true box: shared area ÷ combined
+area. 1 = perfect.
+
+**Keypoint** — a single labelled point, e.g. "right knee," in pose estimation.
+
+**mAP (mean Average Precision)** — the standard detection score (0–1): area under the
+precision–recall curve, averaged over classes (and, for COCO, over IoU thresholds 0.5–0.95).
+
+**Mask** — a per-pixel yes/no marking exactly which pixels belong to an object.
+
+**NMS (Non-Maximum Suppression)** — clean-up step that removes duplicate overlapping boxes for the
+same object, keeping the most confident. "NMS-free" models avoid needing it.
+
+**OKS (Object Keypoint Similarity)** — the IoU-equivalent for pose: how well predicted joints match
+the true ones; the basis of pose mAP.
+
+**Precision** — of the model's predictions, the fraction that were correct (penalises false alarms).
+
+**Recall** — of the real objects, the fraction the model found (penalises misses).
+
+**mIoU (mean IoU)** — the standard segmentation score: average pixel-overlap across classes.
+
+**HOTA / MOTA / IDF1** — tracking scores measuring how well IDs stay correct across frames;
+**ID-switch** = a tracked object wrongly getting a new ID.
+
+## Modern / foundation-model terms
+
+**CLIP** — a model trained to put matching images and text captions near each other in one embedding
+space, enabling zero-shot classification and retrieval.
+
+**Foundation model** — a large model pretrained broadly and reused for many tasks, often by
+prompting, instead of trained for one task.
+
+**Open-vocabulary** — detect/segment by free-text prompt ("find the ladder") rather than a fixed
+class list.
+
+**Prompt** — the instruction you give a promptable model: text (CLIP, VLMs, Grounding DINO), a point
+or box (SAM), etc.
+
+**Pseudo-label** — a label produced *by another model* instead of a human; cheap but noisier. Used
+to auto-build training data in [module 10](modules/10-finetuning/report.qmd).
+
+**Zero-shot** — applying a model to categories/tasks it was never explicitly trained on, via
+description.
+
+## Tooling you'll see named
+
+**ultralytics** — the popular library that packages YOLO models for easy training and inference
+(AGPL-3.0 licensed).
+
+**transformers (Hugging Face)** — the standard library for downloading and running a huge range of
+models with one API.
+
+**supervision** — a utility library used here to hold detections/keypoints and draw them on images.
+
+**FiftyOne** — a tool for downloading, browsing, and evaluating datasets (used to fetch COCO
+subsets).
+
+**Quarto** — the tool that turns these reports into the website you're reading.
+
+**uv** — the Python package/environment manager used to install everything reproducibly.

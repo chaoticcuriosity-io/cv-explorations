@@ -3,12 +3,24 @@ title: "09 · Classical computer vision"
 subtitle: "How it worked before deep learning — edges, contours, features, and flow"
 ---
 
+::: {.callout-note title="New here? Read this first" collapse="true"}
+No prior knowledge needed — but this report is easier if you've skimmed
+**[Foundations](../../foundations.qmd)** (how a computer sees an image, what a model is, how we
+measure success). Stuck on a word? See the **[Glossary](../../glossary.qmd)**. Stuck on a model
+name? See **[Model families](../../models.qmd)**. Key terms are explained inline the first time they
+appear.
+:::
+
 ## Why this module exists
 
 Modules 01–08 are all neural networks. This one deliberately goes back to the **pre-deep-learning**
-toolkit: hand-designed algorithms from OpenCV that are **fast, transparent, deterministic, and
-need no training data or GPU**. They aren't a historical curiosity — they still run inside camera
-calibration, visual SLAM front-ends, image stabilisation, panorama stitching, and as cheap
+toolkit — *classical CV*, meaning hand-designed algorithms (explicit math), with no training and no
+neural networks. These come from OpenCV (a free, widely used library of ready-made image-processing
+functions; see [Model families](../../models.qmd)) and are **fast, transparent, deterministic, and
+need no training data or GPU**. *Deterministic* means the same input always gives the same output —
+no randomness, no learned weights. They aren't a historical curiosity — they still run inside camera
+calibration, visual SLAM front-ends (SLAM = building a map and tracking a camera's position as it
+moves, using these classical features), image stabilisation, panorama stitching, and as cheap
 preprocessing for the deep models. Seeing them makes the rest of the curriculum legible: you can
 *read every line* of what these do, which is rarely true of a learned model.
 
@@ -16,24 +28,36 @@ preprocessing for the deep models. Seeing them makes the rest of the curriculum 
 
 ### Edge detection & contours
 
-The **Canny** edge detector finds intensity discontinuities (gradients), then thins and links
-them into clean edges. **Contours** chain those edges into closed boundaries you can measure
-(area, perimeter, shape). For decades this *was* "object detection".
+*Edge detection* means finding the outlines where image brightness changes sharply. The **Canny**
+edge detector (a classic edge-finding recipe; see [Model families](../../models.qmd)) finds
+intensity discontinuities (gradients), then thins and links them into clean edges. A *gradient* is
+just how fast brightness changes from pixel to pixel — that change is what an edge detector looks
+for. **Contours** chain those edges into closed boundaries you can measure (area, perimeter, shape);
+a *contour* is a connected boundary line traced around a shape. For decades this *was* "object
+detection".
 
 ![Canny edges and extracted contours — pure gradient math, no learning.](results/edges_contours.png){#fig-edges}
 
 ### Feature detection & matching (ORB)
 
-**ORB** finds repeatable keypoints (corners) and encodes each as a binary descriptor, so the
-*same* physical point can be matched across two images. Matching keypoints between views is the
-engine behind panorama stitching, structure-from-motion, and the front-end of visual SLAM — the
-hand-built ancestor of the learned embeddings in [module 07](../07-retrieval/report.qmd).
+**ORB** (a fast classical keypoint finder; see [Model families](../../models.qmd)) finds repeatable
+keypoints (corners) and encodes each as a binary descriptor, so the *same* physical point can be
+matched across two images. Here a *feature* or *keypoint* is a distinctive point — like a corner —
+that can be re-found in another image; a *descriptor* is the short numeric fingerprint of that
+keypoint used to match it across images; and *feature matching* is pairing the same physical point
+between two images. Matching keypoints between views is the engine behind panorama stitching,
+structure-from-motion, and the front-end of visual SLAM — the hand-built ancestor of the learned
+embeddings in [module 07](../07-retrieval/report.qmd). (A related classical detector you may see
+named is SIFT, an older scale-invariant keypoint finder that ORB was designed to replace more
+cheaply.)
 
 ![ORB keypoints matched between two video frames.](results/features.png){#fig-orb}
 
 ### Optical flow
 
-**Farneback** dense optical flow estimates a motion vector for *every* pixel between two frames —
+*Optical flow* is the per-pixel motion between two video frames — its direction and speed.
+**Farneback** dense optical flow (a classical algorithm that computes this flow for every pixel; see
+[Model families](../../models.qmd)) estimates a motion vector for *every* pixel between two frames —
 direction as hue, speed as brightness. It's geometry, not recognition: no idea *what* is moving,
 only *how*. Flow feeds stabilisation, motion segmentation, and action recognition.
 

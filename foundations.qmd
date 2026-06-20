@@ -1,0 +1,234 @@
+---
+title: "Foundations: start here"
+subtitle: "Everything you need to understand the rest of this site — assuming no prior knowledge"
+---
+
+If you're new to computer vision (or to machine learning, or even to a lot of programming),
+**read this page first.** It builds up — from "what is an image to a computer" to "how do these
+models work and how do we measure them" — every idea the module reports lean on. Nothing here
+assumes you've seen it before. There's a one-line [glossary](glossary.qmd) for quick lookups and a
+[model families](models.qmd) page that introduces each system by name (YOLO, DINO, SAM, …).
+
+## What is computer vision?
+
+**Computer vision (CV)** is the field of getting computers to extract *meaning* from images and
+video — the way your eyes and brain do without effort. "Is there a person in this photo? Where?
+How far away? What are they doing?" are all trivial for you and were, until recently, nearly
+impossible for a computer. This site is a tour of the modern techniques that changed that.
+
+## How does a computer "see" an image?
+
+A computer has no eyes. To it, an image is just **a big grid of numbers**.
+
+- A digital image is a grid of **pixels** (picture elements). A phone photo might be 4000 × 3000
+  pixels — 12 million of them.
+- Each pixel has a **colour**, stored as three numbers: how much **R**ed, **G**reen, and **B**lue
+  it contains, each from 0 to 255. White is (255, 255, 255); pure red is (255, 0, 0). These three
+  are called **channels**.
+- So a colour image is really a stack of three grids of numbers — height × width × 3. That block
+  of numbers is called a **tensor** (just a fancy word for a multi-dimensional array of numbers).
+
+That's the entire input. Every model on this site takes in that grid of numbers and outputs other
+numbers — a label, box coordinates, a depth value per pixel. **All of computer vision is turning
+one set of numbers into another, usefully.**
+
+## What is a "model"?
+
+A **model** is a mathematical function with a huge number of adjustable knobs. You feed numbers in
+(the image), it does a long chain of arithmetic, and numbers come out (the answer). The knobs —
+there can be millions or billions of them — are called **parameters** or **weights**.
+
+The magic is *how the knobs get set*. Nobody sets them by hand. Instead:
+
+- A **neural network** is a particular kind of model, loosely inspired by brain neurons: it's built
+  from many simple units arranged in **layers**. Early layers detect simple things (edges,
+  colours); later layers combine those into complex things (an eye, a wheel, a face). "**Deep
+  learning**" just means a neural network with many layers.
+- The weights start out **random** — the model knows nothing. Then we **train** it.
+
+### Training vs. inference (the two phases)
+
+This distinction is everywhere, so it's worth nailing:
+
+- **Training** is the *learning* phase. We show the model thousands of examples for which we already
+  know the right answer (e.g. images each labelled "cat" or "dog" — those known answers are called
+  **labels** or **ground truth**). Each time the model guesses, we measure how wrong it was (the
+  **loss**) and nudge every weight a tiny bit in the direction that would have made it less wrong.
+  Repeat millions of times and the random knobs slowly become a working cat-vs-dog detector. The
+  nudging algorithm is **gradient descent**; one full pass over the training data is an **epoch**.
+- **Inference** is the *using* phase. Training is done, the weights are frozen, and you just feed in
+  a new image to get an answer. Inference is fast (milliseconds); training is slow (minutes to
+  weeks).
+
+A model whose weights have already been trained (often by a big lab, on millions of images) is
+**pretrained**. A saved set of trained weights is a **checkpoint** (you'll see files like
+`yolo26n.pt`). Almost everything on this site uses pretrained models — you download someone's
+finished weights and run inference. [Module 10](modules/10-finetuning/report.qmd) is the exception:
+it **trains** (specifically, **fine-tunes** — see below).
+
+### Why GPUs?
+
+All this arithmetic is the *same* simple operation (multiply-and-add) done billions of times in
+parallel. A **GPU** (graphics card) is hardware built to do exactly that, thousands of operations
+at once, so it runs these models 10–100× faster than a normal CPU. The model's weights have to fit
+in the GPU's memory (**VRAM**); that's why you'll see "24 GB" mentioned — it caps how big a model
+you can run. Everything here runs on a 24 GB NVIDIA RTX 3090 Ti.
+
+## The two great architectures
+
+Almost every model here is built on one of two designs (or a mix). You don't need the math, just
+the intuition.
+
+### CNNs (Convolutional Neural Networks)
+
+A **CNN** is the classic image architecture (dominant from 2012). Its key trick is the
+**convolution**: it slides a small window (a **filter**) across the image looking for one pattern —
+say, a vertical edge — and reports where it found it. Stack many of these: the first layer finds
+edges, the next combines edges into textures and corners, the next into parts (an eye, a wheel),
+the next into whole objects. Because the same small filter is reused across the whole image, CNNs
+are efficient and naturally handle "the cat could be anywhere in the frame." **YOLO** (modules 01,
+03, 05, 06) is the famous CNN-family detector.
+
+### Transformers and "attention" (and ViTs)
+
+The **transformer** (from 2017, originally for language — it's the "T" in ChatGPT) now dominates
+vision too. Its key trick is **attention**: every part of the input can directly "look at" every
+other part and decide what's relevant. For an image, a **Vision Transformer (ViT)** chops the
+picture into a grid of small **patches**, turns each into numbers, and lets all patches attend to
+one another — so the model can relate a hand on one side of the image to a tool on the other in a
+single step. CNNs build understanding up locally; transformers can use the *whole image's* context
+at once. **DETR / RF-DETR** (module 01), **DINO** (module 07), **SAM** (module 03), and the
+vision-language models (module 08) are all transformer-based.
+
+### Backbone vs. head
+
+A common pattern: a **backbone** (a CNN or ViT) chews the image into a rich numerical summary of
+"what's in it" (called **features** or an **embedding**), and a small **head** on top turns those
+features into the specific answer for your task (a class, boxes, a depth map). Swap the head, reuse
+the backbone, and you can do a different task — which is why one good backbone (like DINO) shows up
+behind many models.
+
+## The core tasks (one per kind of question)
+
+Each module answers a different question about an image. From simplest to richest:
+
+| Task | The question | Output | Module |
+|---|---|---|---|
+| **Classification** | *What is this, overall?* | one label | [02](modules/02-classification/report.qmd) |
+| **Object detection** | *What objects, and where?* | labelled **boxes** | [01](modules/01-object-detection/report.qmd) |
+| **Segmentation** | *Which exact pixels?* | per-pixel **masks** | [03](modules/03-segmentation/report.qmd) |
+| **Depth** | *How far is each pixel?* | a distance per pixel | [04](modules/04-depth/report.qmd) |
+| **Pose** | *Where are the body joints?* | **keypoints** (a skeleton) | [05](modules/05-pose/report.qmd) |
+| **Tracking** | *Same object across video frames?* | boxes with persistent **IDs** | [06](modules/06-tracking/report.qmd) |
+| **Retrieval / embeddings** | *How similar are two images?* | a comparable **vector** | [07](modules/07-retrieval/report.qmd) |
+| **Vision-language** | *Describe / answer / reason* | free-form **text** | [08](modules/08-vlm/report.qmd) |
+
+A **bounding box** ("box") is just a rectangle around an object, given as four numbers (left, top,
+right, bottom). A **mask** is a yes/no for every pixel ("is this pixel part of the dog?"). A
+**keypoint** is a single marked point (e.g. "left elbow").
+
+## How we measure success (metrics)
+
+A core promise of this site is *honest numbers*, so you need to know what they mean.
+
+**For classification:**
+
+- **Accuracy** — the fraction it got right. **Top-1 accuracy** = the model's single best guess was
+  correct. **Top-5 accuracy** = the right answer was among its top five guesses (useful when many
+  classes look alike).
+
+**For detection (and anything with boxes):**
+
+- **IoU (Intersection over Union)** — how well a predicted box overlaps the true box. Imagine the
+  two rectangles; IoU = (area where they overlap) ÷ (area they cover together). 1.0 = perfect
+  overlap, 0 = no overlap. A prediction usually "counts" if IoU ≥ 0.5.
+- **Precision** — of the boxes the model predicted, what fraction were correct? (Penalises **false
+  positives** — crying wolf.)
+- **Recall** — of the objects that were really there, what fraction did the model find? (Penalises
+  **false negatives** — misses.)
+- There's always a **trade-off**: a model can catch everything by guessing wildly (high recall, low
+  precision) or only report sure things (high precision, low recall). A **confidence** score (the
+  model's own 0–1 certainty per prediction) and a threshold control where you sit.
+- **mAP (mean Average Precision)** — the standard single detection score, from 0 to 1 (often shown
+  as a %). It sweeps the confidence threshold to trace the full precision-vs-recall curve, takes the
+  area under it (that's **Average Precision**), and averages across all object classes. **COCO mAP**
+  averages this over ten overlap strictnesses (IoU 0.5 to 0.95), so it rewards *tight* boxes, not
+  just roughly-right ones. Higher = better; ~0.5 is strong for everyday photos.
+
+**For speed:**
+
+- **Latency** — how long one image takes, in **milliseconds (ms)**. Lower = faster.
+- **FPS (frames per second)** / **throughput** — how many images per second. ~30 FPS is real-time
+  video. Latency and FPS are two views of the same thing (30 FPS ≈ 33 ms each).
+
+Accuracy and speed usually trade off against each other — a recurring theme in the reports is that
+there's no single "best" model, only different points on that curve.
+
+## Jargon you'll meet everywhere
+
+Short plain-language versions (the [glossary](glossary.qmd) has the rest):
+
+- **NMS (Non-Maximum Suppression)** — detectors often fire several overlapping boxes on one object.
+  NMS is the clean-up step that keeps the most confident box and deletes its duplicates. "**NMS-free**"
+  (e.g. YOLO26) means the model learned to emit one box per object directly, skipping that step —
+  simpler and faster.
+- **Anchor** — older detectors guessed by adjusting a fixed set of pre-defined template boxes
+  ("anchors") tiled over the image. "**Anchor-free**" models drop that crutch and predict boxes
+  directly.
+- **Embedding** — a list of numbers (a **vector**) that summarises an image (or patch, or word) so
+  that *similar things get similar vectors*. Comparing images becomes comparing vectors. The heart
+  of [module 07](modules/07-retrieval/report.qmd).
+- **Zero-shot** — using a model on a task or set of categories it was **never explicitly trained
+  on**, by description rather than by examples. CLIP can classify "a photo of a tractor" without ever
+  having a "tractor" training label ([module 02](modules/02-classification/report.qmd)).
+- **Open-vocabulary** — a detector/segmenter you prompt with *free text* ("find the forklift")
+  instead of a fixed list of classes ([module 01](modules/01-object-detection/report.qmd)).
+- **Foundation model** — a large model pretrained on enormous, broad data, meant to be reused for
+  many tasks (often by prompting), rather than trained for one. SAM, CLIP, and the VLMs are examples.
+- **Fine-tuning** — taking a pretrained model and training it a bit more on *your* specific data to
+  specialise it (cheaper than training from scratch). [Module 10](modules/10-finetuning/report.qmd).
+- **Augmentation** — making more training examples by randomly flipping/cropping/recolouring the ones
+  you have, so the model generalises better.
+- **Inference** vs **training**, **weights/checkpoint**, **epoch**, **VRAM** — defined above.
+
+## The big arc of the field (why the models are the way they are)
+
+This whole site is, in a sense, a history in fast-forward:
+
+1. **Classical CV (pre-2012).** Humans hand-designed the rules — explicit math to find edges,
+   corners, and motion. Fast and transparent, but blind to meaning ("edge" yes, "cat" no). This is
+   [module 09](modules/09-classical/report.qmd), shown last as the illuminating contrast.
+2. **The deep-learning revolution (2012).** A CNN crushed the ImageNet image-classification contest,
+   and the field switched almost overnight from hand-designed rules to *learned* features. Accuracy
+   leapt.
+3. **The transformer era (2017→).** Attention let models use global context and scale to enormous
+   data, taking over both language and vision.
+4. **Foundation & promptable models (2021→).** Instead of one model per task trained on a fixed
+   label list, we got big models you *prompt*: **CLIP** (classify by text), **SAM** (segment
+   anything you point at), **Grounding DINO** (detect anything you name). This is the single biggest
+   shift the reports keep returning to: **task-specific models → promptable foundation models**.
+5. **Vision-language models (2023→).** Bolt a vision system onto a language model and you can simply
+   *ask* an image questions in English ([module 08](modules/08-vlm/report.qmd)).
+
+Each module shows the modern approach next to what it replaced, so you see *why* the field moved.
+
+## Why licences appear in the tables
+
+Open-source models come with legal terms. Some are **permissive** (Apache-2.0, MIT — free to use,
+including commercially). Some are **copyleft** (AGPL-3.0 — free to learn with, but commercial use
+requires either open-sourcing your own code or buying a licence). The reports record each model's
+licence because for real projects it matters as much as the accuracy — and noticing it is part of
+becoming a practitioner.
+
+## How to read the rest of this site
+
+Each module is a self-contained report with the same shape: the task in plain terms → the models
+(see [model families](models.qmd) for who's who) → how we measured → the results with annotated
+pictures → where it fails. A good order if you're new:
+
+1. [02 · Classification](modules/02-classification/report.qmd) — the simplest task; eases you in.
+2. [01 · Object detection](modules/01-object-detection/report.qmd) — the iconic task; sets the template.
+3. Then follow your curiosity through 03–10.
+
+When a word stops you, check the [glossary](glossary.qmd). When a model name stops you, check
+[model families](models.qmd). Welcome — you're going to understand all of it.
