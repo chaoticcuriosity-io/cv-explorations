@@ -1,0 +1,54 @@
+[
+  {
+    "key": "yolo26n",
+    "display": "YOLO26-n",
+    "family": "YOLO (NMS-free)",
+    "license": "AGPL-3.0",
+    "mAP": 43.0,
+    "mAP_50": 58.1,
+    "mAP_75": 47.2,
+    "mAP_small": 20.1,
+    "mAP_large": 64.0,
+    "latency_ms": 18.75,
+    "fps": 53.3
+  },
+  {
+    "key": "yolo11n",
+    "display": "YOLO11-n",
+    "family": "YOLO (anchor-free)",
+    "license": "AGPL-3.0",
+    "mAP": 37.6,
+    "mAP_50": 52.1,
+    "mAP_75": 40.5,
+    "mAP_small": 17.9,
+    "mAP_large": 56.4,
+    "latency_ms": 18.0,
+    "fps": 55.6
+  },
+  {
+    "key": "rfdetr-nano",
+    "display": "RF-DETR Nano",
+    "family": "DETR (transformer)",
+    "license": "Apache-2.0",
+    "mAP": 51.3,
+    "mAP_50": 69.9,
+    "mAP_75": 54.2,
+    "mAP_small": 22.4,
+    "mAP_large": 75.4,
+    "latency_ms": 36.43,
+    "fps": 27.5
+  },
+  {
+    "key": "rfdetr-medium",
+    "display": "RF-DETR Medium",
+    "family": "DETR (transformer)",
+    "license": "Apache-2.0",
+    "mAP": 59.4,
+    "mAP_50": 78.2,
+    "mAP_75": 63.7,
+    "mAP_small": 31.6,
+    "mAP_large": 78.6,
+    "latency_ms": 36.3,
+    "fps": 27.5
+  }
+]

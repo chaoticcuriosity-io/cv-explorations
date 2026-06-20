@@ -12,6 +12,10 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - text: Modules
+        menu:
+          - href: modules/01-object-detection/report.qmd
+            text: "01 · Object detection"
     right:
       - icon: github
         href: https://github.com/chaoticcuriosity-io/cv-explorations
